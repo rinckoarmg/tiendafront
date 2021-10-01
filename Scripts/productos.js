@@ -3,6 +3,7 @@ $tabla = D.getElementById("tabla_productos"),
 $template = D.getElementById("listado_productos").content,
 $fragmento = D.createDocumentFragment();
 
+
 //metodo GET 
 const listaPr = async()=>{
     try {
@@ -14,14 +15,9 @@ const listaPr = async()=>{
             $template.getElementById("codigo_producto").textContent = producto.codigo_producto;
             $template.getElementById("iva_compra").textContent = producto.ivacompra;
             $template.getElementById("nit_proveedor").textContent = producto.nitproveedor.nitproveedor;
+            $template.getElementById("nombre_producto").textContent = producto.nombre_producto;
             $template.getElementById("precio_compra").textContent = producto.precio_compra;
             $template.getElementById("precio_venta").textContent = producto.precio_venta;
-
-            $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
-            $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
-            $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
-            $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
-            $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
             $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
@@ -33,44 +29,28 @@ const listaPr = async()=>{
 }
 D.addEventListener("DOMContentLoaded",listaPr);
 
-// Agregar
-function guardarProducto(producto) {
-    const formData = new FormData();
-    formData.append('codigo_producto', producto.codigo_producto);
-    formData.append('iva_compra', producto.ivacompra);
-    formData.append('nit_proveedor', producto.nitproveedor);
-    formData.append('precio_compra', producto.precio_compra);
-    formData.append('precio_venta', producto.precio_venta);
+// Metodo GET
 
-    return fetch('http://localhost:8080/productos/guardar', {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json())
-}
-
-guardarProducto(producto)
-   .then((json) => {
-       // handle success
-    })
-   .catch(error => error);
-
-// Buscar
-
-
-/* DELETE
-const options = {
-    method: 'DELETE',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
-
-fetch('http://localhost:8080/productos/eliminar/{codigo_producto}', options)
-    .then(res => {
-        if (res.ok) {
-            return Promise.resolve('User deleted.');
-        } else {
-            return Promise.reject('An error occurred.');
+// Metodo DELETE
+D.addEventListener("click", async e =>{
+    if (e.target.matches("#eliminar_producto")){
+        let borrar = confirm(`Esta seguro de eliminar el producto con cédula: ${e.target.dataset.codigo_producto}?`);
+        if (borrar){
+            try {
+                let datosPr={
+                    method:"DELETE",
+                    headers:{
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                },
+                res=await fetch(`http://localhost:8080/productos/eliminar/${e.target.dataset.codigo_producto}`,datosPr),
+                json=await res.text();
+                if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+                location.reload();
+            } catch (error) {
+                let mensaje=err.statusText("Ocurrio un error"); 
+            }
         }
-    })
-    .then(res => console.log(res));*/
+    }
+}) 

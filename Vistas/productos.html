@@ -67,14 +67,15 @@
         </form>
     </div>
     <div class="formularios2">
-        <form class="row g-3">
+        <form class="row g-3" >
             <div class="col-auto">
-                <label for="nitProveedor" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="nitProveedor"
+                <label for="codigoproducto" class="visually-hidden">PENDIENTE</label>
+                <input type="text" class="form-control form-control-sm" id="codigoproducto"
                     placeholder="Ingrese código del producto">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-sm">Buscar producto</button>
+                <input type="submit" class="btn btn-primary" value="Buscar Producto" id="buscar_producto"></input>
+            <input type="hidden" name="id">
             </div>
         </form>
     </div>
@@ -86,6 +87,7 @@
                     <th scope="col">Código</th>
                     <th scope="col">Iva</th>
                     <th scope="col">Nit proveedor</th>
+                    <th scope="col">Nombre producto</th>
                     <th scope="col">Precio compra</th>
                     <th scope="col">Precio Venta</th>
                     <th colspan="2" scope="col">Operaciones</th>
@@ -99,10 +101,11 @@
             <th scope="row" id="codigo_producto"></th>
             <td id="iva_compra"></td>
             <td id="nit_proveedor"></td>
+            <td id="nombre_producto"></td>
             <td id="precio_compra"></td>
             <td id="precio_venta"></td>
-            <td> <a id="editar_producto" class="btn btn-primary btn-sm" href="">Modificar</a></td>
-            <td id="eliminar_producto"> <button class="btn btn-primary btn-sm">Eliminar</button></td>
+            <td> <a id="editar_producto" class="btn btn-primary btn-sm" href="formulario_productos.html">Modificar</a></td>
+            <td> <button class="btn btn-primary btn-sm" id="eliminar_producto">Eliminar</button></td>
         </tr>
     </template>
     
