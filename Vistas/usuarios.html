@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/Estilos/style.css">
-    <title>Usuarios</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/Estilos/style.css">
+	<title>Usuarios</title>
 </head>
 
 <body>
@@ -51,56 +51,55 @@
         </div>
     </footer>
     <!--Cabecera y pie de pag | Fin-->
-    <div class="titulos">
-        <h1>Gestión Usuarios</h1>
-    </div>
-    <div class="formularios2">
-        <a class="btn btn-primary btn-sm " href="formulario_usuarios.html">Agregar usuario</a>
-    </div>
-    <div class="formularios2">
-        <form class="row g-3">
-            <div class="col-auto">
-                <label for="cedulaUsuario" class="visually-hidden">Cédula</label>
-                <input type="text" class="form-control form-control-sm" id="cedulaUsuario" placeholder="Ingrese cedula">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-sm">Buscar usuario</button>
-            </div>
-        </form>
-    </div>
-    <div class="tablas">
-        <table class="table table-striped" id="tabla_usuarios">
-            <thead>
-                <tr>
-                    <!-- th: table head -->
-                    <th scope="col">Cedula</th>
-                    <th scope="col">Mail</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Usuario</th>
-                    <th colspan="2" scope="col">Operaciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <template id="listado_usuarios">
-        <tr>
-            <th scope="row" id="cedula_usuario"></th>
-            <td id="email_usuario"></td>
-            <td id="nombre_usuario"></td>
-            <td id="password_usuario"></td>
-            <td id="usuario_usuario"></td>
-            <!-- 'a' sirve para mandar a una referencia externa: -->
-            <td><a id="editar_usuario"class="btn btn-primary btn-sm" type="submit" href="formulario_usuarios.html">Modificar</a></td>
-            <td id="eliminar_usuario"> <button class="btn btn-primary btn-sm">Eliminar</button></td>
-        </tr>
-    </template>
-    <script src="/Scripts/usuarios.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-        crossorigin="anonymous"></script>
-    
+	<div class="titulos">
+		<h1>Gestión Usuarios</h1>
+	</div>
+	<div class="formularios2">
+		<a class="btn btn-primary btn-sm " href="/Vistas/formulario_usuarios.html">Agregar usuario</a>
+	</div>
+	<div class="formularios2">
+		<form class="row g-3">
+			<div class="col-auto">
+				<label for="cedulaUsuario" class="visually-hidden">Cédula</label>
+				<input type="text" class="form-control form-control-sm" id="cedulaUsuario" placeholder="Ingrese cedula">
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-primary btn-sm">Buscar usuario</button>
+			</div>
+		</form>
+	</div>
+	<div class="tablas">
+		<table class="table table-striped" id="tabla_usuarios">
+			<thead>
+				<tr>
+					<!-- th: table head -->
+					<th scope="col">Cedula</th>
+					<th scope="col">Mail</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Password</th>
+					<th scope="col">Usuario</th>
+					<th colspan="2" scope="col">Operaciones</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	<template id="listado_usuarios">
+		<tr>
+			<th scope="row" id="cedula_usuario"></th>
+			<td id="mail_usuario"></td>
+			<td id="nombre_usuario"></td>
+			<td id="password_usuario"></td>
+			<td id="usuario_usuario"></td>
+			<!-- 'a' sirve para mandar a una referencia externa: -->
+			<td><a class="btn btn-primary btn-sm" href="">Modificar</a></td>
+			<td id="eliminar_usuario"> <button class="btn btn-primary btn-sm">Eliminar</button></td>
+		</tr>
+	</template>
+	<script src="/Scripts/usuarios.js" type="module"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>
