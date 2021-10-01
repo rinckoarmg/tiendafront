@@ -48,6 +48,10 @@ body{
 	max-width:500px;
 	margin:0 auto;
 }
+.formulario1{
+	max-width: 300px;
+	margin-right: 20px;
+}
 .formularios2{
 	max-width:1000px;
 	margin:10px auto;
@@ -87,3 +91,20 @@ body{
 #cargararchivo {
 	max-width:500px;
 }
+.modulo_ventas{
+	display: flex;
+	justify-content:flex-start;
+  }
+.ventas_cliente{
+	margin-bottom: 80px;
+  }
+.ventas_producto{
+	 margin-top: 80px;
+	 margin-bottom: 80px;
+   }
+.ventas_confirmar{
+	margin-top: 50px;
+  }
+.col-md-3{
+	float: right;
+  }
