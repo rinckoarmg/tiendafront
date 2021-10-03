@@ -3,7 +3,7 @@ $tabla = D.getElementById("tabla_clientes"),
 $template = D.getElementById("listado_clientes").content,
 $fragmento = D.createDocumentFragment();
 
-//metodo GET 
+//metodo GET -listar
 const listaC = async()=>{
     try {
         let res = await fetch("http://localhost:8080/clientes/listar"),
@@ -26,3 +26,29 @@ const listaC = async()=>{
     }
 }
 D.addEventListener("DOMContentLoaded",listaC);
+
+// Metodo GET - Buscar 
+
+// Metodo DELETE 
+D.addEventListener("click", async e =>{
+    if (e.target.matches("#eliminar_cliente")){
+        let borrar = confirm(`Esta seguro de eliminar el cliente con cédula: ${e.target.dataset.cedula_cliente}?`);
+        if (borrar){
+            try {
+                let datosC={
+                    method:"DELETE",
+                    headers:{
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                },
+                res=await fetch(`http://localhost:8080/clientes/eliminar/${e.target.dataset.cedula_cliente}`,datosC),
+                json=await res.text();
+                if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+                location.reload();
+            } catch (error) {
+                let mensaje=err.statusText("Ocurrio un error");
+            }
+        }
+    }
+})
