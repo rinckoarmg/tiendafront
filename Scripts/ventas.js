@@ -1,28 +1,43 @@
 const D = document,
-$tabla = D.getElementById("tabla_usuarios"), 
-$template = D.getElementById("listado_usuarios").content,
-$fragmento = D.createDocumentFragment();
+$tabla = D.getElementById("tabla_clientes"), 
+$template = D.getElementById("clientes_template").content,
+$fragmento = D.createDocumentFragment(),
+$buscar=D.getElementById("buscar_cliente");
 
-//metodo GET 
-const listaU = async()=>{
-    try {
-        let res = await fetch("http://localhost:8080/detalle_ventas/listar"),
-        json = await res.json();
-        if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+
+//metodo buscar cliente
+
+D.addEventListener("submit", async (e) => {
+    if (e.target === $buscar) {
+      e.preventDefault();
+  
+      try {
+        let res = await fetch(`http://localhost:8080/clientes/buscar/${e.target.numero_cedula.value}`),
+          json = await res.json();
+          console.log(e.target.numero_cedula.value);
+  
+        if (!res.ok) throw { status: res.status, statusText: res.statusText };
         console.log(json);
-        json.forEach(usuario => {
-            $template.getElementById("cedula_usuario").textContent = usuario.cedula_usuario;
-            $template.getElementById("mail_usuario").textContent = usuario.email_usuario;
-            $template.getElementById("nombre_usuario").textContent = usuario.nombre_usuario;
-            $template.getElementById("password_usuario").textContent = usuario.password;
-            $template.getElementById("usuario_usuario").textContent = usuario.usuario;
-            $template.getElementById("eliminar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
-            let $clone = D.importNode($template, true);
-            $fragmento.appendChild($clone);
-        }); 
+        
+        
+          $template.getElementById("cedula_cliente").textContent =json.cedula_cliente;
+          $template.getElementById("nombre_cliente").textContent =
+            json.nombre_cliente;
+          $template.getElementById("correo_cliente").textContent =
+            json.email_cliente;
+          $template.getElementById("telefono_cliente").textContent =
+            json.telefono_cliente;
+          $template.getElementById("direccion_cliente").textContent =
+            json.direccion_cliente;
+  
+          let $clone = D.importNode($template, true);
+          $fragmento.appendChild($clone);
+        
         $tabla.querySelector("tbody").appendChild($fragmento);
-    } catch (error) {
-        let mensaje=err.statusText("Ocurrio un error");
+  
+      } catch (error) {
+        console.log(error);
+      }
     }
-}
-D.addEventListener("DOMContentLoaded",listaU);
+  });
+  

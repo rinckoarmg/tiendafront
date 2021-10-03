@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/Estilos/style.css">
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/Estilos/style.css">
     <title>Ventas</title>
 </head>
+
 <body>
     <!--Cabecera y pie de pag | Inicio-->
     <nav class="navbar navbar-expand-lg navbar-dark navbarmitienda">
@@ -50,13 +52,13 @@
     </footer>
     <!--Cabecera y pie de pag | Fin-->
     <div class="titulos">
-		<h1>Ventas</h1>
-	</div>
+        <h1>Ventas</h1>
+    </div>
     <div>
         <div class="formularios2">
             <div class="ventas_cliente">
 
-                <div  class="col-md-3">
+                <div class="col-md-3">
                     <table class="table table-striped">
                         <tr>
                             <th scope="col">Numero de consecutivo</th>
@@ -65,18 +67,25 @@
                     </table>
                 </div>
                 <h3>Datos del cliente</h3>
-                <div class="modulo_ventas">
-                    <div class="input-group input-group-sm mb-3 formulario1">
-                        <input type="text" class="form-control" id="inputPassword4"
-                            placeholder="Numero de cedula" />
-                        <button class="btn btn-primary" type="submit">
-                            Buscar
-                        </button>
-                    </div>
-                    
+                <div class="col-md-4">
+
+                    <form id="buscar_cliente" class="buscar_cedula">
+
+                        <div>
+                            <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de cedula"
+                                name="numero_cedula" />
+                        </div>
+
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Buscar">
+                            <input type="hidden" name="od">
+                        </div>
+
+                    </form>
+
                 </div>
 
-                <table class="table table-striped">
+                <table id="tabla_clientes" class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Numero de cedula</th>
@@ -84,28 +93,20 @@
                             <th scope="col">Correo</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Direción</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">134526354</th>
-                            <td class="textos">william diaz</td>
-                            <td>diazrubianowilliam94@gamail.com</td>
-                            <td>3156354762</td>
-                            <td>carrera 138 c # 139 -39</td>
 
-                        </tr>
                     </tbody>
                 </table>
+
             </div>
             <hr size="3px">
             <div class="ventas_producto">
                 <h3>Datos del producto</h3>
                 <div class="modulo_ventas">
                     <div class="input-group input-group-sm mb-3 formulario1">
-                        <input type="text" class="form-control" id="inputPassword4"
-                            placeholder="Codigo del producto" />
+                        <input type="text" class="form-control" id="inputPassword4" placeholder="Codigo del producto" />
                         <button class="btn btn-primary" type="submit">
                             Buscar
                         </button>
@@ -156,12 +157,26 @@
                         <th scope="col">105.000</th>
                     </tr>
 
-                    
+
                 </table>
                 <div class="ventas_confirmar">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <button class="btn btn-primary" type="button">Confirmar venta</button>
                     </div>
                 </div>
+
+                <template id="clientes_template">
+                    <tr>
+                        <th id="cedula_cliente" scope="row"></th>
+                        <td id="nombre_cliente" class="textos"></td>
+                        <td id="correo_cliente"></td>
+                        <td id="telefono_cliente"></td>
+                        <td id="direccion_cliente"></td>
+                    </tr>
+
+                </template>
+
+                <script src="/Scripts/ventas.js" type="module"></script>
 </body>
+
 </html>
