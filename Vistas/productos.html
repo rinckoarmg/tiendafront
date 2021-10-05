@@ -51,10 +51,10 @@
         </div>
     </footer>
     <!--Cabecera y pie de pag | Fin-->
+
     <div class="titulos">
         <h1>Gestión Productos</h1>
     </div>
-    
     <div class="formularios2">
         <form class="row g-3">
             <div class="col-auto">
@@ -70,17 +70,12 @@
         <form class="row g-3" id="buscarProducto">
             <div class="col-auto">
                 <label for="codigoproducto" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="codigoproducto" name="codigoproducto"
-                    placeholder="Ingrese código producto">
+                <input type="text" class="form-control form-control-sm" id="codigoproducto" name="codigoproducto" placeholder="Ingrese código producto">
             </div>
             <div class="col-auto">
                 <input type="submit" class="btn btn-primary btn-sm" value="Buscar Producto" id="buscar_producto"></input>
                 <input type="hidden" name="id">
-                <!--<a class="btn btn-primary btn-sm " href="productos.html">Ver todos</a>-->
                 <input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="vertodos"></input>
-            </div>
-            <div>
-                
             </div>
         </form>
     </div>
@@ -109,11 +104,12 @@
             <td id="nombre_producto"></td>
             <td id="precio_compra"></td>
             <td id="precio_venta"></td>
-            <td> <a id="editar_producto" class="btn btn-primary btn-sm" href="formulario_productos.html">Modificar</a></td>
+            <td> <a id="editar_producto" class="btn btn-primary btn-sm" href="formulario_productos.html">Modificar</a>
+            </td>
             <td> <button class="btn btn-primary btn-sm" id="eliminar_producto">Eliminar</button></td>
         </tr>
     </template>
-    
+
     <script src="/Scripts/productos.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

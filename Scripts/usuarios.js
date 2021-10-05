@@ -1,9 +1,11 @@
 const D = document,
 $tabla = D.getElementById("tabla_usuarios"), 
 $template = D.getElementById("listado_usuarios").content,
-$fragmento = D.createDocumentFragment();
+$fragmento = D.createDocumentFragment(),
+$buscar = D.getElementById("buscarUsuario"),
+$codigo = D.getElementById("cedulaUsuario").nodeValue;
 
-//metodo GET - listar
+// Metodo GET listar
 const listaU = async()=>{
     try {
         let res = await fetch("http://localhost:8080/usuarios/listar"),
@@ -26,7 +28,44 @@ const listaU = async()=>{
     }
 }
 D.addEventListener("DOMContentLoaded",listaU);
-// Metodo GET - Buscar 
+
+// Metodo GET by Id
+D.addEventListener("submit", async (e) =>{
+    if (e.target==$buscar){
+        $tabla.querySelector("tbody").textContent="";
+        e.preventDefault();
+        try {
+            let res = await fetch(`http://localhost:8080/usuarios/buscar/${e.target.cedulaUsuario.value}`),
+            json = await res.json(); 
+            if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+            console.log(json);
+                $template.getElementById("cedula_usuario").textContent = json.cedula_usuario;
+                $template.getElementById("mail_usuario").textContent = json.email_usuario;
+                $template.getElementById("nombre_usuario").textContent = json.nombre_usuario;
+                $template.getElementById("password_usuario").textContent = json.password;
+                $template.getElementById("usuario_usuario").textContent = json.usuario;
+                let $clone = D.importNode($template, true);
+                $fragmento.appendChild($clone);
+            $tabla.querySelector("tbody").appendChild($fragmento);
+        } catch (error) {
+            let mensaje=err.statusText("Ocurrio un error");
+        }
+    }
+    limpiar();
+})
+
+// Limpiar cedula usuario
+function limpiar() {
+    D.getElementById("cedulaUsuario").value = "";
+}
+
+// Cargar listado
+D.addEventListener("click", async e =>{
+    if (e.target.matches("#vertodos")){
+        $tabla.querySelector("tbody").textContent="";
+        listaU();
+    }
+})
 
 
 // Metodo DELETE 

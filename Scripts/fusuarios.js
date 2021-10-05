@@ -5,6 +5,7 @@ D.addEventListener("submit", async e =>{
     if (e.target === $formulario){
         e.preventDefault();
         if(!e.target.id.value){
+
             //metodo POST - Guardar
             try {
                 let datosU = {
@@ -32,6 +33,7 @@ D.addEventListener("submit", async e =>{
                 let mensaje=err.statusText("Ocurrio un error");
             }
         } else {
+
             //metodo PUT - actualizar
             try {
                 let datosU = {
@@ -59,6 +61,5 @@ D.addEventListener("submit", async e =>{
                 let mensaje=err.statusText("Ocurrio un error");
             }
         }
-        
     }
 });
