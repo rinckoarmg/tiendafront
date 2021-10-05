@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/Estilos/style.css">
     <title>Proveedores</title>
 </head>
+
 <body>
     <!--Cabecera y pie de pag | Inicio-->
     <nav class="navbar navbar-expand-lg navbar-dark navbarmitienda">
@@ -49,38 +52,39 @@
     </footer>
     <!--Cabecera y pie de pag | Fin-->
     <div class="titulos">
-		<h1>Gestión Proveedores</h1>
-	</div>
-	<div class="formularios2">
-		<a class="btn btn-primary btn-sm " href="formulario_proveedores.html">Agregar proveedor</a>
-	</div>
-	<div class="formularios2">
-		<form class="row g-3">
-		  <div class="col-auto">
-		    <label for="nitProveedor" class="visually-hidden">PENDIENTE</label>
-		    <input type="text" class="form-control form-control-sm" id="nitProveedor" placeholder="Ingrese numero de NIT">
-		  </div>
-		  <div class="col-auto">
-		    <button type="submit" class="btn btn-primary btn-sm">Buscar proveedor</button>
-		  </div>
-		</form>
-	</div>
-	<div class="tablas">
-		<table class="table table-striped"id="tabla_proveedores">
-		  <thead>
-		    <tr>
-		    <!-- th: table head -->
-		      <th scope="col">NIT Proveedor</th>
-		      <th scope="col">Ciudad</th>
-		      <th scope="col">Dirección</th>
-		      <th scope="col">Nombre</th>
-		      <th scope="col">Telefono</th>
-		      <th colspan="2" scope="col">Operaciones</th>
-		    </tr>
-		  </thead>
-		  <tbody></tbody>
-		</table> 
-	</div>
+        <h1>Gestión Proveedores</h1>
+    </div>
+    <div class="formularios2">
+        <a class="btn btn-primary btn-sm " href="/Vistas/formulario_proveedores.html">Agregar proveedor</a>
+    </div>
+    <div class="formularios2">
+        <form class="row g-3">
+            <div class="col-auto">
+                <label for="nitProveedor" class="visually-hidden">PENDIENTE</label>
+                <input type="text" class="form-control form-control-sm" id="nitProveedor"
+                    placeholder="Ingrese numero de NIT">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm">Buscar proveedor</button>
+            </div>
+        </form>
+    </div>
+    <div class="tablas">
+        <table class="table table-striped" id="tabla_proveedores">
+            <thead>
+                <tr>
+                    <!-- th: table head -->
+                    <th scope="col">NIT Proveedor</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Telefono</th>
+                    <th colspan="2" scope="col">Operaciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
     <template id="listado_proveedores">
         <tr>
             <th scope="row" id="nit_proveedor"></th>
@@ -88,11 +92,14 @@
             <td id="direccion_proveedor"></td>
             <td id="nombre_proveedor"></td>
             <td id="telefono_proveedor"></td>
-            <td> <a class="btn btn-primary btn-sm" href="formulario_proveedores.jsp?nitProveedor=<% %>">Modificar</a></td>
-            <td id="eliminar_proveedor"> <button class="btn btn-primary btn-sm">Eliminar</button></td>
-          </tr>
+            <td> <a class="btn btn-primary btn-sm" href="formulario_proveedores.html">Modificar</a></td>
+            <td> <button class="btn btn-primary btn-sm" id="eliminar_proveedor">Eliminar</button></td>
+        </tr>
     </template>
     <script src="/Scripts/proveedores.js" type="module"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/Estilos/style.css">
     <title>Gestion Proveedores</title>
 </head>
+
 <body>
     <!--Cabecera y pie de pag | Inicio-->
     <nav class="navbar navbar-expand-lg navbar-dark navbarmitienda">
@@ -50,39 +52,43 @@
     </footer>
     <!--Cabecera y pie de pag | Fin-->
     <div class="titulos">
-		<h1>Gestión de Proveedores</h1>
-	</div>
-	<div class="formulario">
-		<form>
-		  <div class="mb-3">
-		    <label for="InputCedula" class="form-label">Cedula</label>
-		    <input type="text" class="form-control form-control-sm" id="InputCedula" aria-describedby="emailHelp">
-		  </div>
-		  <div class="mb-3">
-		    <label for="InputEmail" class="form-label">Email</label>
-		    <input type="email" class="form-control form-control-sm" id="InputEmail" aria-describedby="emailHelp">
-		  </div>
-		  <div class="mb-3">
-		    <label for="InputNombre" class="form-label">Nombre</label>
-		    <input type="text" class="form-control form-control-sm" id="InputNombre" aria-describedby="emailHelp">
-		  </div>
-		  <div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Password</label>
-		    <input type="password" class="form-control form-control-sm" id="exampleInputPassword1">
-		  </div>
-		  <div class="mb-3">
-		    <label for="InputUsuario" class="form-label">Usuario</label>
-		    <input type="text" class="form-control form-control-sm" id="InputUsuario" aria-describedby="emailHelp">
-		  </div>
-		  <div class="mb-3 form-check">
-		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-		    <label class="form-check-label" for="exampleCheck1">Acepto la política de datos</label>
-		  </div>
-		  <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="submit" class="btn btn-primary">Modificar</button>
-		</form>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-	
-</body>
+        <h1>Gestión de Proveedores</h1>
+    </div>
+    <div class="formulario">
+        <form id="datos_proveedor">
+            <div class="mb-3">
+                <label for="InputNit" class="form-label">NIT</label>
+                <input type="text" class="form-control form-control-sm" id="InputNit" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="InputCiudad" class="form-label">Ciudad</label>
+                <input type="text" class="form-control form-control-sm" id="InputCiudad" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="InputDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control form-control-sm" id="InputDireccion"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="InputNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control form-control-sm" id="InputNombre" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="InputTelefono" class="form-label">Telefono</label>
+                <input type="text" class="form-control form-control-sm" id="InputTelefono" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Acepto la política de datos</label>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Enviar"></input>
+            <input type="hidden" name="Id">
+        </form>
+    </div>
+    <template id="datos_proveedor"></template>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="/Scripts/fproveedores.js" type="module"></script>
+</body>    
 </html>
