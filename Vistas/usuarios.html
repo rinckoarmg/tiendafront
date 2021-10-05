@@ -62,12 +62,13 @@
 		<form class="row g-3" id="buscarUsuario">
 			<div class="col-auto">
 				<label for="cedulaUsuario" class="visually-hidden">PENDIENTE</label>
-				<input type="text" class="form-control form-control-sm" id="cedulaUsuario" name="cedulaUsuario" placeholder="Ingrese cedula">
+				<input type="text" class="form-control form-control-sm" id="cedulaUsuario" name="cedulaUsuario"
+					placeholder="Ingrese cedula">
 			</div>
 			<div class="col-auto">
-				<input type="submit" class="btn btn-primary btn-sm" value= "Buscar Usuario" id="buscar_usuario"></input>
+				<input type="submit" class="btn btn-primary btn-sm" value="Buscar Usuario" id="buscar_usuario"></input>
 				<input type="hidden" name="id">
-				<input type="submit" class="btn btn-primary btn-sm" value= "Ver todos" id="vertodos"></input>
+				<input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="ver_todos"></input>
 			</div>
 		</form>
 	</div>
@@ -93,8 +94,7 @@
 			<td id="nombre_usuario"></td>
 			<td id="password_usuario"></td>
 			<td id="usuario_usuario"></td>
-			<!-- 'a' sirve para mandar a una referencia externa: -->
-			<td><a class="btn btn-primary btn-sm" href="">Modificar</a></td>
+			<td><a class="btn btn-primary btn-sm" href="formulario_usuarios.html">Modificar</a></td>
 			<td> <button class="btn btn-primary btn-sm" id="eliminar_usuario">Eliminar</button></td>
 		</tr>
 	</template>

@@ -59,21 +59,23 @@
         <a class="btn btn-primary btn-sm " href="/Vistas/formulario_clientes.html">Agregar cliente</a>
     </div>
     <div class="formularios2">
-        <form class="row g-3">
-            <div class="col-auto">
-                <label for="cedulaCliente" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="cedulaCliente" placeholder="Ingrese cedula">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-sm">Buscar cliente</button>
-            </div>
-        </form>
-    </div>
+		<form class="row g-3" id="buscarCliente">
+			<div class="col-auto">
+				<label for="cedulaCliente" class="visually-hidden">PENDIENTE</label>
+				<input type="text" class="form-control form-control-sm" id="cedulaCliente" name="cedulaCliente"
+					placeholder="Ingrese cedula">
+			</div>
+			<div class="col-auto">
+				<input type="submit" class="btn btn-primary btn-sm" value="Buscar Cliente" id="buscar_cliente"></input>
+				<input type="hidden" name="id">
+				<input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="ver_todos"></input>
+			</div>
+		</form>
+	</div>
     <div class="tablas">
         <table class="table table-striped" id="tabla_clientes">
             <thead>
                 <tr>
-                    <!-- th: table head -->
                     <th scope="col">Cedula</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Email</th>

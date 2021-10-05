@@ -51,22 +51,16 @@ D.addEventListener("submit", async (e) =>{
             let mensaje=err.statusText("Ocurrio un error");
         }
     }
-    limpiar();
-})
-
-// Limpiar cedula usuario
-function limpiar() {
     D.getElementById("cedulaUsuario").value = "";
-}
+})
 
 // Cargar listado
 D.addEventListener("click", async e =>{
-    if (e.target.matches("#vertodos")){
+    if (e.target.matches("#ver_todos")){
         $tabla.querySelector("tbody").textContent="";
         listaU();
     }
 })
-
 
 // Metodo DELETE 
 D.addEventListener("click", async e =>{

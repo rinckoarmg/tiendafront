@@ -1,9 +1,11 @@
 const D = document,
 $tabla = D.getElementById("tabla_clientes"), 
 $template = D.getElementById("listado_clientes").content,
-$fragmento = D.createDocumentFragment();
+$fragmento = D.createDocumentFragment(),
+$buscar = D.getElementById("buscarCliente"),
+$codigo = D.getElementById("cedulaCliente").nodeValue;
 
-//metodo GET -listar
+//metodo GET listar
 const listaC = async()=>{
     try {
         let res = await fetch("http://localhost:8080/clientes/listar"),
@@ -27,7 +29,38 @@ const listaC = async()=>{
 }
 D.addEventListener("DOMContentLoaded",listaC);
 
-// Metodo GET - Buscar 
+// Metodo GET by Id
+D.addEventListener("submit", async (e) =>{
+    if (e.target==$buscar){
+        $tabla.querySelector("tbody").textContent="";
+        e.preventDefault();
+        try {
+            let res = await fetch(`http://localhost:8080/clientes/buscar/${e.target.cedulaCliente.value}`),
+            json = await res.json(); 
+            if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+            console.log(json);
+                $template.getElementById("cedula_cliente").textContent = json.cedula_cliente;
+                $template.getElementById("direccion_cliente").textContent = json.direccion_cliente;
+                $template.getElementById("email_cliente").textContent = json.email_cliente;
+                $template.getElementById("nombre_cliente").textContent = json.nombre_cliente;
+                $template.getElementById("telefono_cliente").textContent = json.telefono_cliente;
+                let $clone = D.importNode($template, true);
+                $fragmento.appendChild($clone);
+            $tabla.querySelector("tbody").appendChild($fragmento);
+        } catch (error) {
+            let mensaje=err.statusText("Ocurrio un error");
+        }
+    }
+    D.getElementById("cedulaCliente").value = "";
+})
+
+// Cargar listado
+D.addEventListener("click", async e =>{
+    if (e.target.matches("#ver_todos")){
+        $tabla.querySelector("tbody").textContent="";
+        listaC();
+    }
+})
 
 // Metodo DELETE 
 D.addEventListener("click", async e =>{
