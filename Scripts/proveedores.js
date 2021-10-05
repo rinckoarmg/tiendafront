@@ -26,3 +26,31 @@ const listaP = async()=>{
     }
 }
 D.addEventListener("DOMContentLoaded",listaP);
+// Metodo GET - Buscar 
+
+
+// Metodo DELETE 
+D.addEventListener("click", async e =>{
+    if (e.target.matches("#eliminar_proveedor")){
+        let borrar = confirm(`Esta seguro de eliminar el proveedor con Nit: ${e.target.dataset.nitproveedor}?`);
+        if (borrar){
+            try {
+                let datosP={
+                    method:"DELETE",
+                    headers:{
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                },
+                res=await fetch(`http://localhost:8080/proveedores/eliminar/${e.target.dataset.nitproveedor}`,datosP),
+                json=await res.text();
+                if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+                location.reload();
+            } catch (error) {
+                let mensaje=err.statusText("Ocurrio un error");
+            }
+        }
+    }
+})
+
+
