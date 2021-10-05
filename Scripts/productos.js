@@ -6,8 +6,7 @@ $buscar = D.getElementById("buscarProducto"),
 $codigo = D.getElementById("codigoproducto").nodeValue;
 
 
-//metodo GET 
-
+// Metodo GET listar
 const listaPr = async()=>{
     try {
         let res = await fetch("http://localhost:8080/productos/listar"),
@@ -29,12 +28,10 @@ const listaPr = async()=>{
     } catch (error) {
         let mensaje=err.statusText("Ocurrio un error");
     }
-      
 }
 D.addEventListener("DOMContentLoaded",listaPr);
 
 // Metodo GET by Id
-
 D.addEventListener("submit", async (e) =>{
     if (e.target==$buscar){
         $tabla.querySelector("tbody").textContent="";
