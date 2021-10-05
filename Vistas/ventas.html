@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/Estilos/style.css">
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/Estilos/style.css">
     <title>Ventas</title>
 </head>
+
 <body>
     <!--Cabecera y pie de pag | Inicio-->
     <nav class="navbar navbar-expand-lg navbar-dark navbarmitienda">
@@ -50,13 +52,13 @@
     </footer>
     <!--Cabecera y pie de pag | Fin-->
     <div class="titulos">
-		<h1>Ventas</h1>
-	</div>
+        <h1>Ventas</h1>
+    </div>
     <div>
         <div class="formularios2">
             <div class="ventas_cliente">
 
-                <div  class="col-md-3">
+                <div class="col-md-3">
                     <table class="table table-striped">
                         <tr>
                             <th scope="col">Numero de consecutivo</th>
@@ -65,18 +67,25 @@
                     </table>
                 </div>
                 <h3>Datos del cliente</h3>
-                <div class="modulo_ventas">
-                    <div class="input-group input-group-sm mb-3 formulario1">
-                        <input type="text" class="form-control" id="inputPassword4"
-                            placeholder="Numero de cedula" />
-                        <button class="btn btn-primary" type="submit">
-                            Buscar
-                        </button>
-                    </div>
-                    
+                <div class="col-md-4">
+
+                    <form id="buscar_cliente" class="buscar_cedula">
+
+                        <div>
+                            <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de cedula"
+                                name="numero_cedula" />
+                        </div>
+
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Buscar">
+                            <input type="hidden" name="od">
+                        </div>
+
+                    </form>
+
                 </div>
 
-                <table class="table table-striped">
+                <table id="tabla_clientes" class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Numero de cedula</th>
@@ -84,84 +93,168 @@
                             <th scope="col">Correo</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Direción</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">134526354</th>
-                            <td class="textos">william diaz</td>
-                            <td>diazrubianowilliam94@gamail.com</td>
-                            <td>3156354762</td>
-                            <td>carrera 138 c # 139 -39</td>
 
-                        </tr>
                     </tbody>
                 </table>
+
             </div>
+            <hr size="3px">
+            <div class="ventas_usuario">
+                <h3>Datos del usuario</h3>
+                <div class="col-md-4">
+
+                    <form id="buscar_usuario" class="buscar_cedula">
+
+                        <div>
+                            <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de cedula"
+                                name="numero_cedula" />
+                        </div>
+
+                        <div>
+                            <input class="btn btn-primary" type="submit" value="Buscar">
+                            <input type="hidden" name="od">
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <table id="tabla_usuario" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Numero de cedula</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Contraseña</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+
             <hr size="3px">
             <div class="ventas_producto">
                 <h3>Datos del producto</h3>
-                <div class="modulo_ventas">
-                    <div class="input-group input-group-sm mb-3 formulario1">
-                        <input type="text" class="form-control" id="inputPassword4"
-                            placeholder="Codigo del producto" />
-                        <button class="btn btn-primary" type="submit">
-                            Buscar
-                        </button>
-                    </div>
-                    <div class="input-group input-group-sm mb-3 formulario1">
-                        <input type="number" class="form-control" id="inputPassword4" placeholder="Cantidad" />
-                        <button class="btn btn-primary" type="submit">
-                            Confirmar
-                        </button>
-                    </div>
+                <div class="col-md-4">
+
+                    <form id="buscar_producto" class="buscar_cedula">
+
+                        <div>
+                            <input type="number" class="form-control" id="inputPassword4" placeholder="codigo del producto"
+                                name="codigo_producto" />
+                        </div>
+
+                        <div>
+                            <input type="number" class="form-control" id="inputPassword4" placeholder="cantidad del producto"
+                                name="cantidad_producto" />
+                        </div>
+                        <div>
+                            <input id="boton_confirmar" class="btn btn-primary" type="submit" value="Confirmar">
+                            <input type="hidden" name="od">
+                        </div>
+
+                    </form>
+
                 </div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Codigo del producto</th>
-                            <th scope="col">Nombre del producto</th>
-                            <th scope="col">Iva de compra</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Valor unitario</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">134526354</th>
-                            <td class="textos">Zapatos</td>
-                            <td class="textos">5</td>
-                            <td class="textos">1</td>
-                            <td class="textos">100.000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <hr size="3px">
-            <div>
-                <table class="table table-striped">
 
-                    <tr>
-                        <th scope="col">Total venta</th>
-                        <th scope="col">100.000</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Total iva</th>
-                        <th scope="col">5</th>
-                    </tr>
-
-                    <tr>
-                        <th scope="col">Total con iva</th>
-                        <th scope="col">105.000</th>
-                    </tr>
-
+                    <table id="tabla_productos" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Codigo del producto</th>
+                                <th scope="col">Nombre del producto</th>
+                                <th scope="col">Iva del producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Valor unitario</th>
+                                <th scope="col">total producto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                     
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <hr size="3px">
+
+            <div>
+                <table id="tabla_totales" class="table table-striped">
+                    <tbody>
+
+                    </tbody>
+
                 </table>
+                
                 <div class="ventas_confirmar">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <button class="btn btn-primary" type="button">Confirmar venta</button>
                     </div>
                 </div>
+            </div>
+
+                <template id="clientes_template">
+                    <tr>
+                        <th id="cedula_cliente" scope="row"></th>
+                        <td id="nombre_cliente" class="textos"></td>
+                        <td id="correo_cliente"></td>
+                        <td id="telefono_cliente"></td>
+                        <td id="direccion_cliente"></td>
+                    </tr>
+
+                </template>
+
+                <template id="usuarios_template">
+                    <tr>
+                      <th id="cedula_usuario" scope="row"></th>
+                      <td id="nombre_usuario" class="textos"></td>
+                      <td id="correo_usuario"></td>
+                      <td id="usuario_usuario"></td>
+                      <td id="contraseña_usuario"></td>
+                      
+                    </tr>
+                
+                  </template>
+
+                  <template id="productos_template">
+                    <tr>
+                      <th id="codigo_producto" scope="row"></th>
+                      <td id="nombre_producto" class="textos"></td>
+                      <td id="iva_compra"></td>
+                      <td id="cantidad_producto"></td>
+                      <td id="valor_unitario"></td>
+                      <td  name="totalp" id="total"></td>
+                      
+                    </tr>
+                
+                  </template>
+
+                  <template id="totales_template">
+
+                    <tr>
+                        <th scope="col">Total venta</th>
+                        <th id="total_venta" scope="col"> </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Total iva</th>
+                        <th id="total_iva" scope="col"></th>
+                    </tr>
+    
+                    <tr>
+                        <th scope="col">Total con iva</th>
+                        <th id="total_con_iva" scope="col"></th>
+                    </tr>
+                  </template>
+                 
+
+                <script src="/Scripts/ventas.js" type="module"></script>
 </body>
+
 </html>
