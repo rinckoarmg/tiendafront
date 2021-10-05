@@ -6,7 +6,7 @@ D.addEventListener("submit", async e =>{
         e.preventDefault();
         if(!e.target.id.value){
 
-            //metodo POST - Guardar
+            //metodo POST guardar
             try {
                 let datosU = {
                     method:"POST",
@@ -34,7 +34,7 @@ D.addEventListener("submit", async e =>{
             }
         } else {
 
-            //metodo PUT - actualizar
+            //metodo PUT actualizar
             try {
                 let datosU = {
                     method:"PUT",
