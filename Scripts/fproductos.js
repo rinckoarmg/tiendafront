@@ -45,11 +45,12 @@ D.addEventListener("submit", async e =>{
                     },
                     body:JSON.stringify(
                         {
-                            cedula_usuario:e.target.InputCedula.value,
-                            email_usuario:e.target.InputEmail.value,
-                            nombre_usuario:e.target.InputNombre.value,
-                            password:e.target.InputPassword.value,
-                            usuario:e.target.InputUsuario.value
+                            codigo_producto:e.target.InputCodigo.value,
+                            ivacompra:e.target.InputIva.value,
+                            nitproveedor:e.target.InputProveedor.value,
+                            nombre_producto:e.target.InputNombre.value,
+                            precio_compra:e.target.pCompra.value,
+                            precio_venta:e.target.pVenta.value
                         }
                     )
                 },
@@ -64,3 +65,19 @@ D.addEventListener("submit", async e =>{
         }
     }
 });
+
+// Buscar proveedor
+async function traerProveedor() {
+    try {
+        let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigoproducto.value}`),
+            proveedor = await res.json(); 
+        return proveedor;
+    } catch (error) {
+        console.log(error);
+    }
+} 
+
+// Mostrar proveedor
+async function mostrarProveedor() {
+    let users = await traerProveedor();
+}

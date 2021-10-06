@@ -70,6 +70,7 @@ D.addEventListener("click", async e =>{
     }
 })
 
+
 // Metodo DELETE
 D.addEventListener("click", async e =>{
     if (e.target.matches("#eliminar_producto")){
