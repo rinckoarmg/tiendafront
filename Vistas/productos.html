@@ -27,7 +27,7 @@
                         <a class="nav-link" href="usuarios.html">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="clientes.html">clientes</a>
+                        <a class="nav-link" href="clientes.html">Clientes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="proveedores.html">Proveedores</a>
@@ -62,7 +62,70 @@
                 <input class="form-control form-control-sm" type="file" id="formFile">
             </div>
             <div><button type="submit" class="btn btn-secondary btn-sm">Cargar listado</button>
-                <a class="btn btn-primary btn-sm " href="formulario_productos.html">Agregar producto</a>
+                <!-- Formulario agregar Inicio -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Agregar Producto
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="formulario">
+                                <form id="datos_producto">
+                                    <div class="mb-3">
+                                        <label for="InputCodigo" class="form-label">Código Producto</label>
+                                        <input type="text" class="form-control form-control-sm" id="nitproveedor" name="nitproveedor" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="InputIva" class="form-label">Iva</label>
+                                        <input type="text" class="form-control form-control-sm" id="InputIva" aria-describedby="emailHelp">
+                                    </div>
+                                    <label for="InputProveedor" class="form-label">Nit Proveedor</label>
+                                    <div class="input-group mb-3">
+                                        <form id="buscarProveedor"></form>
+                                            <input type="text" class="form-control" placeholder="Ingrese el nit del proveedor" aria-label="nit_proveedor" aria-describedby="button-addon2">
+                                            <input type="submit" class="btn btn-primary btn-sm" value="Buscar Proveedor" id="buscar_nit"></input>
+                                            <input type="hidden" name="id">
+                                            <input type="hidden" name="nitproveedor">
+                                            <input type="hidden" name="ciudad_proveedor">
+                                            <input type="hidden" name="direccion_proveedor">
+                                            <input type="hidden" name="nombre_proveedor">
+                                            <input type="hidden" name="telefono_proveedor">
+                                        </form>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="InputNombre" class="form-label">Nombre Producto</label>
+                                        <input type="text" class="form-control form-control-sm" id="InputNombre"
+                                            aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="pCompra" class="form-label">Precio Compra</label>
+                                        <input type="text" class="form-control form-control-sm" id="pCompra">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="pVenta" class="form-label">Precio Venta</label>
+                                        <input type="text" class="form-control form-control-sm" id="pVenta" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <input type="submit" class="btn btn-primary" value="Guardar"></input>
+                                        <input type="hidden" name="id">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </div>
+                </div>
+                <!-- Formulario agregar Fin -->
             </div>
         </form>
     </div>

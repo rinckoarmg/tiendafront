@@ -53,14 +53,16 @@
         <h1>Reporte Ventas</h1>
     </div>
     <div class="formularios2">
-        <form class="row g-3">
+        <form class="row g-3" id="buscarVenta">
             <div class="col-auto">
-                <label for="nitProveedor" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="nitProveedor"
-                    placeholder="Ingrese código de venta">
+                <label for="codigoventa" class="visually-hidden">PENDIENTE</label>
+                <input type="text" class="form-control form-control-sm" id="codigoventa"
+                    placeholder="Ingrese cédula del cliente">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-sm">Buscar venta</button>
+                <input type="submit" class="btn btn-primary btn-sm" value="Buscar Ventas" id="buscar_ventas"></input>
+                <input type="hidden" name="id">
+                <input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="vertodos"></input>
             </div>
         </form>
     </div>
@@ -72,7 +74,7 @@
                     <th scope="col">Cédula</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Valor Total Ventas</th>
-                    <th colspan="2" scope="col">Operaciones</th>
+                    <!--<th colspan="2" scope="col">Operaciones</th>-->
                 </tr>
             </thead>
             <tbody></tbody>
@@ -83,10 +85,18 @@
             <th scope="row" id="cedulaV"></th>
             <td id="nombreV"></td>
             <td id="valorTotalV"></td>
-            <td> <a class="btn btn-primary btn-sm" href="">Modificar</a></td>
-            <td id="eliminar_venta"> <button class="btn btn-primary btn-sm">Eliminar</button></td>
+            <!--<td> <a class="btn btn-primary btn-sm" href="">Modificar</a></td>
+            <td id="eliminar_venta"> <button class="btn btn-primary btn-sm">Eliminar</button></td>-->
         </tr>
     </template>
+    <div class="row g-3 align-items-right formulario">
+        <div class="col-auto">
+          <label for="totalVentas" class="col-form-label">Total Ventas $</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" id="totalVentas" class="form-control" >
+        </div>
+      </div>
     <script src="/Scripts/reportes.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

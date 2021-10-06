@@ -96,16 +96,16 @@ body{
 	justify-content:flex-start;
   }
 .ventas_cliente{
-	margin-bottom: 80px;
+	margin-bottom: 50px;
   }
 .ventas_producto{
-	 margin-top: 80px;
-	 margin-bottom: 80px;
+	 margin-top: 50px;
+	 margin-bottom: 50px;
    }
 
 .ventas_usuario{
-	margin-top: 80px;
-	margin-bottom: 80px;
+	margin-top: 50px;
+	margin-bottom: 50px;
   }   
 .ventas_confirmar{
 	margin-top: 50px;
@@ -113,4 +113,9 @@ body{
 .col-md-3{
 	float: right;
   }
-
+.bproducto {
+	display: flex;
+}
+.bproducto_item {
+	margin-right: 5px;
+} 
