@@ -3,7 +3,8 @@ $tabla = D.getElementById("tabla_usuarios"),
 $template = D.getElementById("listado_usuarios").content,
 $fragmento = D.createDocumentFragment(),
 $buscar = D.getElementById("buscarUsuario"),
-$codigo = D.getElementById("cedulaUsuario").nodeValue;
+$codigo = D.getElementById("cedulaUsuario").nodeValue,
+$formulario = D.getElementById("datos_usuario");
 
 // Metodo GET listar
 const listaU = async()=>{
@@ -18,6 +19,7 @@ const listaU = async()=>{
             $template.getElementById("nombre_usuario").textContent = usuario.nombre_usuario;
             $template.getElementById("password_usuario").textContent = usuario.password;
             $template.getElementById("usuario_usuario").textContent = usuario.usuario;
+
             $template.getElementById("eliminar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
@@ -85,3 +87,66 @@ D.addEventListener("click", async e =>{
         }
     }
 })
+
+//Guardar y actualizar
+D.addEventListener("submit", async e =>{
+    if (e.target === $formulario){
+        e.preventDefault();
+        if(!e.target.id.value){
+            //metodo POST guardar
+            try {
+                let datosU = {
+                    method:"POST",
+                    headers:{
+                    "Accept": 'application/json',
+                    'Content-Type': 'application/json',
+                    },
+                    body:JSON.stringify(
+                        {
+                            cedula_usuario:e.target.InputCedula.value,
+                            email_usuario:e.target.InputEmail.value,
+                            nombre_usuario:e.target.InputNombre.value,
+                            password:e.target.InputPassword.value,
+                            usuario:e.target.InputUsuario.value
+                        }
+                    )
+                },
+                res = await fetch("http://localhost:8080/usuarios/guardar", datosU),
+                json = await res.json();
+                console.log(res);
+                if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+                location.reload();
+                let mensaje=err.statusText("Usuario guardado");
+            } catch (error) {
+                let mensaje=err.statusText("Ocurrio un error");
+            }
+        } else {
+            //metodo PUT actualizar
+            try {
+                let datosU = {
+                    method:"PUT",
+                    headers:{
+                    "Accept": 'application/json',
+                    'Content-Type': 'application/json',
+                    },
+                    body:JSON.stringify(
+                        {
+                            cedula_usuario:e.target.InputCedula.value,
+                            email_usuario:e.target.InputEmail.value,
+                            nombre_usuario:e.target.InputNombre.value,
+                            password:e.target.InputPassword.value,
+                            usuario:e.target.InputUsuario.value
+                        }
+                    )
+                },
+                res=await fetch(`http://localhost:8080/usuarios/actualizar/${e.target.InputCedula.value}`,datosU),
+                json = await res.json();
+                console.log(res);
+                if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+                location.reload();
+            } catch (error) {
+                let mensaje=err.statusText("Ocurrio un error");
+            }
+        }
+    }
+});
