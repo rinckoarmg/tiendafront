@@ -68,8 +68,8 @@
                 </div>
                 <h3>Datos del cliente</h3>
                 <div class="col-md-4">
-
-                    <form id="buscar_cliente" class="buscar_cedula">
+                    
+                    <form id="buscar_cliente" class="input-group buscar_cedula">
 
                         <div>
                             <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de cedula"
@@ -105,8 +105,8 @@
             <div class="ventas_usuario">
                 <h3>Datos del usuario</h3>
                 <div class="col-md-4">
-
-                    <form id="buscar_usuario" class="buscar_cedula">
+                    
+                    <form id="buscar_usuario" class="input-group buscar_cedula">
 
                         <div>
                             <input type="number" class="form-control" id="inputPassword4" placeholder="Numero de cedula"
@@ -142,26 +142,26 @@
             <hr size="3px">
             <div class="ventas_producto">
                 <h3>Datos del producto</h3>
-                <div class="col-md-4">
+                <div class=" col-md-4">
+                    
+                    <form id="buscar_producto" class="input-group buscar_cedula">
+                        <div class="bproducto">
+                            <div class="bproducto_item">
+                                <input type="number" class="form-control" id="inputPassword4" placeholder="codigo del producto"
+                                    name="codigo_producto" />
+                            </div>
 
-                    <form id="buscar_producto" class="buscar_cedula">
-
-                        <div>
-                            <input type="number" class="form-control" id="inputPassword4" placeholder="codigo del producto"
-                                name="codigo_producto" />
+                            <div class="bproducto_item">
+                                <input type="number" class="form-control" id="inputPassword4" placeholder="cantidad del producto"
+                                    name="cantidad_producto" />
+                            </div>
+                            <div class="bproducto_item">
+                                <input id="boton_confirmar" class="btn btn-primary" type="submit" value="Confirmar">
+                                <input type="hidden" name="od">
+                            </div>
                         </div>
-
-                        <div>
-                            <input type="number" class="form-control" id="inputPassword4" placeholder="cantidad del producto"
-                                name="cantidad_producto" />
-                        </div>
-                        <div>
-                            <input id="boton_confirmar" class="btn btn-primary" type="submit" value="Confirmar">
-                            <input type="hidden" name="od">
-                        </div>
-
                     </form>
-
+                    
                 </div>
 
                     <table id="tabla_productos" class="table table-striped">
@@ -185,7 +185,7 @@
 
             <hr size="3px">
 
-            <div>
+            <div class="formularios2">
                 <table id="tabla_totales" class="table table-striped">
                     <tbody>
 

@@ -85,10 +85,10 @@ D.addEventListener("submit", async (e) => {
             json.nombre_usuario;
           $templateUsuarios.getElementById("correo_usuario").textContent =
             json.email_usuario;
-          $templateUsuarios.getElementById("usuario_usuario").textContent =
-            json.usuario;
-          $templateUsuarios.getElementById("contraseña_usuario").textContent =
-            json.password;
+          //$templateUsuarios.getElementById("usuario_usuario").textContent =
+            const usuario = json.usuario;
+          //$templateUsuarios.getElementById("contraseña_usuario").textContent =
+            const password = json.password;
   
           let $clone = D.importNode($templateUsuarios, true);
           $fragmento.appendChild($clone);
