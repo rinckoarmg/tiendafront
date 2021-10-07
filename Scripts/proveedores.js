@@ -20,6 +20,13 @@ const listaP = async()=>{
             $template.getElementById("nombre_proveedor").textContent = proveedor.nombre_proveedor;
             $template.getElementById("telefono_proveedor").textContent = proveedor.telefono_proveedor;
             $template.getElementById("eliminar_proveedor").dataset.nitproveedor = proveedor.nitproveedor;
+
+            $template.getElementById("modificar_proveedor").dataset.nitproveedor = proveedor.nitproveedor; 
+            $template.getElementById("modificar_proveedor").dataset.ciudad_proveedor = proveedor.ciudad_proveedor;
+            $template.getElementById("modificar_proveedor").dataset.direccion_proveedor = proveedor.direccion_proveedor;
+            $template.getElementById("modificar_proveedor").dataset.nombre_proveedor = proveedor.nombre_proveedor; 
+            $template.getElementById("modificar_proveedor").dataset.telefono_proveedor = proveedor.telefono_proveedor;
+
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
         }); 
@@ -148,5 +155,16 @@ D.addEventListener("submit", async e =>{
                 let mensaje=err.statusText("Ocurrio un error");
             }
         }
+    }
+});
+
+D.addEventListener("click",async (e) =>{
+    if(e.target.matches("#modificar_proveedor")){
+        console.log("verificado");
+        $formulario.InputNit.value=e.target.dataset.nitproveedor;
+        $formulario.InputCiudad.value=e.target.dataset.ciudad_proveedor;
+        $formulario.InputDireccion.value=e.target.dataset.direccion_proveedor;
+        $formulario.InputNombre.value=e.target.dataset.nombre_proveedor;
+        $formulario.InputTelefono.value=e.target.dataset.telefono_proveedor;
     }
 });
