@@ -20,6 +20,13 @@ const listaC = async()=>{
             $template.getElementById("nombre_cliente").textContent = cliente.nombre_cliente;
             $template.getElementById("telefono_cliente").textContent = cliente.telefono_cliente;
             $template.getElementById("eliminar_cliente").dataset.cedula_cliente = cliente.cedula_cliente;
+
+            $template.getElementById("modificar_cliente").dataset.cedula_cliente = cliente.cedula_cliente;
+            $template.getElementById("modificar_cliente").dataset.direccion_cliente = cliente.direccion_cliente;
+            $template.getElementById("modificar_cliente").dataset.email_cliente = cliente.email_cliente;
+            $template.getElementById("modificar_cliente").dataset.nombre_cliente = cliente.nombre_cliente;
+            $template.getElementById("modificar_cliente").dataset.telefono_cliente = cliente.telefono_cliente;
+
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
         }); 
@@ -148,5 +155,16 @@ D.addEventListener("submit", async e =>{
                 let mensaje=err.statusText("Ocurrio un error");
             }
         }     
+    }
+});
+
+D.addEventListener("click",async (e) =>{
+    if(e.target.matches("#modificar_cliente")){
+        console.log("verificado");
+        $formulario.InputCedula.value=e.target.dataset.cedula_cliente;
+        $formulario.InputDireccion.value=e.target.dataset.direccion_cliente;
+        $formulario.InputEmail.value=e.target.dataset.email_cliente;
+        $formulario.InputNombre.value=e.target.dataset.nombre_cliente;
+        $formulario.InputTelefono.value=e.target.dataset.telefono_cliente;
     }
 });
