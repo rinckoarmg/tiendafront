@@ -60,85 +60,80 @@
             <div class="col-auto">
                 <label for="formFile" class="form-label">Agregue un listado de productos en formato CSV</label>
                 <input class="form-control form-control-sm" type="file" id="formFile">
-            </div>
-            <div><button type="submit" class="btn btn-secondary btn-sm">Cargar listado</button>
+                <button type="submit" class="btn btn-secondary btn-sm">Cargar listado</button>    
                 <!-- Formulario agregar Inicio -->
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Agregar Producto
-                </button>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="formulario">
-                                <form id="datos_producto">
-                                    <div class="mb-3">
-                                        <label for="InputCodigo" class="form-label">Código Producto</label>
-                                        <input type="text" class="form-control form-control-sm" id="nitproveedor" name="nitproveedor" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="InputIva" class="form-label">Iva</label>
-                                        <input type="text" class="form-control form-control-sm" id="InputIva" aria-describedby="emailHelp">
-                                    </div>
-                                    <label for="InputProveedor" class="form-label">Nit Proveedor</label>
-                                    <div class="input-group mb-3">
-                                        <form id="buscarProveedor"></form>
-                                            <input type="text" class="form-control" placeholder="Ingrese el nit del proveedor" aria-label="nit_proveedor" aria-describedby="button-addon2">
-                                            <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Proveedor" id="buscar_nit"></input>
-                                            <input type="hidden" name="id">
-                                            <input type="hidden" name="nitproveedor">
-                                            <input type="hidden" name="ciudad_proveedor">
-                                            <input type="hidden" name="direccion_proveedor">
-                                            <input type="hidden" name="nombre_proveedor">
-                                            <input type="hidden" name="telefono_proveedor">
-                                        </form>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="InputNombre" class="form-label">Nombre Producto</label>
-                                        <input type="text" class="form-control form-control-sm" id="InputNombre"
-                                            aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="pCompra" class="form-label">Precio Compra</label>
-                                        <input type="text" class="form-control form-control-sm" id="pCompra">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="pVenta" class="form-label">Precio Venta</label>
-                                        <input type="text" class="form-control form-control-sm" id="pVenta" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <input type="submit" class="btn btn-secondary" value="Guardar"></input>
-                                        <input type="hidden" name="id">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    </div>
-                </div>
-                <!-- Formulario agregar Fin -->
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#formulario">Agregar Producto</button>
             </div>
         </form>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="formulario" tabindex="-1" aria-labelledby="formularioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formularioLabel">Productos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body formulario">
+                    <form id="datos_producto">
+                        <div class="mb-3">
+                            <label for="InputCodigo" class="form-label">Código Producto</label>
+                            <input type="text" class="form-control form-control-sm" id="InputCodigo" name="InputCodigo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputIva" class="form-label">Iva</label>
+                            <input type="text" class="form-control form-control-sm" id="InputIva" name="InputIva">
+                        </div>
+
+                        <label for="InputProveedor" class="form-label">Nit Proveedor</label>
+                        <div class="input-group mb-3">
+                            <form id="buscarProveedor"></form>
+                                <input type="text" class="form-control" placeholder="Ingrese el nit del proveedor" aria-label="nit_proveedor" name="nit_proveedor">
+                                <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Proveedor" id="buscar_nit"></input>
+                                <input type="hidden" name="id">
+                                <input type="hidden" name="nitproveedor">
+                                <input type="hidden" name="ciudad_proveedor">
+                                <input type="hidden" name="direccion_proveedor">
+                                <input type="hidden" name="nombre_proveedor">
+                                <input type="hidden" name="telefono_proveedor">
+                            </form>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="InputNombre" class="form-label">Nombre Producto</label>
+                            <input type="text" class="form-control form-control-sm" id="InputNombre" name="InputNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pCompra" class="form-label">Precio Compra</label>
+                            <input type="text" class="form-control form-control-sm" id="pCompra" name="pCompra">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pVenta" class="form-label">Precio Venta</label>
+                            <input type="text" class="form-control form-control-sm" id="pVenta" name="pVenta">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <input type="submit" class="btn btn-secondary" value="Guardar"></input>
+                            <input type="hidden" name="id">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Formulario agregar Fin -->
+
     <div class="formularios2">
         <form class="row g-3" id="buscarProducto">
             <div class="col-auto">
-                <label for="codigoproducto" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="codigoproducto" name="codigoproducto" placeholder="Ingrese código producto">
+                <label for="codigoProducto" class="visually-hidden">PENDIENTE</label>
+                <input type="text" class="form-control form-control-sm" id="codigoProducto" name="codigoProducto" placeholder="Ingrese código producto">
             </div>
             <div class="col-auto">
                 <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Producto" id="buscar_producto"></input>
                 <input type="hidden" name="id">
-                <input type="submit" class="btn btn-secondary btn-sm" value="Ver todos" id="vertodos"></input>
+                <input type="submit" class="btn btn-secondary btn-sm" value="Ver todos" id="ver_todos"></input>
             </div>
         </form>
     </div>
@@ -146,7 +141,6 @@
         <table class="table table-striped" id="tabla_productos">
             <thead>
                 <tr>
-                    <!-- th: table head -->
                     <th scope="col">Código</th>
                     <th scope="col">Iva</th>
                     <th scope="col">Nit proveedor</th>
@@ -167,12 +161,11 @@
             <td id="nombre_producto"></td>
             <td id="precio_compra"></td>
             <td id="precio_venta"></td>
-            <td> <a id="editar_producto" class="btn btn-secondary btn-sm" href="formulario_productos.html">Modificar</a>
-            </td>
+            <td><button type="button" class="btn btn-secondary btn-sm" id="modificar_producto" data-bs-toggle="modal"
+				data-bs-target="#formulario">Modificar</button></td>
             <td> <button class="btn btn-secondary btn-sm" id="eliminar_producto">Eliminar</button></td>
         </tr>
     </template>
-
     <script src="/Scripts/productos.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
