@@ -3,7 +3,7 @@ $tabla = D.getElementById("tabla_productos"),
 $template = D.getElementById("listado_productos").content,
 $fragmento = D.createDocumentFragment(),
 $buscar = D.getElementById("buscarProducto"),
-$codigo = D.getElementById("codigoproducto").nodeValue,
+$codigo = D.getElementById("codigoProducto").nodeValue,
 $formulario = D.getElementById("datos_producto");
 
 
@@ -22,6 +22,14 @@ const listaPr = async()=>{
             $template.getElementById("precio_compra").textContent = producto.precio_compra;
             $template.getElementById("precio_venta").textContent = producto.precio_venta;
             $template.getElementById("eliminar_producto").dataset.codigo_producto = producto.codigo_producto;
+
+            $template.getElementById("modificar_producto").dataset.codigo_producto = producto.codigo_producto;
+            $template.getElementById("modificar_producto").dataset.iva_compra = producto.ivacompra;
+            $template.getElementById("modificar_producto").dataset.nit_proveedor = producto.nitproveedor.nitproveedor;
+            $template.getElementById("modificar_producto").dataset.nombre_producto = producto.nombre_producto;
+            $template.getElementById("modificar_producto").dataset.precio_compra = producto.precio_compra;
+            $template.getElementById("modificar_producto").dataset.precio_venta = producto.precio_venta;
+
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
         }); 
@@ -38,7 +46,7 @@ D.addEventListener("submit", async (e) =>{
         $tabla.querySelector("tbody").textContent="";
         e.preventDefault();
         try {
-            let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigoproducto.value}`),
+            let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigoProducto.value}`),
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
@@ -55,22 +63,16 @@ D.addEventListener("submit", async (e) =>{
             let mensaje=err.statusText("Ocurrio un error");
         }
     }
-    limpiar();
+    D.getElementById("codigoProducto").value = "";
 })
-
-// Limpiar codigo producto
-function limpiar() {
-    D.getElementById("codigoproducto").value = "";
-}
 
 // Cargar listado
 D.addEventListener("click", async e =>{
-    if (e.target.matches("#vertodos")){
+    if (e.target.matches("#ver_todos")){
         $tabla.querySelector("tbody").textContent="";
         listaPr();
     }
 })
-
 
 // Metodo DELETE
 D.addEventListener("click", async e =>{
@@ -123,7 +125,7 @@ D.addEventListener("submit", async e =>{
                 },
                 res = await fetch("http://localhost:8080/productos/guardar", datosPr),
                 json = await res.json();
-                
+                console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
@@ -163,18 +165,39 @@ D.addEventListener("submit", async e =>{
 });
 
 // Buscar proveedor
-async function traerProveedor() {
-    try {
-        let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigoproducto.value}`),
-            proveedor = await res.json(); 
-        return proveedor;
-    } catch (error) {
-        console.log(error);
+D.addEventListener("submit", async (e) =>{
+    if (e.target==$buscar){
+        $tabla.querySelector("tbody").textContent="";
+        e.preventDefault();
+        try {
+            let res = await fetch(`http://localhost:8080/proveedores/buscar/${e.target.nitproveedor.value}`),
+            json = await res.json(); 
+            if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+            console.log(json);
+                $template.getElementById("nitproveedor").textContent = json.nitproveedor;
+                $template.getElementById("ciudad_proveedor").textContent = json.ciudad_proveedor;
+                $template.getElementById("direccion_proveedor").textContent = json.direccion_proveedor;
+                $template.getElementById("nombre_proveedor").textContent = json.nombre_proveedor;
+                $template.getElementById("telefono_proveedor").textContent = json.telefono_proveedor;
+                let $clone = D.importNode($template, true);
+                $fragmento.appendChild($clone);
+            $tabla.querySelector("tbody").appendChild($fragmento);
+        } catch (error) {
+            let mensaje=err.statusText("Ocurrio un error");
+        }
     }
-} 
+    D.getElementById("nitproveedor").value = "";
+})
 
-// Mostrar proveedor
-async function mostrarProveedor() {
-    let users = await traerProveedor();
 
-}
+D.addEventListener("click",async (e) =>{
+    if(e.target.matches("#modificar_producto")){
+        console.log("verificado");
+        $formulario.InputCodigo.value=e.target.dataset.codigo_producto;
+        $formulario.InputIva.value=e.target.dataset.iva_compra;
+        $formulario.nit_proveedor.value=e.target.dataset.nit_proveedor;
+        $formulario.InputNombre.value=e.target.dataset.nombre_producto;
+        $formulario.pCompra.value=e.target.dataset.precio_compra;
+        $formulario.pVenta.value=e.target.dataset.precio_venta;
+    }
+});
