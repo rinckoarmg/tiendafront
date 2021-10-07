@@ -6,7 +6,6 @@ $buscar = D.getElementById("buscarProducto"),
 $codigo = D.getElementById("codigoProducto").nodeValue,
 $formulario = D.getElementById("datos_producto");
 
-
 // Metodo GET listar
 const listaPr = async()=>{
     try {
@@ -116,7 +115,13 @@ D.addEventListener("submit", async e =>{
                         {
                             codigo_producto:e.target.InputCodigo.value,
                             ivacompra:e.target.InputIva.value,
-                            nitproveedor:e.target.InputProveedor.value,
+                            nitproveedor:{
+                                nitproveedor:e.target.nitproveedor.value,
+                                ciudad_proveedor:e.target.ciudad_proveedor,
+                                direccion_proveedor:e.target.direccion_proveedor,
+                                nombre_proveedor:e.target.nombre_proveedor,
+                                telefono_proveedor:e.target.telefono_proveedor
+                            },
                             nombre_producto:e.target.InputNombre.value,
                             precio_compra:e.target.pCompra.value,
                             precio_venta:e.target.pVenta.value
@@ -145,7 +150,13 @@ D.addEventListener("submit", async e =>{
                         {
                             codigo_producto:e.target.InputCodigo.value,
                             ivacompra:e.target.InputIva.value,
-                            nitproveedor:e.target.InputProveedor.value,
+                            nitproveedor: {
+                                nitproveedor:e.target.nitproveedor.value,
+                                ciudad_proveedor:e.target.ciudad_proveedor,
+                                direccion_proveedor:e.target.direccion_proveedor,
+                                nombre_proveedor:e.target.nombre_proveedor,
+                                telefono_proveedor:e.target.telefono_proveedor
+                            },
                             nombre_producto:e.target.InputNombre.value,
                             precio_compra:e.target.pCompra.value,
                             precio_venta:e.target.pVenta.value
@@ -166,22 +177,14 @@ D.addEventListener("submit", async e =>{
 
 // Buscar proveedor
 D.addEventListener("submit", async (e) =>{
-    if (e.target==$buscar){
-        $tabla.querySelector("tbody").textContent="";
+    if (e.target==$formulario){
         e.preventDefault();
         try {
             let res = await fetch(`http://localhost:8080/proveedores/buscar/${e.target.nitproveedor.value}`),
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
-                $template.getElementById("nitproveedor").textContent = json.nitproveedor;
-                $template.getElementById("ciudad_proveedor").textContent = json.ciudad_proveedor;
-                $template.getElementById("direccion_proveedor").textContent = json.direccion_proveedor;
-                $template.getElementById("nombre_proveedor").textContent = json.nombre_proveedor;
-                $template.getElementById("telefono_proveedor").textContent = json.telefono_proveedor;
-                let $clone = D.importNode($template, true);
-                $fragmento.appendChild($clone);
-            $tabla.querySelector("tbody").appendChild($fragmento);
+            
         } catch (error) {
             let mensaje=err.statusText("Ocurrio un error");
         }
@@ -189,13 +192,13 @@ D.addEventListener("submit", async (e) =>{
     D.getElementById("nitproveedor").value = "";
 })
 
-
+//traer datos a formulario
 D.addEventListener("click",async (e) =>{
     if(e.target.matches("#modificar_producto")){
         console.log("verificado");
         $formulario.InputCodigo.value=e.target.dataset.codigo_producto;
         $formulario.InputIva.value=e.target.dataset.iva_compra;
-        $formulario.nit_proveedor.value=e.target.dataset.nit_proveedor;
+        $formulario.nitproveedor.value=e.target.dataset.nit_proveedor;
         $formulario.InputNombre.value=e.target.dataset.nombre_producto;
         $formulario.pCompra.value=e.target.dataset.precio_compra;
         $formulario.pVenta.value=e.target.dataset.precio_venta;
