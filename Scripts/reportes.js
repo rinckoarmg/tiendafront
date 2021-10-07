@@ -3,7 +3,7 @@ $tabla = D.getElementById("tabla_ventas"),
 $template = D.getElementById("listado_ventas").content,
 $buscar = D.getElementById("buscarVenta"),
 $fragmento = D.createDocumentFragment(),
-$codigo = D.getElementById("codigoventa").nodeValue,
+$codigo = D.getElementById("codigocliente").nodeValue,
 $subtotal = 0,
 $cajatotal = D.getElementById("totalVentas").content;
 
@@ -37,14 +37,14 @@ D.addEventListener("submit", async (e) =>{
         $tabla.querySelector("tbody").textContent="";
         e.preventDefault();
         try {
-            let res = await fetch(`http://localhost:8080/ventas/buscar/${e.target.cedula_cliente.value}`),
+            let res = await fetch(`http://localhost:8080/ventas/buscar/${e.target.codigocliente.value}`),
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
             
-                $template.getElementById("cedulaV").textContent = venta.cedula_cliente.cedula_cliente;
-                $template.getElementById("nombreV").textContent = venta.cedula_cliente.nombre_cliente;
-                $template.getElementById("valorTotalV").textContent = venta.total_venta;
+                $template.getElementById("cedulaV").textContent = json.cedula_cliente.cedula_cliente;
+                $template.getElementById("nombreV").textContent = json.cedula_cliente.nombre_cliente;
+                $template.getElementById("valorTotalV").textContent = json.total_venta;
                     let $clone = D.importNode($template, true);
                     $fragmento.appendChild($clone);
             
@@ -53,7 +53,7 @@ D.addEventListener("submit", async (e) =>{
             let mensaje=err.statusText("Ocurrio un error");
         }
     }
-    D.getElementById("codigoventa").value = "";
+    D.getElementById("codigocliente").value = "";
 })
 
 // Cargar listado
