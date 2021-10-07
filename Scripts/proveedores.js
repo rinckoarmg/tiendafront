@@ -4,7 +4,7 @@ $template = D.getElementById("listado_proveedores").content,
 $fragmento = D.createDocumentFragment(),
 $formulario = D.getElementById("datos_proveedor");
 
-//metodo GET 
+//metodo GET listar
 const listaP = async()=>{
     try {
         let res = await fetch("http://localhost:8080/proveedores/listar"),
@@ -27,8 +27,39 @@ const listaP = async()=>{
     }
 }
 D.addEventListener("DOMContentLoaded",listaP);
-// Metodo GET - Buscar 
 
+// Metodo GET by Id
+D.addEventListener("submit", async (e) =>{
+    if (e.target==$buscar){
+        $tabla.querySelector("tbody").textContent="";
+        e.preventDefault();
+        try {
+            let res = await fetch(`http://localhost:8080/proveedores/buscar/${e.target.nitproveedor.value}`),
+            json = await res.json(); 
+            if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+            console.log(json);
+                $template.getElementById("nit_proveedor").textContent = json.nitproveedor;
+                $template.getElementById("ciudad_proveedor").textContent = json.ciudad_proveedor;
+                $template.getElementById("direccion_proveedor").textContent = json.direccion_proveedor;
+                $template.getElementById("nombre_proveedor").textContent = json.nombre_proveedor;
+                $template.getElementById("telefono_proveedor").textContent = json.telefono_proveedor;
+                let $clone = D.importNode($template, true);
+                $fragmento.appendChild($clone);
+            $tabla.querySelector("tbody").appendChild($fragmento);
+        } catch (error) {
+            let mensaje=err.statusText("Ocurrio un error");
+        }
+    }
+    D.getElementById("cedulaCliente").value = "";
+})
+
+// Cargar listado
+D.addEventListener("click", async e =>{
+    if (e.target.matches("#ver_todos")){
+        $tabla.querySelector("tbody").textContent="";
+        listaP();
+    }
+})
 
 // Metodo DELETE 
 D.addEventListener("click", async e =>{
