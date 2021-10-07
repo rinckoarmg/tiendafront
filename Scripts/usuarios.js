@@ -19,6 +19,7 @@ const listaU = async()=>{
             $template.getElementById("nombre_usuario").textContent = usuario.nombre_usuario;
             $template.getElementById("password_usuario").textContent = usuario.password;
             $template.getElementById("usuario_usuario").textContent = usuario.usuario;
+            $template.getElementById("eliminar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
 
             $template.getElementById("modificar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
             $template.getElementById("modificar_usuario").dataset.email_usuario = usuario.email_usuario;
@@ -26,7 +27,6 @@ const listaU = async()=>{
             $template.getElementById("modificar_usuario").dataset.password_usuario = usuario.password;
             $template.getElementById("modificar_usuario").dataset.usuario_usuario = usuario.usuario;
 
-            $template.getElementById("eliminar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
         }); 
