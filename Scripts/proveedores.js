@@ -2,6 +2,8 @@ const D = document,
 $tabla = D.getElementById("tabla_proveedores"), 
 $template = D.getElementById("listado_proveedores").content,
 $fragmento = D.createDocumentFragment(),
+$buscar = D.getElementById("buscarProveedor"),
+$codigo = D.getElementById("nitproveedor").nodeValue,
 $formulario = D.getElementById("datos_proveedor");
 
 //metodo GET listar
@@ -12,7 +14,7 @@ const listaP = async()=>{
         if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
         console.log(json);
         json.forEach(proveedor => {
-            $template.getElementById("nit_proveedor").textContent = proveedor.nitproveedor;
+            $template.getElementById("nitproveedor").textContent = proveedor.nitproveedor;
             $template.getElementById("ciudad_proveedor").textContent = proveedor.ciudad_proveedor;
             $template.getElementById("direccion_proveedor").textContent = proveedor.direccion_proveedor;
             $template.getElementById("nombre_proveedor").textContent = proveedor.nombre_proveedor;
@@ -38,7 +40,7 @@ D.addEventListener("submit", async (e) =>{
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
-                $template.getElementById("nit_proveedor").textContent = json.nitproveedor;
+                $template.getElementById("nitproveedor").textContent = json.nitproveedor;
                 $template.getElementById("ciudad_proveedor").textContent = json.ciudad_proveedor;
                 $template.getElementById("direccion_proveedor").textContent = json.direccion_proveedor;
                 $template.getElementById("nombre_proveedor").textContent = json.nombre_proveedor;
@@ -50,7 +52,7 @@ D.addEventListener("submit", async (e) =>{
             let mensaje=err.statusText("Ocurrio un error");
         }
     }
-    D.getElementById("cedulaCliente").value = "";
+    D.getElementById("nitproveedor").value = "";
 })
 
 // Cargar listado
@@ -85,11 +87,12 @@ D.addEventListener("click", async e =>{
     }
 })
 
-// Agregar y actualizar 
+// Guardar y actualizar 
 D.addEventListener("submit", async e =>{
     if (e.target === $formulario){
         e.preventDefault();
         if(!e.target.id.value){
+
             //metodo POST - Guardar
             try {
                 let datosP = {
@@ -117,6 +120,7 @@ D.addEventListener("submit", async e =>{
                 let mensaje=err.statusText("Ocurrio un error");
             }
         } else {
+
             //metodo PUT - actualizar
             try {
                 let datosP = {
@@ -144,7 +148,5 @@ D.addEventListener("submit", async e =>{
                 let mensaje=err.statusText("Ocurrio un error");
             }
         }
-        
     }
 });
-

@@ -51,80 +51,72 @@
         </div>
     </footer>
     <!--Cabecera y pie de pag | Fin-->
+
     <div class="titulos">
         <h1>Gestión Proveedores</h1>
     </div>
+    <!-- formulario agregar cliente Inicio-->
+    <!-- Button trigger modal -->
     <div class="formularios2">
-        <!-- formulario agregar cliente Inicio-->
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Agregar proveedor
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Proveedor</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="formulario">
-                            <form id="datos_proveedor">
-                                <div class="mb-3">
-                                    <label for="InputNit" class="form-label">NIT</label>
-                                    <input type="text" class="form-control form-control-sm" id="InputNit"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="InputCiudad" class="form-label">Ciudad</label>
-                                    <input type="text" class="form-control form-control-sm" id="InputCiudad"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="InputDireccion" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control form-control-sm" id="InputDireccion"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="InputNombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control form-control-sm" id="InputNombre"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="InputTelefono" class="form-label">Telefono</label>
-                                    <input type="text" class="form-control form-control-sm" id="InputTelefono"
-                                        aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Acepto la política de
-                                        datos</label>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cerrar</button>
-                                    <input type="submit" class="btn btn-primary" value="Enviar"></input>
-                                    <input type="hidden" name="Id">
-                                </div>
-                            </form>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#formulario">Agregar Proveedor</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="formulario" tabindex="-1" aria-labelledby="formularioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formularioLabel">Proveedor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body formulario">
+                    <form id="datos_proveedor">
+                        <div class="mb-3">
+                            <label for="InputNit" class="form-label">NIT</label>
+                            <input type="text" class="form-control form-control-sm" id="InputNit" name="InputNit">
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="InputCiudad" class="form-label">Ciudad</label>
+                            <input type="text" class="form-control form-control-sm" id="InputCiudad" name="InputCiudad">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputDireccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control form-control-sm" id="InputDireccion" name="InputDireccion">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control form-control-sm" id="InputNombre" name="InputNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputTelefono" class="form-label">Telefono</label>
+                            <input type="text" class="form-control form-control-sm" id="InputTelefono" name="InputTelefono">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Acepto la política de datos</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <input type="submit" class="btn btn-primary" value="Guardar"></input>
+                            <input type="hidden" name="Id">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- formulario agregar cliente Fin-->
     </div>
+    <!-- formulario agregar cliente Fin-->
+
     <div class="formularios2">
-        <form class="row g-3">
+        <form class="row g-3" id="buscarProveedor">
             <div class="col-auto">
-                <label for="nitProveedor" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="nitProveedor"
+                <label for="nitproveedor" class="visually-hidden">PENDIENTE</label>
+                <input type="text" class="form-control form-control-sm" id="nitproveedor" name="nitproveedor"
                     placeholder="Ingrese numero de NIT">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-sm">Buscar proveedor</button>
+                <input type="submit" class="btn btn-primary btn-sm" value="Buscar Proveedor" id="buscar_proveedor"></input>
+				<input type="hidden" name="id">
+				<input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="ver_todos"></input>
             </div>
         </form>
     </div>
@@ -132,7 +124,6 @@
         <table class="table table-striped" id="tabla_proveedores">
             <thead>
                 <tr>
-                    <!-- th: table head -->
                     <th scope="col">NIT Proveedor</th>
                     <th scope="col">Ciudad</th>
                     <th scope="col">Dirección</th>
@@ -146,13 +137,14 @@
     </div>
     <template id="listado_proveedores">
         <tr>
-            <th scope="row" id="nit_proveedor"></th>
+            <th scope="row" id="nitproveedor"></th>
             <td id="ciudad_proveedor"></td>
             <td id="direccion_proveedor"></td>
             <td id="nombre_proveedor"></td>
             <td id="telefono_proveedor"></td>
-            <td> <a class="btn btn-primary btn-sm" href="formulario_proveedores.html">Modificar</a></td>
-            <td> <button class="btn btn-primary btn-sm" id="eliminar_proveedor">Eliminar</button></td>
+            <td><button type="button" class="btn btn-primary btn-sm" id="modificar_proveedor" data-bs-toggle="modal"
+                data-bs-target="#formulario">Modificar</button></td>
+            <td><button class="btn btn-primary btn-sm" id="eliminar_proveedor">Eliminar</button></td>
         </tr>
     </template>
     <script src="/Scripts/proveedores.js" type="module"></script>
