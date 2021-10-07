@@ -19,6 +19,13 @@ const listaU = async()=>{
             $template.getElementById("nombre_usuario").textContent = usuario.nombre_usuario;
             $template.getElementById("password_usuario").textContent = usuario.password;
             $template.getElementById("usuario_usuario").textContent = usuario.usuario;
+
+            $template.getElementById("modificar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
+            $template.getElementById("modificar_usuario").dataset.email_usuario = usuario.email_usuario;
+            $template.getElementById("modificar_usuario").dataset.nombre_usuario = usuario.nombre_usuario;
+            $template.getElementById("modificar_usuario").dataset.password_usuario = usuario.password;
+            $template.getElementById("modificar_usuario").dataset.usuario_usuario = usuario.usuario;
+
             $template.getElementById("eliminar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
@@ -147,6 +154,17 @@ D.addEventListener("submit", async e =>{
             } catch (error) {
                 let mensaje=err.statusText("Ocurrio un error");
             }
-        }
+        } 
+    }
+});
+
+D.addEventListener("click",async (e) =>{
+    if(e.target.matches("#modificar_usuario")){
+        console.log("verificado");
+        $formulario.InputCedula.value=e.target.dataset.cedula_usuario;
+        $formulario.InputEmail.value=e.target.dataset.email_usuario;
+        $formulario.InputNombre.value=e.target.dataset.nombre_usuario;
+        $formulario.InputPassword.value=e.target.dataset.password_usuario;
+        $formulario.InputUsuario.value=e.target.dataset.usuario_usuario;
     }
 });
