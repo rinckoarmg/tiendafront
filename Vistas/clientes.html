@@ -55,76 +55,72 @@
     <div class="titulos">
         <h1>Gestión Clientes</h1>
     </div>
+    <!-- formulario agregar cliente Inicio-->
+    <!-- Button trigger modal -->
     <div class="formularios2">
-       <!-- formulario agregar cliente Inicio-->  
-       <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Agregar cliente
-        </button>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#formulario">Agregar
+            Cliente</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="formulario" tabindex="-1" aria-labelledby="formularioLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cliente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="formularioLabel">Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="formulario">
-                        <form id="datos_cliente">
-                            <div class="mb-3">
-                                <label for="InputCedula" class="form-label">Cedula</label>
-                                <input type="text" class="form-control form-control-sm" id="InputCedula" name="InputCedula">
-                            </div>
-                            <div class="mb-3">
-                                <label for="InputDireccion" class="form-label">Dirección</label>
-                                <input type="text" class="form-control form-control-sm" id="InputDireccion" name="InputDireccion">
-                            </div>
-                            <div class="mb-3">
-                                <label for="InputEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control form-control-sm" id="InputEmail" name="InputEmail">
-                            </div>
-                            <div class="mb-3">
-                                <label for="InputNombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control form-control-sm" id="InputNombre" name="InputNombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="InputTelefono" class="form-label">Telefono</label>
-                                <input type="text" class="form-control form-control-sm" id="InputTelefono" name="InputTelefono">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Acepto la política de datos</label>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <input type="submit" class="btn btn-primary" value="Enviar"></input>
-                                <input type="hidden" name="id">
-                            </div>
-                        </form>
-                    </div>
+                <div class="modal-body formulario">
+                    <form id="datos_cliente">
+                        <div class="mb-3">
+                            <label for="InputCedula" class="form-label">Cedula</label>
+                            <input type="text" class="form-control form-control-sm" id="InputCedula" name="InputCedula">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputDireccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control form-control-sm" id="InputDireccion" name="InputDireccion">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control form-control-sm" id="InputEmail" name="InputEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control form-control-sm" id="InputNombre" name="InputNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputTelefono" class="form-label">Telefono</label>
+                            <input type="text" class="form-control form-control-sm" id="InputTelefono" name="InputTelefono">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Acepto la política de datos</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <input type="submit" class="btn btn-primary" value="Enviar"></input>
+                            <input type="hidden" name="id">
+                        </div>
+                    </form>
                 </div>
-                
-            </div>
             </div>
         </div>
-        <!-- formulario agregar cliente Fin-->  
     </div>
+    <!-- formulario agregar cliente Fin-->
+    
     <div class="formularios2">
-		<form class="row g-3" id="buscarCliente">
-			<div class="col-auto">
-				<label for="cedulaCliente" class="visually-hidden">PENDIENTE</label>
-				<input type="text" class="form-control form-control-sm" id="cedulaCliente" name="cedulaCliente"
-					placeholder="Ingrese cedula">
-			</div>
-			<div class="col-auto">
-				<input type="submit" class="btn btn-primary btn-sm" value="Buscar Cliente" id="buscar_cliente"></input>
-				<input type="hidden" name="id">
-				<input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="ver_todos"></input>
-			</div>
-		</form>
-	</div>
+        <form class="row g-3" id="buscarCliente">
+            <div class="col-auto">
+                <label for="cedulaCliente" class="visually-hidden">PENDIENTE</label>
+                <input type="text" class="form-control form-control-sm" id="cedulaCliente" name="cedulaCliente"
+                    placeholder="Ingrese cedula">
+            </div>
+            <div class="col-auto">
+                <input type="submit" class="btn btn-primary btn-sm" value="Buscar Cliente" id="buscar_cliente"></input>
+                <input type="hidden" name="id">
+                <input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="ver_todos"></input>
+            </div>
+        </form>
+    </div>
     <div class="tablas">
         <table class="table table-striped" id="tabla_clientes">
             <thead>
@@ -147,8 +143,9 @@
             <td id="email_cliente"></td>
             <td id="nombre_cliente"></td>
             <td id="telefono_cliente"></td>
-            <td> <a class="btn btn-primary btn-sm" href="formulario_clientes.html">Modificar</a></td>
-            <td> <button class="btn btn-primary btn-sm" id="eliminar_cliente">Eliminar</button></td>
+            <td><button type="button" class="btn btn-primary btn-sm" id="modificar_cliente" data-bs-toggle="modal"
+                    data-bs-target="#formulario">Modificar</button></td>
+            <td><button class="btn btn-primary btn-sm" id="eliminar_cliente">Eliminar</button></td>
         </tr>
     </template>
     <script src="/Scripts/clientes.js" type="module"></script>

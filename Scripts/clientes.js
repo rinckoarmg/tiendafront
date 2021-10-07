@@ -87,7 +87,7 @@ D.addEventListener("click", async e =>{
     }
 })
 
-// Agregar y modificar 
+// Guardar y Actualizar
 D.addEventListener("submit", async e =>{
     if (e.target === $formulario){
         e.preventDefault();

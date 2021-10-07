@@ -19,7 +19,6 @@ const listaU = async()=>{
             $template.getElementById("nombre_usuario").textContent = usuario.nombre_usuario;
             $template.getElementById("password_usuario").textContent = usuario.password;
             $template.getElementById("usuario_usuario").textContent = usuario.usuario;
-
             $template.getElementById("eliminar_usuario").dataset.cedula_usuario = usuario.cedula_usuario;
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
@@ -88,11 +87,12 @@ D.addEventListener("click", async e =>{
     }
 })
 
-//Guardar y actualizar
+// Guardar y actualizar
 D.addEventListener("submit", async e =>{
     if (e.target === $formulario){
         e.preventDefault();
         if(!e.target.id.value){
+
             //metodo POST guardar
             try {
                 let datosU = {
@@ -116,11 +116,11 @@ D.addEventListener("submit", async e =>{
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-                let mensaje=err.statusText("Usuario guardado");
             } catch (error) {
                 let mensaje=err.statusText("Ocurrio un error");
             }
         } else {
+
             //metodo PUT actualizar
             try {
                 let datosU = {
