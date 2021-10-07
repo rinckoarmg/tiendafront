@@ -56,7 +56,7 @@
         <h1>Gestión Productos</h1>
     </div>
     <div class="formularios2">
-        <form class="row g-3">
+        <form class="row g-3" >
             <div class="col-auto">
                 <label for="formFile" class="form-label">Agregue un listado de productos en formato CSV</label>
                 <input class="form-control form-control-sm" type="file" id="formFile">
@@ -85,21 +85,12 @@
                             <label for="InputIva" class="form-label">Iva</label>
                             <input type="text" class="form-control form-control-sm" id="InputIva" name="InputIva">
                         </div>
-
-                        <label for="InputProveedor" class="form-label">Nit Proveedor</label>
-                        <div class="input-group mb-3">
-                            <form id="buscarProveedor"></form>
-                                <input type="text" class="form-control" placeholder="Ingrese el nit del proveedor" aria-label="nit_proveedor" name="nit_proveedor">
-                                <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Proveedor" id="buscar_nit"></input>
-                                <input type="hidden" name="id">
-                                <input type="hidden" name="nitproveedor">
-                                <input type="hidden" name="ciudad_proveedor">
-                                <input type="hidden" name="direccion_proveedor">
-                                <input type="hidden" name="nombre_proveedor">
-                                <input type="hidden" name="telefono_proveedor">
-                            </form>
+                            
+                        <div class="form-control-sm" id="buscarProv">
+                            <label for="InputProveedor" class="form-label">Nit Proveedor</label>
+                            <input type="text" class="form-control" placeholder="Ingrese el nit del proveedor" aria-label="nitproveedor" name="nitproveedor" id="nitproveedor">
+                            
                         </div>
-                        
                         <div class="mb-3">
                             <label for="InputNombre" class="form-label">Nombre Producto</label>
                             <input type="text" class="form-control form-control-sm" id="InputNombre" name="InputNombre">
