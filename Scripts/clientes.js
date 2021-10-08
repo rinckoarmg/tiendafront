@@ -7,7 +7,7 @@ $codigo = D.getElementById("cedulaCliente").nodeValue,
 $formulario = D.getElementById("datos_cliente");
 
 //metodo GET listar
-const listaC = async()=>{
+const listaC = async() => {
     try {
         let res = await fetch("http://localhost:8080/clientes/listar"),
         json = await res.json();
@@ -38,13 +38,13 @@ const listaC = async()=>{
 D.addEventListener("DOMContentLoaded",listaC);
 
 // Metodo GET by Id
-D.addEventListener("submit", async (e) =>{
-    if (e.target==$buscar){
-        $tabla.querySelector("tbody").textContent="";
+D.addEventListener("submit", async (e) => {
+    if (e.target == $buscar){
+        $tabla.querySelector("tbody").textContent = "";
         e.preventDefault();
         try {
             let res = await fetch(`http://localhost:8080/clientes/buscar/${e.target.cedulaCliente.value}`),
-            json = await res.json(); 
+            json = await res.json();
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
                 $template.getElementById("cedula_cliente").textContent = json.cedula_cliente;
@@ -56,46 +56,46 @@ D.addEventListener("submit", async (e) =>{
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (error) {
-            let mensaje=err.statusText("Ocurrio un error");
+            let mensaje = err.statusText("Ocurrio un error");
         }
     }
     D.getElementById("cedulaCliente").value = "";
-})
+});
 
 // Cargar listado
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#ver_todos")){
-        $tabla.querySelector("tbody").textContent="";
+        $tabla.querySelector("tbody").textContent = "";
         listaC();
     }
-})
+});
 
 // Metodo DELETE 
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#eliminar_cliente")){
         let borrar = confirm(`Esta seguro de eliminar el cliente con cédula: ${e.target.dataset.cedula_cliente}?`);
         if (borrar){
             try {
-                let datosC={
+                let datosC = {
                     method:"DELETE",
-                    headers:{
+                    headers: {
                         "Accept": 'application/json',
                         'Content-Type': 'application/json',
                     }
                 },
-                res=await fetch(`http://localhost:8080/clientes/eliminar/${e.target.dataset.cedula_cliente}`,datosC),
-                json=await res.text();
+                res = await fetch(`http://localhost:8080/clientes/eliminar/${e.target.dataset.cedula_cliente}`,datosC),
+                json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         }
     }
-})
+});
 
 // Guardar y Actualizar
-D.addEventListener("submit", async e =>{
+D.addEventListener("submit", async e => {
     if (e.target === $formulario){
         e.preventDefault();
         if(!e.target.id.value){
@@ -124,7 +124,7 @@ D.addEventListener("submit", async e =>{
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         } else {
 
@@ -146,25 +146,25 @@ D.addEventListener("submit", async e =>{
                         }
                     )
                 },
-                res=await fetch(`http://localhost:8080/clientes/actualizar/${e.target.InputCedula.value}`,datosC),
+                res = await fetch(`http://localhost:8080/clientes/actualizar/${e.target.InputCedula.value}`,datosC),
                 json = await res.json();
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         }     
     }
 });
 
-D.addEventListener("click",async (e) =>{
+D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_cliente")){
         console.log("verificado");
-        $formulario.InputCedula.value=e.target.dataset.cedula_cliente;
-        $formulario.InputDireccion.value=e.target.dataset.direccion_cliente;
-        $formulario.InputEmail.value=e.target.dataset.email_cliente;
-        $formulario.InputNombre.value=e.target.dataset.nombre_cliente;
-        $formulario.InputTelefono.value=e.target.dataset.telefono_cliente;
+        $formulario.InputCedula.value = e.target.dataset.cedula_cliente;
+        $formulario.InputDireccion.value = e.target.dataset.direccion_cliente;
+        $formulario.InputEmail.value = e.target.dataset.email_cliente;
+        $formulario.InputNombre.value = e.target.dataset.nombre_cliente;
+        $formulario.InputTelefono.value = e.target.dataset.telefono_cliente;
     }
 });

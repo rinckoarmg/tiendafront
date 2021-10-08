@@ -7,7 +7,7 @@ $codigo = D.getElementById("codigoProducto").nodeValue,
 $formulario = D.getElementById("datos_producto");
 
 // Metodo GET listar
-const listaPr = async()=>{
+const listaPr = async() => {
     try {
         let res = await fetch("http://localhost:8080/productos/listar"),
         json = await res.json();
@@ -34,15 +34,15 @@ const listaPr = async()=>{
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
     } catch (error) {
-        let mensaje=err.statusText("Ocurrio un error");
+        let mensaje = err.statusText("Ocurrio un error");
     }
 }
 D.addEventListener("DOMContentLoaded",listaPr);
 
 // Metodo GET by Id
-D.addEventListener("submit", async (e) =>{
-    if (e.target==$buscar){
-        $tabla.querySelector("tbody").textContent="";
+D.addEventListener("submit", async (e) => {
+    if (e.target == $buscar){
+        $tabla.querySelector("tbody").textContent = "";
         e.preventDefault();
         try {
             let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigoProducto.value}`),
@@ -59,46 +59,46 @@ D.addEventListener("submit", async (e) =>{
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (error) {
-            let mensaje=err.statusText("Ocurrio un error");
+            let mensaje = err.statusText("Ocurrio un error");
         }
     }
     D.getElementById("codigoProducto").value = "";
-})
+});
 
 // Cargar listado
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#ver_todos")){
-        $tabla.querySelector("tbody").textContent="";
+        $tabla.querySelector("tbody").textContent = "";
         listaPr();
     }
-})
+});
 
 // Metodo DELETE
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#eliminar_producto")){
         let borrar = confirm(`Esta seguro de eliminar el producto con cédula: ${e.target.dataset.codigo_producto}?`);
         if (borrar){
             try {
-                let datosPr={
+                let datosPr = {
                     method:"DELETE",
                     headers:{
                         "Accept": 'application/json',
                         'Content-Type': 'application/json',
                     }
                 },
-                res=await fetch(`http://localhost:8080/productos/eliminar/${e.target.dataset.codigo_producto}`,datosPr),
-                json=await res.text();
+                res = await fetch(`http://localhost:8080/productos/eliminar/${e.target.dataset.codigo_producto}`,datosPr),
+                json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error"); 
+                let mensaje = err.statusText("Ocurrio un error"); 
             }
         }
     }
-}) 
+});
 
 // Guardar y actualizar
-D.addEventListener("submit", async e =>{
+D.addEventListener("submit", async e => {
     if (e.target === $formulario){
         e.preventDefault();
         if(!e.target.id.value){
@@ -134,7 +134,7 @@ D.addEventListener("submit", async e =>{
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         } else {
 
@@ -163,44 +163,43 @@ D.addEventListener("submit", async e =>{
                         }
                     )
                 },
-                res=await fetch(`http://localhost:8080/productos/actualizar/${e.target.InputCodigo.value}`,datosPr),
+                res = await fetch(`http://localhost:8080/productos/actualizar/${e.target.InputCodigo.value}`,datosPr),
                 json = await res.json();
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         }
     }
 });
 
 // Buscar proveedor
-D.addEventListener("submit", async (e) =>{
-    if (e.target==$formulario){
+D.addEventListener("submit", async (e) => {
+    if (e.target === $formulario){
         e.preventDefault();
         try {
             let res = await fetch(`http://localhost:8080/proveedores/buscar/${e.target.nitproveedor.value}`),
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
-            
         } catch (error) {
-            let mensaje=err.statusText("Ocurrio un error");
+            let mensaje = err.statusText("Ocurrio un error");
         }
     }
     D.getElementById("nitproveedor").value = "";
-})
+});
 
 //traer datos a formulario
-D.addEventListener("click",async (e) =>{
+D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_producto")){
         console.log("verificado");
-        $formulario.InputCodigo.value=e.target.dataset.codigo_producto;
-        $formulario.InputIva.value=e.target.dataset.iva_compra;
-        $formulario.nitproveedor.value=e.target.dataset.nit_proveedor;
-        $formulario.InputNombre.value=e.target.dataset.nombre_producto;
-        $formulario.pCompra.value=e.target.dataset.precio_compra;
-        $formulario.pVenta.value=e.target.dataset.precio_venta;
+        $formulario.InputCodigo.value = e.target.dataset.codigo_producto;
+        $formulario.InputIva.value = e.target.dataset.iva_compra;
+        $formulario.nitproveedor.value = e.target.dataset.nit_proveedor;
+        $formulario.InputNombre.value = e.target.dataset.nombre_producto;
+        $formulario.pCompra.value = e.target.dataset.precio_compra;
+        $formulario.pVenta.value = e.target.dataset.precio_venta;
     }
 });
