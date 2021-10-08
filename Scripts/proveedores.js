@@ -7,7 +7,7 @@ $codigo = D.getElementById("nitproveedor").nodeValue,
 $formulario = D.getElementById("datos_proveedor");
 
 //metodo GET listar
-const listaP = async()=>{
+const listaP = async() => {
     try {
         let res = await fetch("http://localhost:8080/proveedores/listar"),
         json = await res.json();
@@ -32,15 +32,15 @@ const listaP = async()=>{
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
     } catch (error) {
-        let mensaje=err.statusText("Ocurrio un error");
+        let mensaje = err.statusText("Ocurrio un error");
     }
 }
 D.addEventListener("DOMContentLoaded",listaP);
 
 // Metodo GET by Id
-D.addEventListener("submit", async (e) =>{
-    if (e.target==$buscar){
-        $tabla.querySelector("tbody").textContent="";
+D.addEventListener("submit", async (e) => {
+    if (e.target == $buscar){
+        $tabla.querySelector("tbody").textContent = "";
         e.preventDefault();
         try {
             let res = await fetch(`http://localhost:8080/proveedores/buscar/${e.target.nitproveedor.value}`),
@@ -56,46 +56,46 @@ D.addEventListener("submit", async (e) =>{
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (error) {
-            let mensaje=err.statusText("Ocurrio un error");
+            let mensaje = err.statusText("Ocurrio un error");
         }
     }
     D.getElementById("nitproveedor").value = "";
-})
+});
 
 // Cargar listado
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#ver_todos")){
-        $tabla.querySelector("tbody").textContent="";
+        $tabla.querySelector("tbody").textContent = "";
         listaP();
     }
-})
+});
 
 // Metodo DELETE 
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#eliminar_proveedor")){
         let borrar = confirm(`Esta seguro de eliminar el proveedor con Nit: ${e.target.dataset.nitproveedor}?`);
         if (borrar){
             try {
-                let datosP={
+                let datosP = {
                     method:"DELETE",
                     headers:{
                         "Accept": 'application/json',
                         'Content-Type': 'application/json',
                     }
                 },
-                res=await fetch(`http://localhost:8080/proveedores/eliminar/${e.target.dataset.nitproveedor}`,datosP),
-                json=await res.text();
+                res = await fetch(`http://localhost:8080/proveedores/eliminar/${e.target.dataset.nitproveedor}`,datosP),
+                json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         }
     }
-})
+});
 
 // Guardar y actualizar 
-D.addEventListener("submit", async e =>{
+D.addEventListener("submit", async e => {
     if (e.target === $formulario){
         e.preventDefault();
         if(!e.target.id.value){
@@ -124,7 +124,7 @@ D.addEventListener("submit", async e =>{
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         } else {
 
@@ -152,19 +152,19 @@ D.addEventListener("submit", async e =>{
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje=err.statusText("Ocurrio un error");
+                let mensaje = err.statusText("Ocurrio un error");
             }
         }
     }
 });
 
-D.addEventListener("click",async (e) =>{
+D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_proveedor")){
         console.log("verificado");
-        $formulario.InputNit.value=e.target.dataset.nitproveedor;
-        $formulario.InputCiudad.value=e.target.dataset.ciudad_proveedor;
-        $formulario.InputDireccion.value=e.target.dataset.direccion_proveedor;
-        $formulario.InputNombre.value=e.target.dataset.nombre_proveedor;
-        $formulario.InputTelefono.value=e.target.dataset.telefono_proveedor;
+        $formulario.InputNit.value = e.target.dataset.nitproveedor;
+        $formulario.InputCiudad.value = e.target.dataset.ciudad_proveedor;
+        $formulario.InputDireccion.value = e.target.dataset.direccion_proveedor;
+        $formulario.InputNombre.value = e.target.dataset.nombre_proveedor;
+        $formulario.InputTelefono.value = e.target.dataset.telefono_proveedor;
     }
 });
