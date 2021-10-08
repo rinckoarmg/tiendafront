@@ -54,7 +54,7 @@ D.addEventListener("submit", async (e) =>{
                 $template.getElementById("valorTotalV").textContent = json.total_venta;
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
-                total = total + parseInt(json.total_venta, 10);
+                total = total + parseFloat(json.total_venta, 10);
 
             $tabla.querySelector("tbody").appendChild($fragmento);
             
