@@ -25,7 +25,7 @@ const listaV = async()=>{
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
             
-            totales = totales + parseInt(venta.total_venta, 10);
+            totales = totales + parseFloat(venta.total_venta, 10);
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
         $cajatotal.value = "";
