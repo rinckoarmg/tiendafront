@@ -42,12 +42,13 @@ D.addEventListener("submit", async (e) =>{
     if (e.target==$buscar){
         $tabla.querySelector("tbody").textContent="";
         e.preventDefault();
+        $cajatotal.value = "";
         try {
             let res = await fetch(`http://localhost:8080/ventas/buscar/${e.target.codigocliente.value}`),
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
-            
+            total = 0.0;
                 $template.getElementById("cedulaV").textContent = json.cedula_cliente.cedula_cliente;
                 $template.getElementById("nombreV").textContent = json.cedula_cliente.nombre_cliente;
                 $template.getElementById("valorTotalV").textContent = json.total_venta;
@@ -56,7 +57,7 @@ D.addEventListener("submit", async (e) =>{
                 total = total + parseInt(json.total_venta, 10);
 
             $tabla.querySelector("tbody").appendChild($fragmento);
-            $cajatotal.value = "";
+            
             $cajatotal.value = total;
         } catch (err) {
             console.log(err.name); 
