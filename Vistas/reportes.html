@@ -55,14 +55,14 @@
     <div class="formularios2">
         <form class="row g-3" id="buscarVenta">
             <div class="col-auto">
-                <label for="codigoventa" class="visually-hidden">PENDIENTE</label>
+                <label for="codigocliente" class="visually-hidden">PENDIENTE</label>
                 <input type="text" class="form-control form-control-sm" id="codigocliente"
                     placeholder="Ingrese cédula del cliente">
             </div>
             <div class="col-auto">
-                <input type="submit" class="btn btn-primary btn-sm" value="Buscar Ventas" id="buscar_ventas"></input>
+                <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Ventas" id="buscar_ventas"></input>
                 <input type="hidden" name="id">
-                <input type="submit" class="btn btn-primary btn-sm" value="Ver todos" id="vertodos"></input>
+                <input type="submit" class="btn btn-secondary btn-sm" value="Ver todos" id="vertodos"></input>
             </div>
         </form>
     </div>
@@ -77,26 +77,65 @@
                     <!--<th colspan="2" scope="col">Operaciones</th>-->
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <tr class="filas">
+                    <td id="cedulaV"></td>
+                    <td id="nombreV"></td>
+                    <td id="valorTotalV" class="valor">25</td>
+                </tr>
+                <tr class="filas">
+                    <td id="cedulaV"></td>
+                    <td id="nombreV"></td>
+                    <td id="valorTotalV" class="valor">30</td>
+                </tr>
+            </tbody>
         </table>
     </div>
     <template id="listado_ventas">
-        <tr>
-            <th scope="row" id="cedulaV"></th>
+        <tr class="filas">
+            <td id="cedulaV"></td>
             <td id="nombreV"></td>
-            <td id="valorTotalV"></td>
-            <!--<td> <a class="btn btn-primary btn-sm" href="">Modificar</a></td>
-            <td id="eliminar_venta"> <button class="btn btn-primary btn-sm">Eliminar</button></td>-->
+            <td id="valorTotalV" class="valor"></td>
         </tr>
     </template>
+    <form id="totales">
     <div class="row g-3 align-items-right formulario">
         <div class="col-auto">
           <label for="totalVentas" class="col-form-label">Total Ventas $</label>
         </div>
         <div class="col-auto">
-          <input type="text" id="totalVentas" class="form-control" >
+          <input type="text" id="totalVentas" name="totalVentas" class="form-control" >
         </div>
-      </div>
+    </div>
+    </form>
+    <script>
+        let total = 0;
+
+        let celdasPrecio = document.querySelectorAll('td.valor');
+    
+        for(let i = 0; i < celdasPrecio.length; ++i){
+            total += parseFloat(celdasPrecio[i].firstChild.data);
+        }
+        
+        let nuevaFila = document.createElement('tr');
+        
+        let celdaVacia = document.createElement('td');
+        let textoCeldaVacia = document.createTextNode('');
+        celdaVacia.appendChild(textoCeldaVacia);
+        nuevaFila.appendChild(celdaVacia);
+
+        let celdaTotal = document.createElement('td');
+        let textoCeldaTotal = document.createTextNode('Total:');
+        celdaTotal.appendChild(textoCeldaTotal);
+        nuevaFila.appendChild(celdaTotal);
+
+        let celdaValorTotal = document.createElement('td');
+        let textoCeldaValorTotal = document.createTextNode(total);
+        celdaValorTotal.appendChild(textoCeldaValorTotal);
+        nuevaFila.appendChild(celdaValorTotal);
+
+        document.getElementById('tabla_ventas').appendChild(nuevaFila);
+    </script>
     <script src="/Scripts/reportes.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
