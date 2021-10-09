@@ -23,12 +23,12 @@ $buscarProductos=D.getElementById("buscar_producto"),
 //constantes de cantidad del producto
 
 $tablaTotales=D.getElementById("tabla_totales"),
-$templateTotales=D.getElementById("totales_template").content,
 $cantidadProduto=D.getElementById("cantidad_producto");
-let totaldeiva = 0.0,
-totaldelaventa =0.0,
-totalventamasiva = 0.0;
-
+let total_venta=0.0,
+ivaProducto,
+totalIva,
+usuario="",
+password="";
 
 
 
@@ -89,9 +89,9 @@ D.addEventListener("submit", async (e) => {
           $templateUsuarios.getElementById("correo_usuario").textContent =
             json.email_usuario;
           //$templateUsuarios.getElementById("usuario_usuario").textContent =
-            const usuario = json.usuario;
+            usuario = json.usuario;
           //$templateUsuarios.getElementById("contraseña_usuario").textContent =
-            const password = json.password;
+            password = json.password;
   
           let $clone = D.importNode($templateUsuarios, true);
           $fragmento.appendChild($clone);
@@ -114,50 +114,78 @@ D.addEventListener("submit", async (e) => {
       try {
         let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigo_producto.value}`),
           json = await res.json();
-        
+         
         if (!res.ok) throw { status: res.status, statusText: res.statusText };
         console.log(json);
-        
-        
+
           $templateProductos.getElementById("codigo_producto").textContent =json.codigo_producto;
-          $templateProductos.getElementById("nombre_producto").textContent =
-            json.nombre_producto;
-          $templateProductos.getElementById("iva_compra").textContent = parseFloat(json.ivacompra, 10);
-          $templateProductos.getElementById("cantidad_producto").textContent = parseFloat(e.target.cantidad_producto.value);
-          $templateProductos.getElementById("valor_unitario").textContent = parseFloat(json.precio_venta, 10);
-          $templateProductos.getElementById("total").textContent = (parseFloat(json.precio_venta, 10) * parseFloat(e.target.cantidad_producto.value));
+          $templateProductos.getElementById("nombre_producto").textContent =json.nombre_producto;
+          $templateProductos.getElementById("iva_compra").textContent =`${json.ivacompra} %`;
+          $templateProductos.getElementById("cantidad_producto").textContent =`${e.target.cantidad_producto.value} und`;
+          $templateProductos.getElementById("valor_unitario").textContent =`$ ${json.precio_venta}`;
+          $templateProductos.getElementById("total").textContent =`$ ${e.target.cantidad_producto.value * json.precio_venta}`;
           
 
           let $clone = D.importNode($templateProductos, true);
           $fragmento.appendChild($clone);
+          $tablaProductos.querySelector("tbody").appendChild($fragmento);
         
-        $tablaProductos.querySelector("tbody").appendChild($fragmento);
-        
-        //const totalProducto=e.target.cantidad_producto.value * json.precio_venta,
-        //ivaProducto=(totalProducto / 100 ) * json.ivacompra,
-        //totalIva=totalProducto + ivaProducto;
-        
-        let subtotalxproducto = (parseFloat(json.precio_venta, 10) * parseFloat(e.target.cantidad_producto.value));
-        let ivaxproducto = (subtotalxproducto/100) * parseFloat(json.ivacompra, 10);
-        let totalxproducto = subtotalxproducto + ivaxproducto;
+          total_venta = total_venta + (e.target.cantidad_producto.value  * parseFloat(json.precio_venta, 10));
+ 
+        ivaProducto=(total_venta / 100 ) * json.ivacompra,
+        totalIva=total_venta + ivaProducto;
 
-        totaldelaventa = totaldelaventa + subtotalxproducto;
-        totaldeiva = totaldeiva + ivaxproducto;
-        totalventamasiva = totalventamasiva + totalxproducto;
+        D.getElementById("total_venta").textContent=`$ ${total_venta}`;
+        D.getElementById("total_iva").textContent=`$ ${ivaProducto}`;
+        D.getElementById("total_con_iva").textContent=`$ ${totalIva}`;
 
-        $templateTotales.getElementById("total_venta").textContent = totaldelaventa;
-        $templateTotales.getElementById("total_iva").textContent = totaldeiva;
-        $templateTotales.getElementById("total_con_iva").textContent = totalventamasiva;
-        
-        //$templateTotales.getElementById("total_venta").textContent=`${Number(totalProducto)}`;
-        //$templateTotales.getElementById("total_iva").textContent=`${ivaProducto}`;
-        //$templateTotales.getElementById("total_con_iva").textContent=`${totalIva}`;
-
-        $tablaTotales.querySelector("tbody").appendChild($templateTotales);
-
+        e.target.codigo_producto.value="";
+        e.target.cantidad_producto.value="";
       } catch (error) {
         console.log(error);
       }
     }
   });
 
+D.addEventListener("click", async e => {
+    if (e.target.matches("#confirmar_venta")){
+      try {
+        let ventas= {
+            method:"POST",
+            headers:{
+            "Accept": 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(
+              {
+                codigo_venta:20,
+                cedula_cliente: {
+                    cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
+                    direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
+                    email_cliente: $templateClientes.getElementById("correo_cliente").textContent,
+                    nombre_cliente:$templateClientes.getElementById("nombre_cliente").textContent,
+                    telefono_cliente: $templateClientes.getElementById("telefono_cliente").textContent
+                },
+                cedula_usuario: {
+                    cedula_usuario: $templateUsuarios.getElementById("cedula_usuario").textContent,
+                    email_usuario: $templateUsuarios.getElementById("correo_usuario").textContent,
+                    nombre_usuario: $templateUsuarios.getElementById("nombre_usuario").textContent,
+                    password: password,
+                    usuario: usuario
+                },
+                ivaventa: ivaProducto,
+                total_venta: totalIva,
+                valor_venta: total_venta
+            }
+            )
+        },
+        res = await fetch("http://localhost:8080/ventas/guardar", ventas),
+        json = await res.json();
+        console.log(res);
+        if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+        location.reload();
+    } catch (error) {
+        let mensaje = err.statusText("Ocurrio un error");
+    }
+    }
+});
