@@ -34,21 +34,29 @@
             <h1>Bienvenido!</h1>
         </div>
         <div class="formulario" >
-            <form>
+            <form id="formulario_login">
                 <div class="mb-3">
                     <label for="usuario" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="usuario" aria-describedby="emailHelp" name="usuario">
+                    <input type="text" required class="form-control" id="usuario" aria-describedby="emailHelp" name="input_usuario">
                     <div id="emailHelp" class="form-text">Ingrese el usuario con el que se registró</div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="pass">
+                    <input type="password" class="form-control" id="password"  required name="input_password">
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">No soy un robot</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Ingresar</button>
+
+                <div>
+                    <div>
+                        <input class="btn btn-primary"  type="submit" value="Enviar">
+                        <input type="hidden" name="id">
+                      </div>
+                </div>
+               
+
                 <!-- 'a' es cuando se genera un link -->
                 <!-- <a class="btn btn-secondary" href="#" role="button">¿Olvidaste la contraseña?</a> -->
             </form>
