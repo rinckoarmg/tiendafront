@@ -25,6 +25,9 @@ $buscarProductos=D.getElementById("buscar_producto"),
 $tablaTotales=D.getElementById("tabla_totales"),
 $templateTotales=D.getElementById("totales_template").content,
 $cantidadProduto=D.getElementById("cantidad_producto");
+let totaldeiva = 0.0,
+totaldelaventa =0.0,
+totalventamasiva = 0.0;
 
 
 
@@ -119,10 +122,10 @@ D.addEventListener("submit", async (e) => {
           $templateProductos.getElementById("codigo_producto").textContent =json.codigo_producto;
           $templateProductos.getElementById("nombre_producto").textContent =
             json.nombre_producto;
-          $templateProductos.getElementById("iva_compra").textContent =`${json.ivacompra} %`;
-          $templateProductos.getElementById("cantidad_producto").textContent =`${e.target.cantidad_producto.value} und`;
-          $templateProductos.getElementById("valor_unitario").textContent =`$ ${json.precio_venta}`;
-          $templateProductos.getElementById("total").textContent =`$ ${e.target.cantidad_producto.value * json.precio_venta}`;
+          $templateProductos.getElementById("iva_compra").textContent = parseFloat(json.ivacompra, 10);
+          $templateProductos.getElementById("cantidad_producto").textContent = parseFloat(e.target.cantidad_producto.value);
+          $templateProductos.getElementById("valor_unitario").textContent = parseFloat(json.precio_venta, 10);
+          $templateProductos.getElementById("total").textContent = (parseFloat(json.precio_venta, 10) * parseFloat(e.target.cantidad_producto.value));
           
 
           let $clone = D.importNode($templateProductos, true);
@@ -130,14 +133,25 @@ D.addEventListener("submit", async (e) => {
         
         $tablaProductos.querySelector("tbody").appendChild($fragmento);
         
-        const totalProducto=e.target.cantidad_producto.value * json.precio_venta,
-        ivaProducto=(totalProducto / 100 ) * json.ivacompra,
-        totalIva=totalProducto + ivaProducto;
-
-        $templateTotales.getElementById("total_venta").textContent=`${Number(totalProducto)}`;
-        $templateTotales.getElementById("total_iva").textContent=`${ivaProducto}`;
-        $templateTotales.getElementById("total_con_iva").textContent=`${totalIva}`;
+        //const totalProducto=e.target.cantidad_producto.value * json.precio_venta,
+        //ivaProducto=(totalProducto / 100 ) * json.ivacompra,
+        //totalIva=totalProducto + ivaProducto;
         
+        let subtotalxproducto = (parseFloat(json.precio_venta, 10) * parseFloat(e.target.cantidad_producto.value));
+        let ivaxproducto = (subtotalxproducto/100) * parseFloat(json.ivacompra, 10);
+        let totalxproducto = subtotalxproducto + ivaxproducto;
+
+        totaldelaventa = totaldelaventa + subtotalxproducto;
+        totaldeiva = totaldeiva + ivaxproducto;
+        totalventamasiva = totalventamasiva + totalxproducto;
+
+        $templateTotales.getElementById("total_venta").textContent = totaldelaventa;
+        $templateTotales.getElementById("total_iva").textContent = totaldeiva;
+        $templateTotales.getElementById("total_con_iva").textContent = totalventamasiva;
+        
+        //$templateTotales.getElementById("total_venta").textContent=`${Number(totalProducto)}`;
+        //$templateTotales.getElementById("total_iva").textContent=`${ivaProducto}`;
+        //$templateTotales.getElementById("total_con_iva").textContent=`${totalIva}`;
 
         $tablaTotales.querySelector("tbody").appendChild($templateTotales);
 
