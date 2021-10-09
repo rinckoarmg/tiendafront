@@ -68,12 +68,12 @@
                 </div>
                 <h3>Datos del cliente</h3>
                 <div class="col-md-4">
-                    
+
                     <form id="buscar_cliente" class="input-group buscar_cedula">
 
                         <div>
-                            <input type="text" class="form-control form-control-sm" id="inputPassword4" placeholder="Numero de cedula"
-                                name="numero_cedula" />
+                            <input type="text" class="form-control form-control-sm" id="inputPassword4"
+                                placeholder="Numero de cedula" name="numero_cedula" />
                         </div>
 
                         <div>
@@ -105,12 +105,12 @@
             <div class="ventas_usuario">
                 <h3>Datos del usuario</h3>
                 <div class="col-md-4">
-                    
+
                     <form id="buscar_usuario" class="input-group buscar_cedula">
 
                         <div>
-                            <input type="text" class="form-control form-control-sm" id="inputPassword4" placeholder="Numero de cedula"
-                                name="numero_cedula" />
+                            <input type="text" class="form-control form-control-sm" id="inputPassword4"
+                                placeholder="Numero de cedula" name="numero_cedula" />
                         </div>
 
                         <div>
@@ -128,8 +128,6 @@
                             <th scope="col">Numero de cedula</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Correo</th>
-                            <th scope="col">Usuario</th>
-                            <th scope="col">Contraseña</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,119 +141,117 @@
             <div class="ventas_producto">
                 <h3>Datos del producto</h3>
                 <div class=" col-md-4">
-                    
+
                     <form id="buscar_producto" class="input-group buscar_cedula">
                         <div class="bproducto">
                             <div class="bproducto_item">
-                                <input type="text" class="form-control form-control-sm" id="inputPassword4" placeholder="codigo del producto"
-                                    name="codigo_producto" />
+                                <input type="text" class="form-control form-control-sm" id="inputPassword4"
+                                    placeholder="codigo del producto" name="codigo_producto" />
                             </div>
 
                             <div class="bproducto_item">
-                                <input type="text" class="form-control form-control-sm" id="inputPassword4" placeholder="cantidad del producto"
-                                    name="cantidad_producto" />
+                                <input type="text" class="form-control form-control-sm" id="inputPassword4"
+                                    placeholder="cantidad del producto" name="cantidad_producto" />
                             </div>
                             <div class="bproducto_item">
-                                <input id="boton_confirmar" class="btn btn-primary btn-sm" type="submit" value="Confirmar">
+                                <input id="boton_confirmar" class="btn btn-primary btn-sm" type="submit"
+                                    value="Confirmar">
                                 <input type="hidden" name="od">
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
 
-                    <table id="tabla_productos" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Codigo del producto</th>
-                                <th scope="col">Nombre del producto</th>
-                                <th scope="col">Iva del producto</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Valor unitario</th>
-                                <th scope="col">total producto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    
-                        </tbody>
-                    </table>
-                </div>
-                
-            </div>
-
-            
-
-            <div class="formularios2">
-                <hr size="3px">
-                <table id="tabla_totales" class="table table-striped">
+                <table id="tabla_productos" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codigo del producto</th>
+                            <th scope="col">Nombre del producto</th>
+                            <th scope="col">Iva del producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Valor unitario</th>
+                            <th scope="col">total producto</th>
+                            <th colspan="2" scope="col">Acciones</th>
+                        </tr>
+                        </tr>
+                    </thead>
                     <tbody>
 
                     </tbody>
-
                 </table>
-                
-                <div class="ventas_confirmar">
-                    <div class="d-grid gap-2 col-3 mx-auto">
-                        <button class="btn btn-primary btn-sm" type="button">Confirmar venta</button>
-                    </div>
-                </div>
             </div>
 
-                <template id="clientes_template">
-                    <tr>
-                        <th id="cedula_cliente" scope="row"></th>
-                        <td id="nombre_cliente" class="textos"></td>
-                        <td id="correo_cliente"></td>
-                        <td id="telefono_cliente"></td>
-                        <td id="direccion_cliente"></td>
-                    </tr>
+        </div>
 
-                </template>
-
-                <template id="usuarios_template">
-                    <tr>
-                      <th id="cedula_usuario" scope="row"></th>
-                      <td id="nombre_usuario" class="textos"></td>
-                      <td id="correo_usuario"></td>
-                      <td id="usuario_usuario"></td>
-                      <td id="contraseña_usuario"></td>
-                      
-                    </tr>
-                
-                  </template>
-
-                  <template id="productos_template">
-                    <tr>
-                      <th id="codigo_producto" scope="row"></th>
-                      <td id="nombre_producto" class="textos"></td>
-                      <td id="iva_compra"></td>
-                      <td id="cantidad_producto"></td>
-                      <td id="valor_unitario"></td>
-                      <td  name="totalp" id="total"></td>
-                      
-                    </tr>
-                
-                  </template>
-
-                  <template id="totales_template">
-
+        <div class="formularios2">
+            <hr size="3px">
+            <table id="tabla_totales" class="table table-striped">
+                <tbody>
                     <tr>
                         <th scope="col">Total venta</th>
-                        <th id="total_venta" scope="col"> </th>
+                        <th id="total_venta" scope="col">$ 0</th>
                     </tr>
                     <tr>
                         <th scope="col">Total iva</th>
-                        <th id="total_iva" scope="col"></th>
+                        <th id="total_iva" scope="col">$ 0</th>
                     </tr>
-    
+
                     <tr>
                         <th scope="col">Total con iva</th>
-                        <th id="total_con_iva" scope="col"></th>
+                        <th id="total_con_iva" scope="col">$ 0</th>
                     </tr>
-                  </template>
-                 
+                </tbody>
 
-                <script src="/Scripts/ventas.js" type="module"></script>
+            </table>
+
+            <div class="ventas_confirmar">
+                <div class="d-grid gap-2 col-3 mx-auto">
+                    <input id="confirmar_venta" type="submit" class="btn btn-secondary" value="Confirmar venta"></input>
+                    <input type="hidden" name="id">
+                </div>
+            </div>
+        </div>
+
+        <template id="clientes_template">
+            <tr>
+                <th id="cedula_cliente" scope="row"></th>
+                <td id="nombre_cliente" class="textos"></td>
+                <td id="correo_cliente"></td>
+                <td id="telefono_cliente"></td>
+                <td id="direccion_cliente"></td>
+            </tr>
+
+        </template>
+
+        <template id="usuarios_template">
+            <tr>
+                <th id="cedula_usuario" scope="row"></th>
+                <td id="nombre_usuario" class="textos"></td>
+                <td id="correo_usuario"></td>
+
+            </tr>
+
+        </template>
+
+        <template id="productos_template">
+            <tr>
+                <th id="codigo_producto" scope="row"></th>
+                <td id="nombre_producto" class="textos"></td>
+                <td id="iva_compra"></td>
+                <td id="cantidad_producto"></td>
+                <td id="valor_unitario"></td>
+                <td name="totalp" id="total"></td>
+                <td><button type="button" class="btn btn-secondary btn-sm" id="modificar_cliente" data-bs-toggle="modal"
+                        data-bs-target="#formulario">Modificar</button></td>
+                <td><button class="btn btn-secondary btn-sm" id="eliminar_cliente">Eliminar</button></td>
+
+            </tr>
+
+        </template>
+
+
+        <script src="/Scripts/ventas.js" type="module"></script>
 </body>
 
 </html>
