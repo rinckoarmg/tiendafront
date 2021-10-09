@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/Estilos/style.css">
     <title>Reporte Ventas</title>
 </head>
+
 <body>
     <!--Cabecera y pie de pag | Inicio-->
     <nav class="navbar navbar-expand-lg navbar-dark navbarmitienda">
@@ -49,6 +51,7 @@
         </div>
     </footer>
     <!--Cabecera y pie de pag | Fin-->
+    
     <div class="titulos">
         <h1>Reporte Ventas</h1>
     </div>
@@ -88,18 +91,19 @@
         </tr>
     </template>
     <form id="totales">
-    <div class="row g-3 align-items-right formulario">
-        <div class="col-auto">
-          <label for="totalVentas" class="col-form-label">Total Ventas $</label>
+        <div class="row g-3 align-items-right formulario">
+            <div class="col-auto">
+                <label for="totalVentas" class="col-form-label">Total Ventas $</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="caja_total" name="caja_total" class="form-control">
+            </div>
         </div>
-        <div class="col-auto">
-          <input type="text" id="caja_total" name="caja_total" class="form-control" >
-        </div>
-    </div>
     </form>
     <script src="/Scripts/reportes.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

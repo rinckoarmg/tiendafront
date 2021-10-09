@@ -4,13 +4,13 @@ $template = D.getElementById("listado_ventas").content,
 $buscar = D.getElementById("buscarVenta"),
 $fragmento = D.createDocumentFragment(),
 $codigo = D.getElementById("codigocliente").nodeValue,
-$templateTotales=D.getElementById("totales"),
+$templateTotales = D.getElementById("totales"),
 $cajatotal = D.getElementById("caja_total");
 let totales = 0.0,
-total =0.0;
+total = 0.0;
 
 //metodo GET 
-const listaV = async()=>{
+const listaV = async() => {
     try {
         let res = await fetch("http://localhost:8080/ventas/listar"),
         json = await res.json();
@@ -24,7 +24,6 @@ const listaV = async()=>{
             //$template.getElementById("eliminar_venta").dataset.codigo_venta = venta.codigo_venta;
             let $clone = D.importNode($template, true);
             $fragmento.appendChild($clone);
-            
             totales = totales + parseFloat(venta.total_venta, 10);
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
@@ -39,7 +38,7 @@ D.addEventListener("DOMContentLoaded",listaV);
 
 // Metodo GET by Id
 D.addEventListener("submit", async (e) =>{
-    if (e.target==$buscar){
+    if (e.target == $buscar){
         $tabla.querySelector("tbody").textContent="";
         e.preventDefault();
         $cajatotal.value = "";
@@ -55,9 +54,7 @@ D.addEventListener("submit", async (e) =>{
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
                 total = total + parseFloat(json.total_venta, 10);
-
             $tabla.querySelector("tbody").appendChild($fragmento);
-            
             $cajatotal.value = total;
         } catch (err) {
             console.log(err.name); 
@@ -66,12 +63,12 @@ D.addEventListener("submit", async (e) =>{
         }
     }
     D.getElementById("codigocliente").value = "";
-})
+});
 
 // Cargar listado
-D.addEventListener("click", async e =>{
+D.addEventListener("click", async e => {
     if (e.target.matches("#vertodos")){
-        $tabla.querySelector("tbody").textContent="";
+        $tabla.querySelector("tbody").textContent = "";
         listaV();
     }
-})
+});
