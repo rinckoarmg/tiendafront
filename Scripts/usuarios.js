@@ -31,7 +31,7 @@ const listaU = async() => {
             $fragmento.appendChild($clone);
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
-    } catch (error) {
+    } catch (err) {
         let mensaje = err.statusText("Ocurrio un error");
     }
 }
@@ -52,10 +52,19 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("nombre_usuario").textContent = json.nombre_usuario;
                 $template.getElementById("password_usuario").textContent = json.password;
                 $template.getElementById("usuario_usuario").textContent = json.usuario;
+
+                $template.getElementById("eliminar_usuario").dataset.cedula_usuario = json.cedula_usuario;
+
+                $template.getElementById("modificar_usuario").dataset.cedula_usuario = json.cedula_usuario;
+                $template.getElementById("modificar_usuario").dataset.email_usuario = json.email_usuario;
+                $template.getElementById("modificar_usuario").dataset.nombre_usuario = json.nombre_usuario;
+                $template.getElementById("modificar_usuario").dataset.password_usuario = json.password;
+                $template.getElementById("modificar_usuario").dataset.usuario_usuario = json.usuario;
+                
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
-        } catch (error) {
+        } catch (err) {
             let mensaje = err.statusText("Ocurrio un error");
         }
     }
@@ -87,7 +96,7 @@ D.addEventListener("click", async e =>{
                 json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         }
@@ -123,7 +132,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         } else {
@@ -151,7 +160,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         } 
