@@ -52,7 +52,6 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("nombre_usuario").textContent = json.nombre_usuario;
                 $template.getElementById("password_usuario").textContent = json.password;
                 $template.getElementById("usuario_usuario").textContent = json.usuario;
-
                 $template.getElementById("eliminar_usuario").dataset.cedula_usuario = json.cedula_usuario;
 
                 $template.getElementById("modificar_usuario").dataset.cedula_usuario = json.cedula_usuario;
@@ -132,6 +131,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Usuario CREADO");
             } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
@@ -160,6 +160,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Usuario MODIFICADO");
             } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
@@ -169,7 +170,7 @@ D.addEventListener("submit", async e => {
 
 D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_usuario")){
-        console.log("verificado");
+        console.log("Click en MODIFICAR");
         $formulario.InputCedula.value = e.target.dataset.cedula_usuario;
         $formulario.InputEmail.value = e.target.dataset.email_usuario;
         $formulario.InputNombre.value = e.target.dataset.nombre_usuario;

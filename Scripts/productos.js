@@ -55,6 +55,16 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("nombre_producto").textContent = json.nombre_producto;
                 $template.getElementById("precio_compra").textContent = json.precio_compra;
                 $template.getElementById("precio_venta").textContent = json.precio_venta;
+
+                $template.getElementById("eliminar_producto").dataset.codigo_producto = json.codigo_producto;
+
+                $template.getElementById("modificar_producto").dataset.codigo_producto = json.codigo_producto;
+                $template.getElementById("modificar_producto").dataset.iva_compra = json.ivacompra;
+                $template.getElementById("modificar_producto").dataset.nit_proveedor = json.nitproveedor.nitproveedor;
+                $template.getElementById("modificar_producto").dataset.nombre_producto = json.nombre_producto;
+                $template.getElementById("modificar_producto").dataset.precio_compra = json.precio_compra;
+                $template.getElementById("modificar_producto").dataset.precio_venta = json.precio_venta;
+
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
@@ -194,7 +204,7 @@ D.addEventListener("submit", async (e) => {
 //traer datos a formulario
 D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_producto")){
-        console.log("verificado");
+        console.log("Click en MODIFICAR");
         $formulario.InputCodigo.value = e.target.dataset.codigo_producto;
         $formulario.InputIva.value = e.target.dataset.iva_compra;
         $formulario.nitproveedor.value = e.target.dataset.nit_proveedor;

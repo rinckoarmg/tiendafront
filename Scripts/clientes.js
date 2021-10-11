@@ -31,7 +31,7 @@ const listaC = async() => {
             $fragmento.appendChild($clone);
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
-    } catch (error) {
+    } catch (err) {
         let mensaje = err.statusText("Ocurrio un error");
     }
 }
@@ -52,10 +52,18 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("email_cliente").textContent = json.email_cliente;
                 $template.getElementById("nombre_cliente").textContent = json.nombre_cliente;
                 $template.getElementById("telefono_cliente").textContent = json.telefono_cliente;
+                $template.getElementById("eliminar_cliente").dataset.cedula_cliente = json.cedula_cliente;
+
+                $template.getElementById("modificar_cliente").dataset.cedula_cliente = json.cedula_cliente;
+                $template.getElementById("modificar_cliente").dataset.direccion_cliente = json.direccion_cliente;
+                $template.getElementById("modificar_cliente").dataset.email_cliente = json.email_cliente;
+                $template.getElementById("modificar_cliente").dataset.nombre_cliente = json.nombre_cliente;
+                $template.getElementById("modificar_cliente").dataset.telefono_cliente = json.telefono_cliente;
+
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
-        } catch (error) {
+        } catch (err) {
             let mensaje = err.statusText("Ocurrio un error");
         }
     }
@@ -87,7 +95,7 @@ D.addEventListener("click", async e => {
                 json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         }
@@ -123,7 +131,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         } else {
@@ -151,7 +159,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         }     
@@ -160,7 +168,7 @@ D.addEventListener("submit", async e => {
 
 D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_cliente")){
-        console.log("verificado");
+        console.log("Click en MODIFICAR");
         $formulario.InputCedula.value = e.target.dataset.cedula_cliente;
         $formulario.InputDireccion.value = e.target.dataset.direccion_cliente;
         $formulario.InputEmail.value = e.target.dataset.email_cliente;
