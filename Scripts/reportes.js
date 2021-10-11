@@ -46,14 +46,16 @@ D.addEventListener("submit", async (e) =>{
             let res = await fetch(`http://localhost:8080/ventas/buscar/${e.target.codigocliente.value}`),
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
-            console.log(json);
+            //console.log(json);
             total = 0.0;
-                $template.getElementById("cedulaV").textContent = json.cedula_cliente.cedula_cliente;
-                $template.getElementById("nombreV").textContent = json.cedula_cliente.nombre_cliente;
-                $template.getElementById("valorTotalV").textContent = json.total_venta;
+            json.forEach(venta => {
+                $template.getElementById("cedulaV").textContent = venta.cedula_cliente.cedula_cliente;
+                $template.getElementById("nombreV").textContent = venta.cedula_cliente.nombre_cliente;
+                $template.getElementById("valorTotalV").textContent = venta.total_venta;
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
-                total = total + parseFloat(json.total_venta, 10);
+                total = total + parseFloat(venta.total_venta, 10);
+            });
             $tabla.querySelector("tbody").appendChild($fragmento);
             $cajatotal.value = total;
         } catch (err) {
