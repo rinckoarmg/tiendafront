@@ -52,6 +52,15 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("direccion_proveedor").textContent = json.direccion_proveedor;
                 $template.getElementById("nombre_proveedor").textContent = json.nombre_proveedor;
                 $template.getElementById("telefono_proveedor").textContent = json.telefono_proveedor;
+
+                $template.getElementById("eliminar_proveedor").dataset.nitproveedor = json.nitproveedor;
+
+                $template.getElementById("modificar_proveedor").dataset.nitproveedor = json.nitproveedor; 
+                $template.getElementById("modificar_proveedor").dataset.ciudad_proveedor = json.ciudad_proveedor;
+                $template.getElementById("modificar_proveedor").dataset.direccion_proveedor = json.direccion_proveedor;
+                $template.getElementById("modificar_proveedor").dataset.nombre_proveedor = json.nombre_proveedor; 
+                $template.getElementById("modificar_proveedor").dataset.telefono_proveedor = json.telefono_proveedor;
+
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
@@ -160,7 +169,7 @@ D.addEventListener("submit", async e => {
 
 D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_proveedor")){
-        console.log("verificado");
+        console.log("Click en MODIFICAR");
         $formulario.InputNit.value = e.target.dataset.nitproveedor;
         $formulario.InputCiudad.value = e.target.dataset.ciudad_proveedor;
         $formulario.InputDireccion.value = e.target.dataset.direccion_proveedor;
