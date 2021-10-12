@@ -213,3 +213,87 @@ D.addEventListener("click",async (e) => {
         $formulario.pVenta.value = e.target.dataset.precio_venta;
     }
 });
+
+// cargar csv
+let area = document.getElementById('area');
+
+area.addEventListener('dragover', e => e.preventDefault());
+area.addEventListener('drop', readFile);
+
+function readFile (e) {
+  e.preventDefault();
+  let file = e.dataTransfer.files[0];
+  
+  if (file.type === 'text/csv') {
+    let reader = new FileReader();
+    reader.onloadend = () => printFileContents(reader.result);
+    reader.readAsText(file, 'UTF8');
+  } else {
+    alert('Archivo no válido, agregue un archivo en formato csv');
+  }
+}
+
+function printFileContents (contents) {
+    area.style.lineHeight = '30px';
+    area.textContent = '';
+    let lines = contents.split(/\r\n/);
+    console.log(lines);
+    lines.forEach(async line => {
+        let elemento = line.split(",");
+        console.log(elemento);
+        let cod = elemento[0],
+        iva = elemento[1],
+        nit = elemento[2],
+        nombre = elemento[3],
+        precioc = elemento[4],
+        preciov = elemento[5];
+
+        // buscar datos del proveedor
+        try {
+            let res = await fetch(`http://localhost:8080/proveedores/buscar/${nit}`),
+            json = await res.json();
+            if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+            console.log(json);
+
+            //guardar los datos 
+            try {
+                let datosProv = {
+                    method:"POST",
+                    headers:{
+                    "Accept": 'application/json',
+                    'Content-Type': 'application/json',
+                    },
+                    body:JSON.stringify(
+                        {
+                            codigo_producto:cod,
+                            ivacompra:iva,
+                            nitproveedor:{
+                                nitproveedor:nit,
+                                ciudad_proveedor:json.ciudad_proveedor,
+                                direccion_proveedor:json.direccion_proveedor,
+                                nombre_proveedor:json.nombre_proveedor,
+                                telefono_proveedor:json.telefono_proveedor
+                            },
+                            nombre_producto:nombre,
+                            precio_compra:precioc,
+                            precio_venta:preciov
+                        }
+                    )
+                },
+                res = await fetch("http://localhost:8080/productos/guardar", datosProv);
+                console.log(res);
+                if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+                location.reload();
+            } catch (err) {
+                console.log(err.name); 
+                console.log(err.message);
+                console.log("error en guardar")
+            }
+        } catch (err) {
+            console.log(err.name); 
+            console.log(err.message);
+            console.log("error en busqueda proveedor");
+            alert("por favor verifique los datos del proveedor en el producto"+" "+nombre);
+        }
+    });
+}

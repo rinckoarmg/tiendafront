@@ -65,6 +65,9 @@ body{
 	background-color:#145374;
 	border-color:#145374;
 }
+.btnprod{
+	margin-top: 5px;
+}
 .card {
 	text-align: center;
 	margin: 10px auto;
@@ -108,3 +111,20 @@ body{
 #cerrarSesion {
 	text-align: right;
 }
+#area {
+	align-items: center;
+	border: 2px dashed #aaa;
+	border-radius: 5px;
+	color: #555;
+	display: flex;
+	flex-flow: column nowrap;
+	font-size: 10px;
+	justify-content: center;
+	max-height: 100px;
+	overflow: auto;
+	padding: 10px;
+	text-align: center;
+	white-space: pre-line;
+
+	max-width: 800px;
+  }
