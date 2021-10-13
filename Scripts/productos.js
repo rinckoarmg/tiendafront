@@ -224,12 +224,12 @@ function readFile (e) {
   e.preventDefault();
   let file = e.dataTransfer.files[0];
   
-  if (file.type == "application/vnd.ms-excel") {
+  if (file.type == "application/vnd.ms-excel" || file.type == "text/plain" || file.type == "text/csv") {
     let reader = new FileReader();
     reader.onloadend = () => printFileContents(reader.result);
     reader.readAsText(file, 'UTF-8');
   } else {
-    alert('Archivo no válido, agregue un archivo en formato csv');
+    alert('Archivo no válido, verifique tipo de archivo');
   }
 }
 
