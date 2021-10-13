@@ -224,7 +224,7 @@ function readFile (e) {
   e.preventDefault();
   let file = e.dataTransfer.files[0];
   
-  if (file.type == "application/vnd.ms-excel" || file.type == "text/plain" || file.type == "text/csv") {
+  if (file.type == "application/vnd.ms-excel" || file.type == "text/plain" || file.type == "text/csv" || file.type == 'text/tsv') {
     let reader = new FileReader();
     reader.onloadend = () => printFileContents(reader.result);
     reader.readAsText(file, 'UTF-8');
