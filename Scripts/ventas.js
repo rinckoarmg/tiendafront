@@ -28,7 +28,16 @@ let total_venta=0.0,
 ivaProducto,
 totalIva,
 usuario="",
-password="";
+password="",
+iva_compra="",
+nit_proveedor="",
+ciudadProveedor="",
+direccionProveedor="",
+nombreProveedor="",
+telefonoProveedor="",
+precioCompra="",
+codigoVenta="",
+cantidad="";
 
 
 
@@ -118,10 +127,11 @@ D.addEventListener("submit", async (e) => {
         if (!res.ok) throw { status: res.status, statusText: res.statusText };
         console.log(json);
 
+          cantidad=e.target.cantidad_producto.value;
           $templateProductos.getElementById("codigo_producto").textContent =json.codigo_producto;
           $templateProductos.getElementById("nombre_producto").textContent =json.nombre_producto;
           $templateProductos.getElementById("iva_compra").textContent =`${json.ivacompra} %`;
-          $templateProductos.getElementById("cantidad_producto").textContent =`${e.target.cantidad_producto.value} und`;
+          $templateProductos.getElementById("cantidad_producto").textContent =`${cantidad} und`;
           $templateProductos.getElementById("valor_unitario").textContent =`$ ${json.precio_venta}`;
           $templateProductos.getElementById("total").textContent =`$ ${e.target.cantidad_producto.value * json.precio_venta}`;
           
@@ -131,9 +141,20 @@ D.addEventListener("submit", async (e) => {
           $tablaProductos.querySelector("tbody").appendChild($fragmento);
         
           total_venta = total_venta + (e.target.cantidad_producto.value  * parseFloat(json.precio_venta, 10));
- 
-        ivaProducto=(total_venta / 100 ) * json.ivacompra,
-        totalIva=total_venta + ivaProducto;
+        
+          iva_compra=json.ivacompra,
+          ivaProducto=(total_venta / 100 ) * iva_compra,
+          totalIva=total_venta + ivaProducto;
+
+
+        nit_proveedor=json.nitproveedor.nitproveedor,
+        ciudadProveedor=json.nitproveedor.ciudad_proveedor,
+        direccionProveedor=json.nitproveedor.direccion_proveedor,
+        nombreProveedor=json.nitproveedor.nombre_proveedor,
+        telefonoProveedor=json.nitproveedor.telefono_proveedor,
+        precioCompra=json.precio_compra,
+        
+       
 
         D.getElementById("total_venta").textContent=`$ ${total_venta}`;
         D.getElementById("total_iva").textContent=`$ ${ivaProducto}`;
@@ -146,7 +167,7 @@ D.addEventListener("submit", async (e) => {
       }
     }
   });
-
+     
 D.addEventListener("click", async e => {
     if (e.target.matches("#confirmar_venta")){
       try {
@@ -158,7 +179,7 @@ D.addEventListener("click", async e => {
             },
             body:JSON.stringify(
               {
-                codigo_venta:20,
+                
                 cedula_cliente: {
                     cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
                     direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
@@ -182,11 +203,74 @@ D.addEventListener("click", async e => {
         res = await fetch("http://localhost:8080/ventas/guardar", ventas),
         json = await res.json();
         console.log(res);
+        codigoVenta=json.codigo_venta;
+
+
         if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
-        location.reload();
+        //location.reload();
     } catch (error) {
         let mensaje = err.statusText("Ocurrio un error");
     }
+
+    try {
+      let detalleVentas= {
+          method:"POST",
+          headers:{
+          "Accept": 'application/json',
+          'Content-Type': 'application/json',
+          },
+          body:JSON.stringify(
+            {
+              cantidad_producto:cantidad,
+              codigo_producto: {
+                  codigo_producto: $templateProductos.getElementById("codigo_producto").textContent,
+                  ivacompra:iva_compra,
+                  nitproveedor: {
+                      nitproveedor: nit_proveedor,
+                      ciudad_proveedor:ciudadProveedor,
+                      direccion_proveedor:direccionProveedor,
+                      nombre_proveedor:nombreProveedor,
+                      telefono_proveedor:telefonoProveedor
+                  },
+                  nombre_producto: $templateProductos.getElementById("nombre_producto").textContent,
+                  precio_compra:precioCompra,
+                  precio_venta:$templateProductos.getElementById("valor_unitario").textContent
+              },
+              codigo_venta: {
+                  codigo_venta: codigoVenta,
+                  cedula_cliente: {
+                    cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
+                    direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
+                    email_cliente: $templateClientes.getElementById("correo_cliente").textContent,
+                    nombre_cliente:$templateClientes.getElementById("nombre_cliente").textContent,
+                    telefono_cliente: $templateClientes.getElementById("telefono_cliente").textContent
+                },
+                cedula_usuario: {
+                  cedula_usuario: $templateUsuarios.getElementById("cedula_usuario").textContent,
+                  email_usuario: $templateUsuarios.getElementById("correo_usuario").textContent,
+                  nombre_usuario: $templateUsuarios.getElementById("nombre_usuario").textContent,
+                  password: password,
+                  usuario: usuario
+              },
+              ivaventa: ivaProducto,
+              total_venta: totalIva,
+              valor_venta: total_venta
+              },
+              valor_total: $templateProductos.getElementById("total").textContent,
+              valor_venta: $templateProductos.getElementById("valor_unitario").textContent,
+              valoriva: $templateProductos.getElementById("iva_compra").textContent
+          }
+          )
+      },
+      res = await fetch("http://localhost:8080/detalleventas/guardar", detalleVentas),
+      json = await res.json();
+      console.log(res);
+      
+      //location.reload();
+    } catch (error) {
+     console.log(error);
+  }
     }
 });
+
 
