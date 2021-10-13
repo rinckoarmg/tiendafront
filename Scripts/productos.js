@@ -33,7 +33,7 @@ const listaPr = async() => {
             $fragmento.appendChild($clone);
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
-    } catch (error) {
+    } catch (err) {
         let mensaje = err.statusText("Ocurrio un error");
     }
 }
@@ -68,7 +68,7 @@ D.addEventListener("submit", async (e) => {
                 let $clone = D.importNode($template, true);
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
-        } catch (error) {
+        } catch (err) {
             let mensaje = err.statusText("Ocurrio un error");
         }
     }
@@ -100,7 +100,7 @@ D.addEventListener("click", async e => {
                 json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error"); 
             }
         }
@@ -143,7 +143,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         } else {
@@ -178,7 +178,7 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
-            } catch (error) {
+            } catch (err) {
                 let mensaje = err.statusText("Ocurrio un error");
             }
         }
@@ -194,7 +194,7 @@ D.addEventListener("submit", async (e) => {
             json = await res.json(); 
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
-        } catch (error) {
+        } catch (err) {
             let mensaje = err.statusText("Ocurrio un error");
         }
     }
@@ -224,10 +224,10 @@ function readFile (e) {
   e.preventDefault();
   let file = e.dataTransfer.files[0];
   
-  if (file.type === 'text/csv') {
+  if (file.type == "application/vnd.ms-excel") {
     let reader = new FileReader();
     reader.onloadend = () => printFileContents(reader.result);
-    reader.readAsText(file, 'UTF8');
+    reader.readAsText(file, 'UTF-8');
   } else {
     alert('Archivo no válido, agregue un archivo en formato csv');
   }
@@ -258,25 +258,25 @@ function printFileContents (contents) {
             //guardar los datos 
             try {
                 let datosProv = {
-                    method:"POST",
-                    headers:{
-                    "Accept": 'application/json',
-                    'Content-Type': 'application/json',
+                    method: "POST",
+                    headers: {
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
                     },
-                    body:JSON.stringify(
+                    body: JSON.stringify(
                         {
-                            codigo_producto:cod,
-                            ivacompra:iva,
-                            nitproveedor:{
-                                nitproveedor:nit,
-                                ciudad_proveedor:json.ciudad_proveedor,
-                                direccion_proveedor:json.direccion_proveedor,
-                                nombre_proveedor:json.nombre_proveedor,
-                                telefono_proveedor:json.telefono_proveedor
+                            codigo_producto: cod,
+                            ivacompra: iva,
+                            nitproveedor: {
+                                nitproveedor: nit,
+                                ciudad_proveedor: json.ciudad_proveedor,
+                                direccion_proveedor: json.direccion_proveedor,
+                                nombre_proveedor: json.nombre_proveedor,
+                                telefono_proveedor: json.telefono_proveedor
                             },
-                            nombre_producto:nombre,
-                            precio_compra:precioc,
-                            precio_venta:preciov
+                            nombre_producto: nombre,
+                            precio_compra: precioc,
+                            precio_venta: preciov
                         }
                     )
                 },
