@@ -24,7 +24,7 @@ const D = document,
 
   $tablaTotales = D.getElementById("tabla_totales"),
   $cantidadProduto = D.getElementById("cantidad_producto");
-let total_venta = 0.0,
+ let total_venta = 0.0,
   ivaProducto,
   totalIva,
   usuario = "",
@@ -167,10 +167,77 @@ D.addEventListener("submit", async (e) => {
   }
 });
 
+//metodo confirmar venta y detalle vantas
+
 D.addEventListener("click", async e => {
   if (e.target.matches("#confirmar_venta")) {
+    confirmarVenta();
+    //location.reload();
+  }
+});
+
+
+
+async function confirmarVenta(){
+  try {
+    let ventas = {
+      method: "POST",
+      headers: {
+        "Accept": 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+
+          cedula_cliente: {
+            cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
+            direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
+            email_cliente: $templateClientes.getElementById("correo_cliente").textContent,
+            nombre_cliente: $templateClientes.getElementById("nombre_cliente").textContent,
+            telefono_cliente: $templateClientes.getElementById("telefono_cliente").textContent
+          },
+          cedula_usuario: {
+            cedula_usuario: $templateUsuarios.getElementById("cedula_usuario").textContent,
+            email_usuario: $templateUsuarios.getElementById("correo_usuario").textContent,
+            nombre_usuario: $templateUsuarios.getElementById("nombre_usuario").textContent,
+            password: password,
+            usuario: usuario
+          },
+          ivaventa: ivaProducto,
+          total_venta: totalIva,
+          valor_venta: total_venta
+        }
+      )
+    },
+      res = await fetch("http://localhost:8080/ventas/guardar", ventas),
+      json = await res.json();
+    console.log(res);
+    codigoVenta = json.codigo_venta,
+    
+    console.log(json);
+    console.log(codigoVenta);
+
+    detalleVentasConfirmar();
+
+    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+  
+  } catch (err) {
+    console.log(err.name);
+    console.log(err.message);
+    console.log("error en guardar venta")
+  }
+
+}
+
+
+async function detalleVentasConfirmar(){
+
+  let lineas=D.querySelectorAll("tr.cualquiera");
+
+  for(let i=0; i<lineas.length;++i){
+    
     try {
-      let ventas = {
+      let detalleVentas = {
         method: "POST",
         headers: {
           "Accept": 'application/json',
@@ -178,107 +245,57 @@ D.addEventListener("click", async e => {
         },
         body: JSON.stringify(
           {
-
-            cedula_cliente: {
-              cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
-              direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
-              email_cliente: $templateClientes.getElementById("correo_cliente").textContent,
-              nombre_cliente: $templateClientes.getElementById("nombre_cliente").textContent,
-              telefono_cliente: $templateClientes.getElementById("telefono_cliente").textContent
+            cantidad_producto: cantidad,
+            codigo_producto: {
+              codigo_producto: $templateProductos.getElementById("codigo_producto").textContent,
+              ivacompra: iva_compra,
+              nitproveedor:{
+                nitproveedor: nit_proveedor,
+                ciudad_proveedor: ciudadProveedor,
+                direccion_proveedor: direccionProveedor,
+                nombre_proveedor: nombreProveedor,
+                telefono_proveedor: telefonoProveedor
+              },
+              nombre_producto: $templateProductos.getElementById("nombre_producto").textContent,
+              precio_compra: precioCompra,
+              precio_venta: $templateProductos.getElementById("valor_unitario").textContent
             },
-            cedula_usuario: {
-              cedula_usuario: $templateUsuarios.getElementById("cedula_usuario").textContent,
-              email_usuario: $templateUsuarios.getElementById("correo_usuario").textContent,
-              nombre_usuario: $templateUsuarios.getElementById("nombre_usuario").textContent,
-              password: password,
-              usuario: usuario
+            codigo_venta: {
+              codigo_venta: codigoVenta,
+              cedula_cliente: {
+                cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
+                direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
+                email_cliente: $templateClientes.getElementById("correo_cliente").textContent,
+                nombre_cliente: $templateClientes.getElementById("nombre_cliente").textContent,
+                telefono_cliente: $templateClientes.getElementById("telefono_cliente").textContent
+              },
+              cedula_usuario: {
+                cedula_usuario: $templateUsuarios.getElementById("cedula_usuario").textContent,
+                email_usuario: $templateUsuarios.getElementById("correo_usuario").textContent,
+                nombre_usuario: $templateUsuarios.getElementById("nombre_usuario").textContent,
+                password: password,
+                usuario: usuario
+              },
+              ivaventa: ivaProducto,
+              total_venta: totalIva,
+              valor_venta: total_venta
             },
-            ivaventa: ivaProducto,
-            total_venta: totalIva,
-            valor_venta: total_venta
+            valor_total: $templateProductos.getElementById("total").textContent,
+            valor_venta: $templateProductos.getElementById("valor_unitario").textContent,
+            valoriva: $templateProductos.getElementById("iva_compra").textContent
           }
         )
       },
-        res = await fetch("http://localhost:8080/ventas/guardar", ventas),
+        res = await fetch("http://localhost:8080/detalle_ventas/guardar", detalleVentas),
         json = await res.json();
-      console.log(res);
-      codigoVenta = json.codigo_venta;
-      console.log(json);
-
-
-      if (!res.ok) throw { status: res.status, statusText: res.statusText };
-      //location.reload();
+        console.log(res);
+        console.log(codigoVenta);
+  
+      
     } catch (err) {
       console.log(err.name);
       console.log(err.message);
-      console.log("error en guardar venta")
+      console.log("error en guardar detalleventa")
     }
-
-    //guardar detalle ventas
-    
-      try {
-        let detalleVentas = {
-          method: "POST",
-          headers: {
-            "Accept": 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            {
-              cantidad_producto: cantidad,
-              codigo_producto: {
-                codigo_producto: $templateProductos.getElementById("codigo_producto").textContent,
-                ivacompra: iva_compra,
-                nitproveedor: {
-                  nitproveedor: nit_proveedor,
-                  ciudad_proveedor: ciudadProveedor,
-                  direccion_proveedor: direccionProveedor,
-                  nombre_proveedor: nombreProveedor,
-                  telefono_proveedor: telefonoProveedor
-                },
-                nombre_producto: $templateProductos.getElementById("nombre_producto").textContent,
-                precio_compra: precioCompra,
-                precio_venta: $templateProductos.getElementById("valor_unitario").textContent
-              },
-              codigo_venta: {
-                codigo_venta: codigoVenta,
-                cedula_cliente: {
-                  cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
-                  direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
-                  email_cliente: $templateClientes.getElementById("correo_cliente").textContent,
-                  nombre_cliente: $templateClientes.getElementById("nombre_cliente").textContent,
-                  telefono_cliente: $templateClientes.getElementById("telefono_cliente").textContent
-                },
-                cedula_usuario: {
-                  cedula_usuario: $templateUsuarios.getElementById("cedula_usuario").textContent,
-                  email_usuario: $templateUsuarios.getElementById("correo_usuario").textContent,
-                  nombre_usuario: $templateUsuarios.getElementById("nombre_usuario").textContent,
-                  password: password,
-                  usuario: usuario
-                },
-                ivaventa: ivaProducto,
-                total_venta: totalIva,
-                valor_venta: total_venta
-              },
-              valor_total: $templateProductos.getElementById("total").textContent,
-              valor_venta: $templateProductos.getElementById("valor_unitario").textContent,
-              valoriva: $templateProductos.getElementById("iva_compra").textContent
-            }
-          )
-        },
-          res = await fetch("http://localhost:8080/detalle_ventas/guardar", detalleVentas),
-          json = await res.json();
-          console.log(res);
-          console.log(json);
   
-        //location.reload();
-      } catch (err) {
-        console.log(err.name);
-        console.log(err.message);
-        console.log("error en guardar detalleventa")
-      }
-    
-  }
-});
-
-
+}}
