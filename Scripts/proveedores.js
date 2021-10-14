@@ -6,7 +6,7 @@ $buscar = D.getElementById("buscarProveedor"),
 $codigo = D.getElementById("nitproveedor").nodeValue,
 $formulario = D.getElementById("datos_proveedor");
 
-//metodo GET listar
+// Metodo GET listar
 const listaP = async() => {
     try {
         let res = await fetch("http://localhost:8080/proveedores/listar"),
@@ -113,7 +113,7 @@ D.addEventListener("submit", async e => {
         e.preventDefault();
         if(!e.target.id.value){
 
-            //metodo POST - Guardar
+            // metodo POST - Guardar
             try {
                 let datosP = {
                     method:"POST",
@@ -144,7 +144,7 @@ D.addEventListener("submit", async e => {
             }
         } else {
 
-            //metodo PUT - actualizar
+            // metodo PUT - actualizar
             try {
                 let datosP = {
                     method:"PUT",

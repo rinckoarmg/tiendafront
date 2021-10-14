@@ -9,7 +9,7 @@ $cajatotal = D.getElementById("caja_total");
 let totales = 0.0,
 total = 0.0;
 
-//metodo GET 
+// Metodo GET listar
 const listaV = async() => {
     try {
         let res = await fetch("http://localhost:8080/ventas/listar"),

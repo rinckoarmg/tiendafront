@@ -127,18 +127,18 @@ D.addEventListener("submit", async e => {
                     },
                     body:JSON.stringify(
                         {
-                            codigo_producto:e.target.InputCodigo.value,
-                            ivacompra:e.target.InputIva.value,
-                            nitproveedor:{
-                                nitproveedor:e.target.nitproveedor.value,
-                                ciudad_proveedor:e.target.ciudad_proveedor,
-                                direccion_proveedor:e.target.direccion_proveedor,
-                                nombre_proveedor:e.target.nombre_proveedor,
-                                telefono_proveedor:e.target.telefono_proveedor
+                            codigo_producto: e.target.InputCodigo.value,
+                            ivacompra: e.target.InputIva.value,
+                            nitproveedor: {
+                                nitproveedor: e.target.nitproveedor.value,
+                                ciudad_proveedor: e.target.ciudad_proveedor,
+                                direccion_proveedor: e.target.direccion_proveedor,
+                                nombre_proveedor: e.target.nombre_proveedor,
+                                telefono_proveedor: e.target.telefono_proveedor
                             },
-                            nombre_producto:e.target.InputNombre.value,
-                            precio_compra:e.target.pCompra.value,
-                            precio_venta:e.target.pVenta.value
+                            nombre_producto: e.target.InputNombre.value,
+                            precio_compra: e.target.pCompra.value,
+                            precio_venta: e.target.pVenta.value
                         }
                     )
                 },
@@ -209,7 +209,7 @@ D.addEventListener("submit", async (e) => {
     D.getElementById("nitproveedor").value = "";
 });
 
-//traer datos a formulario
+// Traer datos a formulario
 D.addEventListener("click",async (e) => {
     if(e.target.matches("#modificar_producto")){
         console.log("Click en MODIFICAR");
@@ -222,7 +222,7 @@ D.addEventListener("click",async (e) => {
     }
 });
 
-// cargar csv
+// Cargar CSV
 let area = document.getElementById('area');
 
 area.addEventListener('dragover', e => e.preventDefault());
@@ -264,7 +264,7 @@ function printFileContents (contents) {
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
 
-            //guardar los datos 
+            // guardar los datos 
             try {
                 let datosProv = {
                     method: "POST",
