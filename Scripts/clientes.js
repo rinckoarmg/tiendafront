@@ -6,7 +6,7 @@ $buscar = D.getElementById("buscarCliente"),
 $codigo = D.getElementById("cedulaCliente").nodeValue,
 $formulario = D.getElementById("datos_cliente");
 
-//metodo GET listar
+// Metodo GET listar
 const listaC = async() => {
     try {
         let res = await fetch("http://localhost:8080/clientes/listar"),
@@ -113,7 +113,7 @@ D.addEventListener("submit", async e => {
         e.preventDefault();
         if(!e.target.id.value){
 
-            //metodo POST guardar
+            // metodo POST guardar:
             try {
                 let datosC = {
                     method:"POST",
@@ -144,7 +144,7 @@ D.addEventListener("submit", async e => {
             }
         } else {
 
-            //metodo PUT actualizar
+            // metodo PUT actualizar:
             try {
                 let datosU = {
                     method:"PUT",

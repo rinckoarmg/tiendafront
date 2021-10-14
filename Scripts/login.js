@@ -20,7 +20,7 @@ D.addEventListener("submit", async (e) => {
   }
 });
 
-//limpiar
+// limpiar
 function limpiar() {
   D.getElementById("usuario").value = "";
   D.getElementById("password").value = "";
