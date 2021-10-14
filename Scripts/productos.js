@@ -303,6 +303,7 @@ function printFileContents (contents) {
             console.log(err.message);
             console.log("error en busqueda proveedor");
             alert("Por favor verifique los datos proveedor del producto:"+" '"+nombre+"'");
+            location.reload();
         }
     });
 }
