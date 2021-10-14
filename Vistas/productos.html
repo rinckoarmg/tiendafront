@@ -67,11 +67,6 @@
                     <img src="/Recursos/iconos/drag-and-drop.png" alt="" width="40" height="40">
                     <h6>Arrastre aqui un listado de productos en formato CSV </h6>
                   </div>
-                <!--
-                    <label for="formFile" class="form-label">Agregue un listado de productos en formato CSV</label>
-                    <input class="form-control form-control-sm" type="file" id="formFile">
-                    <button type="submit" class="btn btn-secondary btn-sm btnprod">Cargar listado</button>
-                -->
                 <!-- Formulario agregar Inicio -->
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-secondary btn-sm btnprod" data-bs-toggle="modal" data-bs-target="#formulario">Agregar Producto</button>
@@ -90,29 +85,28 @@
                     <form id="datos_producto">
                         <div class="mb-3">
                             <label for="InputCodigo" class="form-label">Código Producto</label>
-                            <input type="text" class="form-control form-control-sm" id="InputCodigo" name="InputCodigo">
+                            <input type="text" class="form-control form-control-sm" required class="form-control" id="InputCodigo" name="InputCodigo">
                         </div>
                         <div class="mb-3">
                             <label for="InputIva" class="form-label">Iva</label>
-                            <input type="text" class="form-control form-control-sm" id="InputIva" name="InputIva">
+                            <input type="text" class="form-control form-control-sm" required class="form-control" id="InputIva" name="InputIva">
                         </div>
                             
                         <div class="mb-3" id="buscarProv">
                             <label for="InputProveedor" class="form-label">Nit Proveedor</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ingrese el nit del proveedor" aria-label="nitproveedor" name="nitproveedor" id="nitproveedor">
-                            
+                            <input type="text" class="form-control form-control-sm" placeholder="Ingrese el NIT del proveedor" aria-label="nitproveedor" name="nitproveedor" required class="form-control" id="nitproveedor">
                         </div>
                         <div class="mb-3">
                             <label for="InputNombre" class="form-label">Nombre Producto</label>
-                            <input type="text" class="form-control form-control-sm" id="InputNombre" name="InputNombre">
+                            <input type="text" class="form-control form-control-sm" required class="form-control" id="InputNombre" name="InputNombre">
                         </div>
                         <div class="mb-3">
                             <label for="pCompra" class="form-label">Precio Compra</label>
-                            <input type="text" class="form-control form-control-sm" id="pCompra" name="pCompra">
+                            <input type="text" class="form-control form-control-sm" required class="form-control" id="pCompra" name="pCompra">
                         </div>
                         <div class="mb-3">
                             <label for="pVenta" class="form-label">Precio Venta</label>
-                            <input type="text" class="form-control form-control-sm" id="pVenta" name="pVenta">
+                            <input type="text" class="form-control form-control-sm" required class="form-control" id="pVenta" name="pVenta">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -127,18 +121,25 @@
     <!-- Formulario agregar Fin -->
 
     <div class="formularios2">
-        <form class="row g-3" id="buscarProducto">
+        <div class="row justify-content-start">
             <div class="col-auto">
-                <label for="codigoProducto" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="codigoProducto" name="codigoProducto" placeholder="Ingrese código producto">
+                <form class="row g-3" id="buscarProducto">
+                    <div class="col-auto">
+                        <label for="codigoProducto" class="visually-hidden">PENDIENTE</label>
+                        <input type="text" class="form-control form-control-sm" id="codigoProducto" name="codigoProducto" placeholder="Ingrese código producto">
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Producto" id="buscar_producto"></input>
+                        <input type="hidden" name="id">
+                    </div>
+                </form>
             </div>
-            <div class="col-auto">
-                <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Producto" id="buscar_producto"></input>
-                <input type="hidden" name="id">
+            <div class="col-4">
                 <input type="submit" class="btn btn-secondary btn-sm" value="Ver todos" id="ver_todos"></input>
             </div>
-        </form>
+        </div>        
     </div>
+    
     <div class="tablas">
         <table class="table table-striped" id="tabla_productos">
             <thead>

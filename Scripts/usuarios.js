@@ -32,7 +32,8 @@ const listaU = async() => {
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
     } catch (err) {
-        let mensaje = err.statusText("Ocurrio un error");
+        console.log(err.name); 
+        console.log(err.message);
     }
 }
 D.addEventListener("DOMContentLoaded",listaU);
@@ -64,7 +65,10 @@ D.addEventListener("submit", async (e) => {
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (err) {
-            let mensaje = err.statusText("Ocurrio un error");
+            alert("Usuario Inexistente");
+            D.getElementById("cedulaUsuario").value = "";
+            console.log(err.name); 
+            console.log(err.message);
         }
     }
     D.getElementById("cedulaUsuario").value = "";
@@ -96,7 +100,8 @@ D.addEventListener("click", async e =>{
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         }
     }
@@ -132,8 +137,10 @@ D.addEventListener("submit", async e => {
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
                 console.log("Usuario CREADO");
+                alert("Datos de usuario guardados exitosamente");
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         } else {
 
@@ -161,8 +168,10 @@ D.addEventListener("submit", async e => {
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
                 console.log("Usuario MODIFICADO");
+                alert("Datos de Usuario Actualizados");
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         } 
     }
