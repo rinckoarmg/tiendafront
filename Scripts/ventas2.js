@@ -28,9 +28,8 @@ const D = document,
   
   
  //variables detalleventas
- let coddetalle,
-  cantidad,
-  codprod,
+ let cantidad,
+    codprod,
     iva_compra = "",
     nit_proveedor = "",
       ciudadProveedor = "",
@@ -57,6 +56,10 @@ const D = document,
   valortot = 0,
   valorven = 0,
   valoriv = 0;
+
+  var codDetalle;
+  var cantidadDetalle;
+  
 
 //metodo buscar cliente
 D.addEventListener("submit", async (e) => {
@@ -155,27 +158,6 @@ D.addEventListener("submit", async (e) => {
       iva_compra = json.ivacompra,
       precioCompra = json.precio_compra,
       precioventa = json.precio_venta,
-      coddetalle = json.codigo_detalle_venta,
-
-      $templateProductos.getElementById("codigo_producto").textContent = json.codigo_producto;
-      $templateProductos.getElementById("nombre_producto").textContent = json.nombre_producto;
-      $templateProductos.getElementById("iva_compra").textContent = `${json.ivacompra}`;
-      $templateProductos.getElementById("cantidad_producto").textContent = `${cantidad}`;
-      $templateProductos.getElementById("valor_unitario").textContent = `${json.precio_venta}`;
-      $templateProductos.getElementById("total").textContent = `${e.target.cantidad_producto.value * json.precio_venta}`;
-
-      $templateProductos.getElementById("eliminar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
-
-      $templateProductos.getElementById("modificar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
-      $templateProductos.getElementById("modificar_producto").dataset.cantidad_producto = json.cantidad_producto;
-
-      let $clone = D.importNode($templateProductos, true);
-      $fragmento.appendChild($clone);
-      $tablaProductos.querySelector("tbody").appendChild($fragmento);
-
-      total_venta = total_venta + (e.target.cantidad_producto.value * parseFloat(json.precio_venta, 10));
-      totalIva = (total_venta / 100) * iva_compra,
-      totalMasIva = total_venta + totalIva;
 
       nit_proveedor = json.nitproveedor.nitproveedor,
       ciudadProveedor = json.nitproveedor.ciudad_proveedor,
@@ -193,12 +175,12 @@ D.addEventListener("submit", async (e) => {
 
       e.target.codigo_producto.value = "";
       e.target.cantidad_producto.value = "";
+
     } catch (err) {
       console.log(err.name);
       console.log(err.message);
       console.log("error en buscar producto")
     }
-    crearDetalleVentas()
   }
 });
 
@@ -250,6 +232,214 @@ async function crearv(){
     console.log("error en crear venta")
   }
 };
+
+//acción buscar 
+D.addEventListener("submit", async (e) => {
+  if (e.target === $buscarProductos) {
+    e.preventDefault();
+
+    crearDetalleVentas();
+    buscarDetalleVentas()
+  }
+});
+
+//crear detalle venta
+async function crearDetalleVentas(){
+  await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      let detalleVentas = {
+        method: "POST",
+        headers: {
+          "Accept": 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            cantidad_producto: cantidad,
+            codigo_producto: {
+              codigo_producto: codprod,
+              ivacompra: iva_compra,
+              nitproveedor:{
+                nitproveedor: nit_proveedor,
+                ciudad_proveedor: ciudadProveedor,
+                direccion_proveedor: direccionProveedor,
+                nombre_proveedor: nombreProveedor,
+                telefono_proveedor: telefonoProveedor
+              },
+              nombre_producto: nombreprod,
+              precio_compra: precioCompra,
+              precio_venta: precioventa
+            },
+            codigo_venta: {
+              codigo_venta: codigoVenta,
+              cedula_cliente: {
+                cedula_cliente: cedcliente,
+                direccion_cliente: dirclie,
+                email_cliente: emailclie,
+                nombre_cliente: nombclie,
+                telefono_cliente: telclie
+              },
+              cedula_usuario: {
+                cedula_usuario: cedus,
+                email_usuario: emailus,
+                nombre_usuario: nombus,
+                password: password,
+                usuario: usuario
+              },
+              ivaventa: totalIva,
+              total_venta: totalMasIva,
+              valor_venta: total_venta
+            },
+            valor_total: valortot,
+            valor_venta: valorven,
+            valoriva: valoriv
+          }
+        )
+      },
+        res = await fetch("http://localhost:8080/detalle_ventas/guardar", detalleVentas),
+        json2 = await res.json();
+        console.log(json2);
+      
+      codDetalle = json2.codigo_detalle_venta,
+      cantidadDetalle = json2.cantidad_producto;
+      
+    } catch (err) {
+      console.log(err.name);
+      console.log(err.message);
+      console.log("error en guardar detalleventa")
+    }
+}
+
+//buscar detalle venta
+async function buscarDetalleVentas(){
+  await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      let res = await fetch(`http://localhost:8080/detalle_ventas/buscar/${codDetalle}`),
+        json = await res.json();
+
+      if (!res.ok) throw { status: res.status, statusText: res.statusText };
+      console.log(json);
+
+      
+      //$templateProductos.getElementById("cod_detalle").textContent = json.codigo_detalle_venta;
+      $templateProductos.getElementById("codigo_producto").textContent = json.codigo_producto.codigo_producto;
+      $templateProductos.getElementById("nombre_producto").textContent = json.codigo_producto.nombre_producto;
+      $templateProductos.getElementById("iva_compra").textContent = `${json.codigo_producto.ivacompra}`;
+      $templateProductos.getElementById("cantidad_producto").textContent = `${json.cantidad_producto}`;
+      $templateProductos.getElementById("valor_unitario").textContent = `${json.codigo_producto.precio_venta}`;
+      $templateProductos.getElementById("total").textContent = `${json.cantidad_producto * json.codigo_producto.precio_venta}`;
+
+      $templateProductos.getElementById("eliminar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
+
+      $templateProductos.getElementById("modificar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
+      $templateProductos.getElementById("modificar_producto").dataset.cantidad_producto = $templateProductos.getElementById("cantidad_producto").textContent;
+
+      let $clone = D.importNode($templateProductos, true);
+      $fragmento.appendChild($clone);
+      $tablaProductos.querySelector("tbody").appendChild($fragmento);
+      
+      codDetalle=json.codigo_detalle_venta;
+
+      total_venta = total_venta + (json.cantidad_producto * parseFloat(json.codigo_producto.precio_venta, 10));
+      totalIva = (total_venta / 100) * iva_compra,
+      totalMasIva = total_venta + totalIva;
+
+      D.getElementById("total_venta").textContent = `${total_venta}`;
+      D.getElementById("total_iva").textContent = `${totalIva}`;
+      D.getElementById("total_con_iva").textContent = `${totalMasIva}`;
+
+      valortot = json.cantidad_producto * json.codigo_producto.precio_venta,
+      valorven = json.codigo_producto.precio_venta,
+      valoriv = json.codigo_producto.ivacompra;
+
+      //e.target.codigo_producto.value = "";
+      //e.target.cantidad_producto.value = "";
+
+    } catch (err) {
+      console.log(err.name);
+      console.log(err.message);
+      console.log("error en buscar detalle")
+    }
+  };
+
+//traer datos modificar
+D.addEventListener("click", async e => {
+  if (e.target.matches("#modificar_producto")) {
+    e.target.parentNode.parentNode.remove() 
+    //console.log(codDetalle);
+    $formulario.InputCodigo.value = e.target.dataset.codigo_detalle_venta;
+    $formulario.InputCantidad.value = e.target.dataset.cantidad_producto;
+  }
+});
+
+//guardar cambios detalle venta
+D.addEventListener("submit", async e => {
+  if (e.target === $formulario){
+    
+    e.preventDefault();
+      try {
+        let datosPr = {
+            method:"PUT",
+            headers:{
+            "Accept": 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(
+              { 
+                codigo_detalle_venta: e.target.InputCodigo.value,
+                cantidad_producto: e.target.InputCantidad.value,
+                codigo_producto: {
+                  codigo_producto: codprod,
+                  ivacompra: iva_compra,
+                  nitproveedor:{
+                    nitproveedor: nit_proveedor,
+                    ciudad_proveedor: ciudadProveedor,
+                    direccion_proveedor: direccionProveedor,
+                    nombre_proveedor: nombreProveedor,
+                    telefono_proveedor: telefonoProveedor
+                  },
+                  nombre_producto: nombreprod,
+                  precio_compra: precioCompra,
+                  precio_venta: precioventa
+                },
+                codigo_venta: {
+                  codigo_venta: codigoVenta,
+                  cedula_cliente: {
+                    cedula_cliente: cedcliente,
+                    direccion_cliente: dirclie,
+                    email_cliente: emailclie,
+                    nombre_cliente: nombclie,
+                    telefono_cliente: telclie
+                  },
+                  cedula_usuario: {
+                    cedula_usuario: cedus,
+                    email_usuario: emailus,
+                    nombre_usuario: nombus,
+                    password: password,
+                    usuario: usuario
+                  },
+                  ivaventa: totalIva,
+                  total_venta: totalMasIva,
+                  valor_venta: total_venta
+                },
+                valor_total: valortot,
+                valor_venta: valorven,
+                valoriva: valoriv
+              }
+            )
+        },
+        res = await fetch(`http://localhost:8080/detalle_ventas/actualizar/${e.target.InputCodigo.value}`,datosPr),
+        json = await res.json();
+        console.log(res);
+        if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+
+        buscarDetalleVentas()
+    } catch (err) {
+        console.log(err.name); 
+        console.log(err.message);
+    }
+  }
+});
 
 //confirmar venta
 async function confirmarVenta(){
@@ -305,80 +495,6 @@ async function confirmarVenta(){
 D.addEventListener("click", async e => {
   if (e.target.matches("#confirmar_venta")) {
     confirmarVenta();
-    //location.reload();
-  }
-});
-
-//crear detalle venta
-async function crearDetalleVentas(){
-    try {
-      let detalleVentas = {
-        method: "POST",
-        headers: {
-          "Accept": 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-          {
-            cantidad_producto: cantidad,
-            codigo_producto: {
-              codigo_producto: codprod,
-              ivacompra: iva_compra,
-              nitproveedor:{
-                nitproveedor: nit_proveedor,
-                ciudad_proveedor: ciudadProveedor,
-                direccion_proveedor: direccionProveedor,
-                nombre_proveedor: nombreProveedor,
-                telefono_proveedor: telefonoProveedor
-              },
-              nombre_producto: nombreprod,
-              precio_compra: precioCompra,
-              precio_venta: precioventa
-            },
-            codigo_venta: {
-              codigo_venta: codigoVenta,
-              cedula_cliente: {
-                cedula_cliente: cedcliente,
-                direccion_cliente: dirclie,
-                email_cliente: emailclie,
-                nombre_cliente: nombclie,
-                telefono_cliente: telclie
-              },
-              cedula_usuario: {
-                cedula_usuario: cedus,
-                email_usuario: emailus,
-                nombre_usuario: nombus,
-                password: password,
-                usuario: usuario
-              },
-              ivaventa: totalIva,
-              total_venta: totalMasIva,
-              valor_venta: total_venta
-            },
-            valor_total: valortot,
-            valor_venta: valorven,
-            valoriva: valoriv
-          }
-        )
-      },
-        res = await fetch("http://localhost:8080/detalle_ventas/guardar", detalleVentas),
-        json = await res.json();
-        console.log(res);
-  
-      
-    } catch (err) {
-      console.log(err.name);
-      console.log(err.message);
-      console.log("error en guardar detalleventa")
-}}
-
-//modificar detalle venta
-D.addEventListener("click", async e => {
-  if (e.target.matches("#modificar")) {
-    console.log(codigo_detalle_venta);
-    $formulario.InputCodigo.value = e.target.dataset.codigo_detalle_venta;
-    $formulario.InputCantidad.value = e.target.dataset.cantidad_producto;
-    crearDetalleVentas()
     //location.reload();
   }
 });

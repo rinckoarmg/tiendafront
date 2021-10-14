@@ -130,7 +130,7 @@
                     <form id="buscar_producto" class="input-group buscar_cedula">
                         <div class="bproducto col-auto">
                             <div class="bproducto_item col-4">
-                                <input type="text" class="form-control form-control-sm" id="inputPassword4"
+                                <input type="text" class="form-control form-control-sm" id="inputcodprod"
                                     placeholder="Codigo del producto" name="codigo_producto"/>
                             </div>
                             <div class="bproducto_item col-2">
@@ -148,6 +148,7 @@
                 <table id="tabla_productos" class="tablas table table-striped">
                     <thead>
                         <tr>
+                            <th scope="col"></th>
                             <th scope="col">Codigo del producto</th>
                             <th scope="col">Nombre del producto</th>
                             <th scope="col">% de IVA</th>
@@ -232,6 +233,7 @@
         </template>
         <template id="productos_template">
             <tr class="cualquiera">
+                <th id="cod_detalle" type="hidden"></th>
                 <th id="codigo_producto" scope="row"></th>
                 <td id="nombre_producto" class="textos"></td>
                 <td id="iva_compra"></td>
