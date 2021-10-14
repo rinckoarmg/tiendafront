@@ -34,7 +34,8 @@ const listaPr = async() => {
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
     } catch (err) {
-        let mensaje = err.statusText("Ocurrio un error");
+        console.log(err.name); 
+        console.log(err.message);
     }
 }
 D.addEventListener("DOMContentLoaded",listaPr);
@@ -55,7 +56,6 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("nombre_producto").textContent = json.nombre_producto;
                 $template.getElementById("precio_compra").textContent = json.precio_compra;
                 $template.getElementById("precio_venta").textContent = json.precio_venta;
-
                 $template.getElementById("eliminar_producto").dataset.codigo_producto = json.codigo_producto;
 
                 $template.getElementById("modificar_producto").dataset.codigo_producto = json.codigo_producto;
@@ -69,7 +69,10 @@ D.addEventListener("submit", async (e) => {
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (err) {
-            let mensaje = err.statusText("Ocurrio un error");
+            alert("Producto Inexistente");
+            D.getElementById("codigoProducto").value = "";
+            console.log(err.name); 
+            console.log(err.message);
         }
     }
     D.getElementById("codigoProducto").value = "";
@@ -101,7 +104,8 @@ D.addEventListener("click", async e => {
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error"); 
+                console.log(err.name); 
+                console.log(err.message);
             }
         }
     }
@@ -143,8 +147,11 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Producto CREADO");
+                alert("Datos de producto guardados exitosamente");
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         } else {
 
@@ -179,7 +186,8 @@ D.addEventListener("submit", async e => {
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         }
     }
@@ -228,6 +236,7 @@ function readFile (e) {
     let reader = new FileReader();
     reader.onloadend = () => printFileContents(reader.result);
     reader.readAsText(file, 'UTF-8');
+    alert('Archivo Cargado Exitosamente');
   } else {
     alert('Archivo no válido, verifique tipo de archivo');
   }
@@ -287,13 +296,13 @@ function printFileContents (contents) {
             } catch (err) {
                 console.log(err.name); 
                 console.log(err.message);
-                console.log("error en guardar")
+                alert("Error, verifique los datos del producto:"+" '"+nombre+"'");
             }
         } catch (err) {
             console.log(err.name); 
             console.log(err.message);
             console.log("error en busqueda proveedor");
-            alert("por favor verifique los datos del proveedor en el producto"+" "+nombre);
+            alert("Por favor verifique los datos proveedor del producto:"+" '"+nombre+"'");
         }
     });
 }

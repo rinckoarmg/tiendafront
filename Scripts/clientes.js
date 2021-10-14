@@ -32,7 +32,8 @@ const listaC = async() => {
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
     } catch (err) {
-        let mensaje = err.statusText("Ocurrio un error");
+        console.log(err.name); 
+        console.log(err.message);
     }
 }
 D.addEventListener("DOMContentLoaded",listaC);
@@ -64,7 +65,10 @@ D.addEventListener("submit", async (e) => {
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (err) {
-            let mensaje = err.statusText("Ocurrio un error");
+            alert("Cliente Inexistente");
+            D.getElementById("cedulaCliente").value = "";
+            console.log(err.name); 
+            console.log(err.message);
         }
     }
     D.getElementById("cedulaCliente").value = "";
@@ -96,7 +100,8 @@ D.addEventListener("click", async e => {
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         }
     }
@@ -131,8 +136,11 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Cliente CREADO");
+                alert("Datos de cliente guardados exitosamente");
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         } else {
 
@@ -159,8 +167,11 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Cliente MODIFICADO");
+                alert("Datos de Cliente Actualizados");
             } catch (err) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         }     
     }

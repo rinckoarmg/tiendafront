@@ -32,7 +32,8 @@ const listaP = async() => {
         }); 
         $tabla.querySelector("tbody").appendChild($fragmento);
     } catch (error) {
-        let mensaje = err.statusText("Ocurrio un error");
+        console.log(err.name); 
+        console.log(err.message);
     }
 }
 D.addEventListener("DOMContentLoaded",listaP);
@@ -52,7 +53,6 @@ D.addEventListener("submit", async (e) => {
                 $template.getElementById("direccion_proveedor").textContent = json.direccion_proveedor;
                 $template.getElementById("nombre_proveedor").textContent = json.nombre_proveedor;
                 $template.getElementById("telefono_proveedor").textContent = json.telefono_proveedor;
-
                 $template.getElementById("eliminar_proveedor").dataset.nitproveedor = json.nitproveedor;
 
                 $template.getElementById("modificar_proveedor").dataset.nitproveedor = json.nitproveedor; 
@@ -65,7 +65,10 @@ D.addEventListener("submit", async (e) => {
                 $fragmento.appendChild($clone);
             $tabla.querySelector("tbody").appendChild($fragmento);
         } catch (error) {
-            let mensaje = err.statusText("Ocurrio un error");
+            alert("Proveedor Inexistente");
+            D.getElementById("nitproveedor").value = "";
+            console.log(err.name); 
+            console.log(err.message);
         }
     }
     D.getElementById("nitproveedor").value = "";
@@ -97,7 +100,8 @@ D.addEventListener("click", async e => {
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
             } catch (error) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         }
     }
@@ -132,8 +136,11 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Proveedor CREADO");
+                alert("Datos de proveedor guardados exitosamente");
             } catch (error) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         } else {
 
@@ -160,8 +167,11 @@ D.addEventListener("submit", async e => {
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
+                console.log("Proveedor MODIFICADO");
+                alert("Datos de Proveedor Actualizados");
             } catch (error) {
-                let mensaje = err.statusText("Ocurrio un error");
+                console.log(err.name); 
+                console.log(err.message);
             }
         }
     }

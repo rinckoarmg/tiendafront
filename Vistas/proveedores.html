@@ -112,19 +112,27 @@
     <!-- formulario agregar cliente Fin-->
 
     <div class="formularios2">
-        <form class="row g-3" id="buscarProveedor">
+        <div class="row justify-content-start">
             <div class="col-auto">
-                <label for="nitproveedor" class="visually-hidden">PENDIENTE</label>
-                <input type="text" class="form-control form-control-sm" id="nitproveedor" name="nitproveedor"
-                    placeholder="Ingrese numero de NIT">
+                <form class="row g-3" id="buscarProveedor">
+                    <div class="col-auto">
+                        <label for="nitproveedor" class="visually-hidden">PENDIENTE</label>
+                        <input type="text" class="form-control form-control-sm" id="nitproveedor" name="nitproveedor"
+                            placeholder="Ingrese numero de NIT">
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Proveedor"
+                            id="buscar_proveedor"></input>
+                        <input type="hidden" name="id">
+                    </div>
+                </form>
             </div>
-            <div class="col-auto">
-                <input type="submit" class="btn btn-secondary btn-sm" value="Buscar Proveedor" id="buscar_proveedor"></input>
-				<input type="hidden" name="id">
-				<input type="submit" class="btn btn-secondary btn-sm" value="Ver todos" id="ver_todos"></input>
+            <div class="col-4">
+                <input type="submit" class="btn btn-secondary btn-sm" value="Ver todos" id="ver_todos"></input>
             </div>
-        </form>
+        </div>
     </div>
+
     <div class="tablas">
         <table class="table table-striped" id="tabla_proveedores">
             <thead>
