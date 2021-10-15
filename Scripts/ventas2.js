@@ -362,17 +362,18 @@ async function buscarDetalleVentas(){
     }
   };
 
-//traer datos modificar
+//traer datos modificar detalle venta
 D.addEventListener("click", async e => {
   if (e.target.matches("#modificar_producto")) {
     e.target.parentNode.parentNode.remove() 
     //console.log(codDetalle);
     $formulario.InputCodigo.value = e.target.dataset.codigo_detalle_venta;
     $formulario.InputCantidad.value = e.target.dataset.cantidad_producto;
+    
   }
 });
 
-//guardar cambios detalle venta
+//modificar detalle venta
 D.addEventListener("submit", async e => {
   if (e.target === $formulario){
     
@@ -496,5 +497,32 @@ D.addEventListener("click", async e => {
   if (e.target.matches("#confirmar_venta")) {
     confirmarVenta();
     //location.reload();
+  }
+});
+
+//eliminar detalle venta
+D.addEventListener("click", async e =>{
+  if (e.target.matches("#eliminar_producto")){
+    
+      let borrar = confirm(`Esta seguro de eliminar el item: ${e.target.dataset.codigo_detalle_venta}?`);
+      if (borrar){
+          try {
+              let datosU = {
+                  method:"DELETE",
+                  headers:{
+                      "Accept": 'application/json',
+                      'Content-Type': 'application/json',
+                  }
+              },
+              res = await fetch(`http://localhost:8080/detalle_ventas/eliminar/${e.target.dataset.codigo_detalle_venta}`,datosU),
+              json = await res.text();
+              if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
+              e.target.parentNode.parentNode.remove() 
+              console.log(res);
+          } catch (err) {
+              console.log(err.name); 
+              console.log(err.message);
+          }
+      }
   }
 });
