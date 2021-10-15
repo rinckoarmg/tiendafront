@@ -333,6 +333,30 @@ async function buscarDetalleVentas(){
 
       $templateProductos.getElementById("modificar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
       $templateProductos.getElementById("modificar_producto").dataset.cantidad_producto = $templateProductos.getElementById("cantidad_producto").textContent;
+      $templateProductos.getElementById("modificar_producto").dataset.codigo_producto = json.codigo_producto.codigo_producto;
+      $templateProductos.getElementById("modificar_producto").dataset.ivacompra = json.codigo_producto.ivacompra;
+      $templateProductos.getElementById("modificar_producto").dataset.nitproveedor = json.codigo_producto.nitproveedor.nitproveedor;
+      $templateProductos.getElementById("modificar_producto").dataset.ciudad_proveedor = json.codigo_producto.nitproveedor.ciudad_proveedor;
+      $templateProductos.getElementById("modificar_producto").dataset.direccion_proveedor = json.codigo_producto.nitproveedor.direccion_proveedor;
+      $templateProductos.getElementById("modificar_producto").dataset.nombre_proveedor = json.codigo_producto.nitproveedor.nombre_proveedor;
+      $templateProductos.getElementById("modificar_producto").dataset.telefono_proveedor = json.codigo_producto.nitproveedor.telefono_proveedor;
+      $templateProductos.getElementById("modificar_producto").dataset.nombre_producto = json.codigo_producto.nombre_producto;
+      $templateProductos.getElementById("modificar_producto").dataset.precio_compra = json.codigo_producto.precio_compra;
+      $templateProductos.getElementById("modificar_producto").dataset.precio_venta = json.codigo_producto.precio_venta;
+      $templateProductos.getElementById("modificar_producto").dataset.codigo_venta = json.codigo_venta.codigo_venta;
+      $templateProductos.getElementById("modificar_producto").dataset.cedula_cliente = json.codigo_venta.cedula_cliente.cedula_cliente;
+      $templateProductos.getElementById("modificar_producto").dataset.direccion_cliente = json.codigo_venta.cedula_cliente.direccion_cliente;
+      $templateProductos.getElementById("modificar_producto").dataset.email_cliente = json.codigo_venta.cedula_cliente.email_cliente;
+      $templateProductos.getElementById("modificar_producto").dataset.nombre_cliente = json.codigo_venta.cedula_cliente.nombre_cliente;
+      $templateProductos.getElementById("modificar_producto").dataset.telefono_cliente = json.codigo_venta.cedula_cliente.telefono_cliente;
+      $templateProductos.getElementById("modificar_producto").dataset.cedula_usuario = json.codigo_venta.cedula_usuario.cedula_usuario;
+      $templateProductos.getElementById("modificar_producto").dataset.email_usuario = json.codigo_venta.cedula_usuario.email_usuario;
+      $templateProductos.getElementById("modificar_producto").dataset.nombre_usuario = json.codigo_venta.cedula_usuario.nombre_usuario
+      $templateProductos.getElementById("modificar_producto").dataset.password = json.codigo_venta.cedula_usuario.password;
+      $templateProductos.getElementById("modificar_producto").dataset.usuario = json.codigo_venta.cedula_usuario.usuario;
+      $templateProductos.getElementById("modificar_producto").dataset.ivaventa = json.codigo_venta.ivaventa;
+      $templateProductos.getElementById("modificar_producto").dataset.total_venta = json.codigo_venta.total_venta;
+      $templateProductos.getElementById("modificar_producto").dataset.valor_venta = json.codigo_venta.valor_venta;
 
       let $clone = D.importNode($templateProductos, true);
       $fragmento.appendChild($clone);
@@ -376,7 +400,34 @@ D.addEventListener("click", async e => {
 //modificar detalle venta
 D.addEventListener("submit", async e => {
   if (e.target === $formulario){
-    
+    codprod = e.target.dataset.codigo_producto.codigo_producto,
+    iva_compra = e.target.dataset.codigo_producto.ivacompra,
+    nit_proveedor = e.target.dataset.codigo_producto.nitproveedor.nitproveedor,
+      ciudadProveedor = e.target.dataset.codigo_producto.nitproveedor.ciudad_proveedor,
+      direccionProveedor = e.target.dataset.codigo_producto.nitproveedor.direccion_proveedor,
+      nombreProveedor = e.target.dataset.codigo_producto.nitproveedor.nombre_proveedor,
+      telefonoProveedor = e.target.dataset.codigo_producto.nitproveedor.telefono_proveedor,
+    nombreprod = e.target.dataset.codigo_producto.nombre_producto,
+    precioCompra = e.target.dataset.codigo_producto.precio_compra,
+    precioventa = e.target.dataset.codigo_producto.precio_venta,
+  codigoVenta = e.target.dataset.codigo_venta.codigo_venta,
+    cedcliente = e.target.dataset.codigo_venta.cedula_cliente.cedula_cliente,
+      dirclie = e.target.dataset.codigo_venta.cedula_cliente.direccion_cliente,
+      emailclie = e.target.dataset.codigo_venta.cedula_cliente.email_cliente,
+      nombclie = e.target.dataset.codigo_venta.cedula_cliente.nombre_cliente,
+      telclie = e.target.dataset.codigo_venta.cedula_cliente.telefono_cliente,
+    cedus = e.target.dataset.codigo_venta.cedula_usuario.cedula_usuario,
+      emailus = e.target.dataset.codigo_venta.cedula_usuario.email_usuario,
+      nombus = e.target.dataset.codigo_venta.cedula_usuario.nombre_usuario,
+      password = e.target.dataset.codigo_venta.cedula_usuario.password,
+      usuario = e.target.dataset.codigo_venta.cedula_usuario.usuario;
+    totalIva = e.target.dataset.codigo_venta.ivaventa,
+    totalMasIva = e.target.dataset.codigo_venta.total_venta,
+    total_venta = e.target.dataset.codigo_venta.valor_venta,
+  valortot = e.target.dataset.cantidad_producto * precioventa,
+  valorven = precioventa,
+  valoriv = iva_compra;
+
     e.preventDefault();
       try {
         let datosPr = {
