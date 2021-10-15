@@ -125,6 +125,9 @@ body{
 	padding: 10px;
 	text-align: center;
 	white-space: pre-line;
-
 	max-width: 800px;
-  }
+}
+
+#modificar_producto{
+	visibility: hidden;
+}
