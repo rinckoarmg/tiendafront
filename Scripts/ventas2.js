@@ -26,7 +26,6 @@ const D = document,
   $tablaTotales = D.getElementById("tabla_totales"),
   $cantidadProduto = D.getElementById("cantidad_producto");
 
-
 //variables detalleventas
 let cantidad,
   codprod,
@@ -53,6 +52,9 @@ let cantidad,
   totalIva = 0,
   totalMasIva = 0,
   total_venta = 0.0,
+  total_resta = 0.0,
+  totalIvaCompra = 0.0,
+
   valortot = 0,
   valorven = 0,
   valoriv = 0;
@@ -331,6 +333,8 @@ async function buscarDetalleVentas() {
     $templateProductos.getElementById("total").textContent = `${json.cantidad_producto * json.codigo_producto.precio_venta}`;
 
     $templateProductos.getElementById("eliminar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
+    $templateProductos.getElementById("eliminar_producto").dataset.precio_venta = `${json.cantidad_producto * json.codigo_producto.precio_venta}`;
+    $templateProductos.getElementById("eliminar_producto").dataset.ivacompra = `${json.codigo_producto.ivacompra}`;
 
     $templateProductos.getElementById("modificar_producto").dataset.codigo_detalle_venta = json.codigo_detalle_venta;
     $templateProductos.getElementById("modificar_producto").dataset.cantidad_producto = $templateProductos.getElementById("cantidad_producto").textContent;
@@ -387,9 +391,28 @@ async function buscarDetalleVentas() {
   }
 };
 
+addEventListener("click", async e => {
+  if (e.target.matches("#eliminar_producto")) {
+    console.log("Click en ELIMINAR");
+    total_resta = e.target.dataset.precio_venta;
+    console.log(total_resta);
+    total_venta = total_venta-total_resta;
+    D.getElementById("total_venta").textContent = total_venta;
+    console.log(total_venta);
+
+    totalIva = (total_venta / 100) * iva_compra;
+    console.log(totalIva);
+    D.getElementById("total_iva").textContent = `${totalIva}`;
+
+    totalMasIva = total_venta + totalIva;
+    D.getElementById("total_con_iva").textContent = `${totalMasIva}`;
+  }
+});
+
 //traer datos modificar detalle venta
 D.addEventListener("click", async e => {
   if (e.target.matches("#modificar_producto")) {
+    console.log("Click en MODIFICAR");
     e.target.parentNode.parentNode.remove()
     //console.log(codDetalle);
     $formulario.InputCodigo.value = e.target.dataset.codigo_detalle_venta;
@@ -420,8 +443,8 @@ D.addEventListener("submit", async e => {
       emailus = e.target.dataset.codigo_venta.cedula_usuario.email_usuario,
       nombus = e.target.dataset.codigo_venta.cedula_usuario.nombre_usuario,
       password = e.target.dataset.codigo_venta.cedula_usuario.password,
-      usuario = e.target.dataset.codigo_venta.cedula_usuario.usuario;
-    totalIva = e.target.dataset.codigo_venta.ivaventa,
+      usuario = e.target.dataset.codigo_venta.cedula_usuario.usuario,
+      totalIva = e.target.dataset.codigo_venta.ivaventa,
       totalMasIva = e.target.dataset.codigo_venta.total_venta,
       total_venta = e.target.dataset.codigo_venta.valor_venta,
       valortot = e.target.dataset.cantidad_producto * precioventa,
@@ -564,7 +587,7 @@ D.addEventListener("click", async e => {
         },
           res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/detalle_ventas/eliminar/${e.target.dataset.codigo_detalle_venta}`, datosU),
           json = await res.text();
-        if (!res.ok) throw { status: res.status, statusText: res.statusText };
+        if (!res.ok) throw {status: res.status, statusText: res.statusText};
         e.target.parentNode.parentNode.remove()
         console.log(res);
       } catch (err) {
