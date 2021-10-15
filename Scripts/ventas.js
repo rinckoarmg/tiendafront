@@ -24,7 +24,7 @@ const D = document,
 
   $tablaTotales = D.getElementById("tabla_totales"),
   $cantidadProduto = D.getElementById("cantidad_producto");
- let total_venta = 0.0,
+let total_venta = 0.0,
   ivaProducto,
   totalIva,
   usuario = "",
@@ -48,13 +48,12 @@ D.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-      let res = await fetch(`http://localhost:8080/clientes/buscar/${e.target.numero_cedula.value}`),
+      let res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/clientes/buscar/${e.target.numero_cedula.value}`),
         json = await res.json();
       console.log(e.target.numero_cedula.value);
 
       if (!res.ok) throw { status: res.status, statusText: res.statusText };
       console.log(json);
-
 
       $templateClientes.getElementById("cedula_cliente").textContent = json.cedula_cliente;
       $templateClientes.getElementById("nombre_cliente").textContent = json.nombre_cliente;
@@ -82,13 +81,12 @@ D.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-      let res = await fetch(`http://localhost:8080/usuarios/buscar/${e.target.numero_cedula.value}`),
+      let res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/usuarios/buscar/${e.target.numero_cedula.value}`),
         json = await res.json();
       console.log(e.target.numero_cedula.value);
 
       if (!res.ok) throw { status: res.status, statusText: res.statusText };
       console.log(json);
-
 
       $templateUsuarios.getElementById("cedula_usuario").textContent = json.cedula_usuario;
       $templateUsuarios.getElementById("nombre_usuario").textContent = json.nombre_usuario;
@@ -119,7 +117,7 @@ D.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-      let res = await fetch(`http://localhost:8080/productos/buscar/${e.target.codigo_producto.value}`),
+      let res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/productos/buscar/${e.target.codigo_producto.value}`),
         json = await res.json();
 
       if (!res.ok) throw { status: res.status, statusText: res.statusText };
@@ -132,7 +130,6 @@ D.addEventListener("submit", async (e) => {
       $templateProductos.getElementById("cantidad_producto").textContent = `${cantidad}`;
       $templateProductos.getElementById("valor_unitario").textContent = `${json.precio_venta}`;
       $templateProductos.getElementById("total").textContent = `${e.target.cantidad_producto.value * json.precio_venta}`;
-
 
       let $clone = D.importNode($templateProductos, true);
       $fragmento.appendChild($clone);
@@ -150,8 +147,6 @@ D.addEventListener("submit", async (e) => {
         nombreProveedor = json.nitproveedor.nombre_proveedor,
         telefonoProveedor = json.nitproveedor.telefono_proveedor,
         precioCompra = json.precio_compra,
-
-
 
         D.getElementById("total_venta").textContent = `${total_venta}`;
       D.getElementById("total_iva").textContent = `${ivaProducto}`;
@@ -176,9 +171,7 @@ D.addEventListener("click", async e => {
   }
 });
 
-
-
-async function confirmarVenta(){
+async function confirmarVenta() {
   try {
     let ventas = {
       method: "POST",
@@ -188,7 +181,6 @@ async function confirmarVenta(){
       },
       body: JSON.stringify(
         {
-
           cedula_cliente: {
             cedula_cliente: $templateClientes.getElementById("cedula_cliente").textContent,
             direccion_cliente: $templateClientes.getElementById("direccion_cliente").textContent,
@@ -209,33 +201,31 @@ async function confirmarVenta(){
         }
       )
     },
-      res = await fetch("http://localhost:8080/ventas/guardar", ventas),
+      res = await fetch("http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/ventas/guardar", ventas),
       json = await res.json();
     console.log(res);
     codigoVenta = json.codigo_venta,
-    
-    console.log(json);
+
+      console.log(json);
     console.log(codigoVenta);
 
     detalleVentasConfirmar();
 
     if (!res.ok) throw { status: res.status, statusText: res.statusText };
-  
+
   } catch (err) {
     console.log(err.name);
     console.log(err.message);
     console.log("error en guardar venta")
   }
-
 }
 
+async function detalleVentasConfirmar() {
 
-async function detalleVentasConfirmar(){
+  let lineas = D.querySelectorAll("tr.cualquiera");
 
-  let lineas=D.querySelectorAll("tr.cualquiera");
+  for (let i = 0; i < lineas.length; ++i) {
 
-  for(let i=0; i<lineas.length;++i){
-    
     try {
       let detalleVentas = {
         method: "POST",
@@ -249,7 +239,7 @@ async function detalleVentasConfirmar(){
             codigo_producto: {
               codigo_producto: $templateProductos.getElementById("codigo_producto").textContent,
               ivacompra: iva_compra,
-              nitproveedor:{
+              nitproveedor: {
                 nitproveedor: nit_proveedor,
                 ciudad_proveedor: ciudadProveedor,
                 direccion_proveedor: direccionProveedor,
@@ -286,16 +276,15 @@ async function detalleVentasConfirmar(){
           }
         )
       },
-        res = await fetch("http://localhost:8080/detalle_ventas/guardar", detalleVentas),
+        res = await fetch("http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/detalle_ventas/guardar", detalleVentas),
         json = await res.json();
-        console.log(res);
-        console.log(codigoVenta);
-  
-      
+      console.log(res);
+      console.log(codigoVenta);
+
     } catch (err) {
       console.log(err.name);
       console.log(err.message);
       console.log("error en guardar detalleventa")
     }
-  
-}}
+  }
+}

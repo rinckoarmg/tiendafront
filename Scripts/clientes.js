@@ -9,7 +9,7 @@ $formulario = D.getElementById("datos_cliente");
 // Metodo GET listar
 const listaC = async() => {
     try {
-        let res = await fetch("http://localhost:8080/clientes/listar"),
+        let res = await fetch("http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/clientes/listar"),
         json = await res.json();
         if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
         console.log(json);
@@ -44,7 +44,7 @@ D.addEventListener("submit", async (e) => {
         $tabla.querySelector("tbody").textContent = "";
         e.preventDefault();
         try {
-            let res = await fetch(`http://localhost:8080/clientes/buscar/${e.target.cedulaCliente.value}`),
+            let res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/clientes/buscar/${e.target.cedulaCliente.value}`),
             json = await res.json();
             if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
             console.log(json);
@@ -95,7 +95,7 @@ D.addEventListener("click", async e => {
                         'Content-Type': 'application/json',
                     }
                 },
-                res = await fetch(`http://localhost:8080/clientes/eliminar/${e.target.dataset.cedula_cliente}`,datosC),
+                res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/clientes/eliminar/${e.target.dataset.cedula_cliente}`,datosC),
                 json = await res.text();
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
                 location.reload();
@@ -131,7 +131,7 @@ D.addEventListener("submit", async e => {
                         }
                     )
                 },
-                res = await fetch("http://localhost:8080/clientes/guardar", datosC),
+                res = await fetch("http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/clientes/guardar", datosC),
                 json = await res.json();
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 
@@ -146,7 +146,7 @@ D.addEventListener("submit", async e => {
 
             // metodo PUT actualizar:
             try {
-                let datosU = {
+                let datosC = {
                     method:"PUT",
                     headers:{
                     "Accept": 'application/json',
@@ -162,7 +162,7 @@ D.addEventListener("submit", async e => {
                         }
                     )
                 },
-                res = await fetch(`http://localhost:8080/clientes/actualizar/${e.target.InputCedula.value}`,datosC),
+                res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/clientes/actualizar/${e.target.InputCedula.value}`,datosC),
                 json = await res.json();
                 console.log(res);
                 if (!res.ok) throw{status:res.status,statusText:res.statusText}; 

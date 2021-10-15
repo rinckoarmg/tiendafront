@@ -5,8 +5,8 @@ D.addEventListener("submit", async (e) => {
   if (e.target === $login) {
     e.preventDefault();
     try {
-      let res = await fetch(`http://localhost:8080/usuarios/login/${e.target.input_usuario.value}/${e.target.input_password.value}`),
-      json = await res.json();
+      let res = await fetch(`http://backend181-env.eba-wzp6p6pz.us-east-2.elasticbeanstalk.com/usuarios/login/${e.target.input_usuario.value}/${e.target.input_password.value}`),
+        json = await res.json();
 
       console.log(json);
       limpiar();
